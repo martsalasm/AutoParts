@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
 
 //router.route("/").get((req, res) => {
@@ -29,4 +29,4 @@ router.param("id", (req, res, next, id) => {
   console.log(`ID del producto: ${id}`);
   next();
 });
-module.exports = router;
+export default router;

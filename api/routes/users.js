@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -17,4 +17,4 @@ router.get("/:rut", (req, res) => {
   res.send(`User with ID: ${req.params.rut}`);
 });
 
-module.exports = router;
+export default router;
