@@ -1,5 +1,7 @@
 import mysql from "mysql2";
 import dotenv from "dotenv";
+
+
 dotenv.config();
 const db = mysql
   .createConnection({
@@ -11,7 +13,7 @@ const db = mysql
 
   db.connect(err => {
     if (err) throw err;
-    console.log('✅ MySQL connected');
+    console.log('Conectado a MYSQL!');
   });
 
   export default db;
