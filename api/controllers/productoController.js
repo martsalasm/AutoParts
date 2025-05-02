@@ -15,17 +15,17 @@ const getProductos = async (req, res) => {
 }
 // metodo post para agregar un producto
 const addProducto = async (req, res) => {
-  const { nombre, precio, preciob2b, marca, stock } = req.body;
-  if (!nombre || !precio || !preciob2b || !marca || stock === undefined) {
+  const { nombre, precio, preciob2b, marca, stock, imagen } = req.body;
+  if (!nombre || !precio || !preciob2b || !marca || !imagen || stock === undefined) {
     return res.status(400).json({ error: "Faltan datos necesarios" });
   }
 
   try {
     const [result] = await db.query(
-      "INSERT INTO productos (nombre_producto, precio, preciob2b, marca, stock) VALUES (?, ?, ?, ?, ?)", 
-      [nombre, precio, preciob2b, marca, stock]
+      "INSERT INTO productos (nombre_producto, precio, preciob2b, marca, stock, url_imagen) VALUES (?, ?, ?, ?, ?, ?)", 
+      [nombre, precio, preciob2b, marca, stock, imagen]
     );
-    res.status(201).json({ id: result.insertId, nombre, precio, preciob2b, marca, stock });
+    res.status(201).json({ id: result.insertId, nombre, precio, preciob2b, marca, stock, imagen });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error al agregar el producto" });
@@ -49,15 +49,15 @@ const getProductoById = async (req, res) => {
 
 const updateProductoById = async (req, res) => {
   const { id } = req.params;
-  const { nombre, precio, preciob2b, marca, stock } = req.body;
-  if (!nombre || !precio || !preciob2b || !marca || stock === undefined) {
+  const { nombre, precio, preciob2b, marca, stock, imagen } = req.body;
+  if (!nombre || !precio || !preciob2b || !marca || !imagen || stock === undefined) {
     return res.status(400).json({ error: "Faltan datos necesarios" });
   }
 
   try {
     const [result] = await db.query(
-      "UPDATE productos SET nombre_producto = ?, precio = ?, preciob2b = ?, marca = ?, stock = ? WHERE id_producto = ?",
-      [nombre, precio, preciob2b, marca, stock, id]
+      "UPDATE productos SET nombre_producto = ?, precio = ?, preciob2b = ?, marca = ?,stock = ?, url_imagen=?  WHERE id_producto = ?",
+      [nombre, precio, preciob2b, marca, stock,imagen, id]
     );
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: "Producto no encontrado" });
