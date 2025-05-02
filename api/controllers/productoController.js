@@ -3,7 +3,6 @@ import db from "../database.js";
 // Controlador de productos para operaciones CRUD
 
 // metodo get para obtener todos los productos
-
 const getProductos = async (req, res) => {  
   try {
     const [rows] = await db.query("SELECT * FROM productos");
@@ -13,6 +12,23 @@ const getProductos = async (req, res) => {
     res.status(500).json({ error: "Error al obtener los productos" });
   }
 }
+
+//metodo get para obtener un producto por id
+const getProductoById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const [rows] = await db.query("SELECT * FROM productos WHERE id_producto = ?", [id]);
+    if (rows.length === 0) {
+      return res.status(404).json({ error: "Producto no encontrado" });
+    }
+    res.json(rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener el producto" });
+  }
+};
+
+
 // metodo post para agregar un producto
 const addProducto = async (req, res) => {
   const { nombre, precio, preciob2b, marca, stock, imagen } = req.body;
@@ -32,21 +48,8 @@ const addProducto = async (req, res) => {
   }
 };
 
-//metodo get para obtener un producto por id
-const getProductoById = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const [rows] = await db.query("SELECT * FROM productos WHERE id_producto = ?", [id]);
-    if (rows.length === 0) {
-      return res.status(404).json({ error: "Producto no encontrado" });
-    }
-    res.json(rows[0]);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Error al obtener el producto" });
-  }
-};
 
+// metodo put para actualizar un producto por id
 const updateProductoById = async (req, res) => {
   const { id } = req.params;
   const { nombre, precio, preciob2b, marca, stock, imagen } = req.body;

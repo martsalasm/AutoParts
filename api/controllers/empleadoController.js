@@ -12,7 +12,7 @@ const getEmpleados = async (req, res) => {
     res.status(500).json({ error: "Error al obtener los empleados" });
   }
 }
-
+// metodo get para obtener un empleado por rut
 const getEmpleadoByRut = async (req, res) => {
   const { rut } = req.params;
   try {
@@ -54,7 +54,7 @@ if (!rutEmpleado || !nombreEmpleado || !apellidoEmpleado || !rolEmpleado || !tel
   };
 
 
-
+// metodo put para actualizar un empleado por rut
 const updateEmpleadoByRut = async (req, res) => {
   const { rut } = req.params;
   const { nombreEmpleado, apellidoEmpleado, rolEmpleado, telefonoEmpleado, correoEmpleado} = req.body;
@@ -72,6 +72,8 @@ const updateEmpleadoByRut = async (req, res) => {
     res.status(500).json({ error: "Error al actualizar el empleado" });
   }
 }
+
+//metodo delete para eliminar un empleado por rut
 const deleteEmpleadoByRut = async (req, res) => {
   const { rut } = req.params;
   try {
