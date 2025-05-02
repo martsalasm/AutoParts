@@ -121,12 +121,12 @@ footer {
 
 .aboutus {
   text-align: center;
-  width: 50%;
-  margin: auto;
-  font-size: 2em;
-  padding: 50px 20px;
+  width: 65%;
+  margin: 30px auto;
+  font-size: 1.2em;
+  padding: 30px 15px;
   text-justify: inter-word;
-  line-height: 2em;
+  line-height: 1.8em;
 }
 @media (max-width: 600px) {
   nav li {
