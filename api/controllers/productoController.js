@@ -1,6 +1,10 @@
 import db from "../database.js";
 
-const getProductos = async (req, res) => {
+// Controlador de productos para operaciones CRUD
+
+// metodo get para obtener todos los productos
+
+const getProductos = async (req, res) => {  
   try {
     const [rows] = await db.query("SELECT * FROM productos");
     res.json(rows);
@@ -9,7 +13,7 @@ const getProductos = async (req, res) => {
     res.status(500).json({ error: "Error al obtener los productos" });
   }
 }
-
+// metodo post para agregar un producto
 const addProducto = async (req, res) => {
   const { nombre, precio, preciob2b, marca, stock } = req.body;
   if (!nombre || !precio || !preciob2b || !marca || stock === undefined) {
@@ -28,7 +32,7 @@ const addProducto = async (req, res) => {
   }
 };
 
-
+//metodo get para obtener un producto por id
 const getProductoById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -43,10 +47,50 @@ const getProductoById = async (req, res) => {
   }
 };
 
+const updateProductoById = async (req, res) => {
+  const { id } = req.params;
+  const { nombre, precio, preciob2b, marca, stock } = req.body;
+  if (!nombre || !precio || !preciob2b || !marca || stock === undefined) {
+    return res.status(400).json({ error: "Faltan datos necesarios" });
+  }
+
+  try {
+    const [result] = await db.query(
+      "UPDATE productos SET nombre_producto = ?, precio = ?, preciob2b = ?, marca = ?, stock = ? WHERE id_producto = ?",
+      [nombre, precio, preciob2b, marca, stock, id]
+    );
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Producto no encontrado" });
+    }
+    res.json({ id, nombre, precio, preciob2b, marca, stock });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al actualizar el producto" });
+  }
+};
+
+
+// metodo delete para eliminar un producto por id
+const deleteProductoById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const [result] = await db.query("DELETE FROM productos WHERE id_producto = ?", [id]);
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Producto no encontrado" });
+    }
+    res.status(204).send();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al eliminar el producto" });
+  }
+};
+
 
 
 export default{
     getProductos,
     addProducto,
-    getProductoById
+    getProductoById,
+    deleteProductoById,
+    updateProductoById
 }
