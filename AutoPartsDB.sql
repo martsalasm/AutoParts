@@ -13,7 +13,7 @@ CREATE TABLE clientes(
     direccion_cliente VARCHAR(100) NOT NULL,
     telefono_cliente VARCHAR(15) NOT NULL,
     correo_cliente VARCHAR(100) NOT NULL,
-    tipo_cliente ENUM('B2C', 'B2B') DEFAULT 'B2C' NOT NULL,
+    tipo_cliente ENUM('B2C', 'B2B') DEFAULT 'B2C' NOT NULL
 )
 
 CREATE TABLE empleados(
