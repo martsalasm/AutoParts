@@ -13,7 +13,98 @@ const getEmpleados = async (req, res) => {
   }
 }
 
+const getEmpleadoByRut = async (req, res) => {
+  const { rut } = req.params;
+  try {
+    const [rows] = await db.query("SELECT * FROM empleados WHERE rut_empleado = ?", [rut]);
+    if (rows.length === 0) {
+      return res.status(404).json({ error: "Empleado no encontrado" });
+    }
+    else if (rows.length > 1) {
+      return res.status(500).json({ error: "Error, se encontraron varios empleados con el mismo rut" });
+    }
+    res.json(rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener el empleado" });
+  };
+};
+
+//metodo post para agregar un empleado
+const addEmpleado = async (req, res) => {
+const { rutEmpleado, nombreEmpleado, apellidoEmpleado, rolEmpleado, telefonoEmpleado, correoEmpleado} = req.body;
+if (!rutEmpleado || !nombreEmpleado || !apellidoEmpleado || !rolEmpleado || !telefonoEmpleado || !correoEmpleado) {
+  return res.status(400).json({ error: "Faltan datos necesarios" });
+}
+  // ** Validación del RUT utilizando la regex **
+  if (!validarRut(rutEmpleado)) {
+    return res.status(400).json({ error: "El formato del RUT no es válido" });
+  }
+  try {
+    const [result] = await db.query(
+      "INSERT INTO empleados (rut_empleado, nombre_empleado, apellido_empleado, rol_empleado, telefono_empleado, correo_empleado) VALUES (?, ?, ?, ?, ?, ?)", 
+      [rutEmpleado, nombreEmpleado, apellidoEmpleado, rolEmpleado, telefonoEmpleado, correoEmpleado]
+    );
+    res.status(201).json({ rutEmpleado, nombreEmpleado, apellidoEmpleado, rolEmpleado, telefonoEmpleado, correoEmpleado });
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al agregar el empleado" });
+  }
+  };
+
+
+
+const updateEmpleadoByRut = async (req, res) => {
+  const { rut } = req.params;
+  const { nombreEmpleado, apellidoEmpleado, rolEmpleado, telefonoEmpleado, correoEmpleado} = req.body;
+  if (!nombreEmpleado || !apellidoEmpleado || !rolEmpleado || !telefonoEmpleado || !correoEmpleado) {
+    return res.status(400).json({ error: "Faltan datos necesarios" });
+  }
+  try {
+    const [result] = await db.query(
+      "UPDATE empleados SET nombre_empleado = ?, apellido_empleado = ?, rol_empleado = ?, telefono_empleado = ?, correo_empleado=? WHERE rut_empleado = ?",
+      [nombreEmpleado, apellidoEmpleado, rolEmpleado, telefonoEmpleado, correoEmpleado, rut]
+    );
+    res.status(201).json({ rut, nombreEmpleado, apellidoEmpleado, rolEmpleado, telefonoEmpleado, correoEmpleado });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al actualizar el empleado" });
+  }
+}
+const deleteEmpleadoByRut = async (req, res) => {
+  const { rut } = req.params;
+  try {
+    const [result] = await db.query("DELETE FROM empleados WHERE rut_empleado = ?", [rut]);
+    res.status(200).json({ message: "Empleado eliminado" });
+    if (result.affectedRows > 0) {
+      res.send({ message: 'Empleado eliminado correctamente' });
+    } else {
+      res.status(404).json({ error: 'No se encontró ningún empleado con ese RUT' });
+    }
+    res.status(204).send();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al eliminar el empleado" });
+  }
+}
+
+
+  // Función de validación del RUT
+  function validarRut(rut) {
+    if (typeof rut !== 'string') {
+      return false;
+    }
+    const rutLimpio = rut.replace(/\./g, ''); // Eliminar puntos
+    const regex = /^([1-9]|[1-9]\d|[1-9]\d{2})(\d{3})*-(\d|k|K)$/;
+    return regex.test(rutLimpio);
+  }
+
 
 export default {
-getEmpleados
+getEmpleados,
+getEmpleadoByRut,
+addEmpleado,
+updateEmpleadoByRut,
+deleteEmpleadoByRut,
 };

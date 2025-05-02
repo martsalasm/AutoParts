@@ -11,6 +11,7 @@ CREATE TABLE productos(
 CREATE TABLE clientes(
     rut_cliente VARCHAR(10) PRIMARY KEY,
     nombre_cliente VARCHAR(100) NOT NULL,
+    apellido_cliente VARCHAR(100) NOT NULL,
     direccion_cliente VARCHAR(100) NOT NULL,
     telefono_cliente VARCHAR(15) NOT NULL,
     correo_cliente VARCHAR(100) NOT NULL,
@@ -20,6 +21,7 @@ CREATE TABLE clientes(
 CREATE TABLE empleados(
     rut_empleado VARCHAR(10) PRIMARY KEY,
     nombre_empleado VARCHAR(100) NOT NULL,
+    apellido_empleado VARCHAR(100) NOT NULL,
     rol_empleado ENUM('admin','bodeguero','vendedor','contador') NOT NULL,
     telefono_empleado VARCHAR(15) NOT NULL,
     correo_empleado VARCHAR(100) NOT NULL
