@@ -128,6 +128,9 @@ footer {
   text-justify: inter-word;
   line-height: 1.8em;
 }
+.aboutus img {
+  border-radius: 100%;
+}
 @media (max-width: 600px) {
   nav li {
     display: block;
@@ -148,5 +151,10 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .aboutus img{
+    width: 100%;
+    height: 260px;
+    border-radius: 50%;
   }
 }
