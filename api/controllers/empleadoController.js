@@ -1,6 +1,6 @@
 import db from "../database.js";
 
-//Controlador de empoleados para operaciones CRUD
+//Controlador de empleados para operaciones CRUD
 
 // metodo get para obtener todos los empleados
 const getEmpleados = async (req, res) => {
