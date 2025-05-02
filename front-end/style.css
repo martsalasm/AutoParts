@@ -98,6 +98,8 @@ footer {
   height: 333px;
   object-fit: cover;
 }
+
+/*footer*/
 footer {
   display: flex;
   width: 100%;
@@ -113,6 +115,8 @@ footer {
   font-style: italic;
   padding-bottom: 2px;
 }
+
+
 #pagos{display: inline-block;}
 #pagos img {
   max-width: 260px;
@@ -121,6 +125,8 @@ footer {
   max-height: 200px;
 }
 
+
+/* pagina about us */
 .aboutus {
   text-align: center;
   width: 65%;
@@ -133,6 +139,12 @@ footer {
 .aboutus img {
   border-radius: 100%;
 }
+
+
+
+
+
+/* Responsive Design */
 @media (max-width: 600px) {
   nav li {
     display: block;
