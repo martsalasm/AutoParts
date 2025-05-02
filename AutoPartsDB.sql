@@ -4,6 +4,7 @@ CREATE TABLE productos(
     precio INT NOT NULL,
     preciob2b INT NOT NULL,
     marca VARCHAR(50) NOT NULL,
+    categoria VARCHAR(50) NOT NULL,
     stock INT NOT NULL,
     url_imagen VARCHAR(255)
 )
