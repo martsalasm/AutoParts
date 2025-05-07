@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 <img src="${product.url_imagen}" alt="${product.nombre_producto}">
                 <p>Precio: $${product.precio}</p>
                 <p>Precio Mayorista: $${product.preciob2b}</p>
-                <p> Stock: ${product.stock}</p>
+                <p> Stock: ${product.stock} unidades</p>
                 <button class="add-to-cart" data-id="${product.id_producto}">Agregar al carrito</button>
             `;
             productsContainer.appendChild(productCard);
@@ -19,4 +19,15 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }).catch(error => {
         console.error("Error al cagar los productos:", error);
     });
+});
+
+
+document.getElementById("categorias-title").addEventListener("click", () => {
+    var categoriasList = document.getElementsByClassName("categorias-list");
+
+    for (let i = 0; i < categoriasList.length; i++) {
+        if (window.innerWidth <= 600) {
+            categoriasList[i].classList.toggle('visible');
+        }
+    }
 });
