@@ -6,7 +6,6 @@
   padding: 0px;
   width: 100%;
   box-sizing: border-box;
-  overflow-y: scroll;
   color: rgb(230, 230, 230);
 }
 /* index */
@@ -64,6 +63,7 @@ nav li {
   font-size: 2em;
   color: white;
   height: 100vh;
+  min-height: 60vh;
 }
 #greeting-message {
   text-align: center;
