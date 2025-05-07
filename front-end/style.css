@@ -70,7 +70,7 @@ nav li {
   text-shadow: #141313 0px 0px 5px;
   outline: #141313 0px 0px 5px;
 }
-#marcas-title {
+.marcas-title {
   background-color: rgb(26, 26, 26);
   color: white;
   text-align: center;
@@ -95,6 +95,10 @@ nav li {
   width: 333px;
   height: 333px;
   object-fit: cover;
+}
+#most-sold{
+  display: flex;
+  justify-content: space-around;
 }
 
 /*footer*/
