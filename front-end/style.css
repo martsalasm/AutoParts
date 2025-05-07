@@ -9,6 +9,7 @@
   overflow-y: scroll;
   color: rgb(230, 230, 230);
 }
+/* index */
 #title img{
   width: 400px;
   min-width: fit-content;
@@ -33,6 +34,7 @@ header {
   text-align: center;
   margin-top: 20px;
 }
+/* navbar */
 nav {
   display: flex;
   justify-content: center;
@@ -96,6 +98,8 @@ nav li {
   height: 333px;
   object-fit: cover;
 }
+
+/* index, most-sold */
 #most-sold{
   display: flex;
   justify-content: space-around;
