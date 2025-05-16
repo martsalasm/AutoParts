@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 <p>Precio: $${product.precio}</p>
                 <p>Precio Mayorista: $${product.preciob2b}</p>
                 <p> Stock: ${product.stock} unidades</p>
-                <button class="add-to-cart" data-id="${product.id_producto}">Agregar al carrito</button>
+                <button class="add-to-cart" data-id="${product.id_producto}">Agregar al carrito<i class="fas fa-shopping-cart" style="display:inline; margin-left:10px"></i> </button>
             `;
             productsContainer.appendChild(productCard);
         });
