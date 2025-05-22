@@ -1,3 +1,5 @@
+import cart from "./cart.js";
+
 document.addEventListener("DOMContentLoaded", () => {
     const mostSoldProductsContainer = document.getElementById("most-sold");
     fetch("http://localhost:3000/productos")
@@ -17,7 +19,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 `;
                 mostSoldProductsContainer.appendChild(productCard);
             }
+            
         });
+        document.querySelectorAll(".add-to-cart").forEach(button => {
+                            button.addEventListener("click", (event) => {
+                                const productId = event.target.getAttribute("data-id");
+                                cart.addToCart(productId);
+                                alert("Producto agregado al carrito!");
+                            });
+                        });
     }).catch(error => {
         console.error("Error al cargar los productos más vendidos:", error);
     });

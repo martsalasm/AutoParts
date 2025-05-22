@@ -1,12 +1,13 @@
-document.addEventListener("DOMContentLoaded", ()=>{
+import cart from "./cart.js";
+document.addEventListener("DOMContentLoaded", () => {
     const productsContainer = document.getElementById("products-container");
     fetch("http://localhost:3000/productos")
-    .then(response => response.json())
-    .then(data => {
-        data.forEach(product => {
-            const productCard = document.createElement("div");
-            productCard.classList.add("product-card");
-            productCard.innerHTML = `
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(product => {
+                const productCard = document.createElement("div");
+                productCard.classList.add("product-card");
+                productCard.innerHTML = `
                 <h2 class=card-title>${product.nombre_producto}</h2>
                 <img src="${product.url_imagen}" alt="${product.nombre_producto}">
                 <p>Precio: $${product.precio}</p>
@@ -14,11 +15,21 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 <p> Stock: ${product.stock} unidades</p>
                 <button class="add-to-cart" data-id="${product.id_producto}">Agregar al carrito<i class="fas fa-shopping-cart" style="display:inline; margin-left:10px"></i> </button>
             `;
-            productsContainer.appendChild(productCard);
-        });
-    }).catch(error => {
-        console.error("Error al cagar los productos:", error);
-    });
+                productsContainer.appendChild(productCard);
+            });
+
+            document.querySelectorAll(".add-to-cart").forEach(button => {
+                button.addEventListener("click", (event) => {
+                    const productId = event.target.getAttribute("data-id");
+                    cart.addToCart(productId);
+                    alert("Producto agregado al carrito!");
+                });
+            });
+        }).catch(error => {
+            console.error("Error al cagar los productos:", error);
+        }
+    );
+
 });
 
 
