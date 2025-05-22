@@ -1,4 +1,7 @@
 import cart from "./cart.js";
+
+
+// Función para mostrar los productos en la página de catálogo
 document.addEventListener("DOMContentLoaded", () => {
     const productsContainer = document.getElementById("products-container");
     fetch("http://localhost:3000/productos")
@@ -32,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-
+// Función para mostrar/ocultar las categorías
 document.getElementById("categorias-title").addEventListener("click", () => {
     var categoriasList = document.getElementsByClassName("categorias-list");
 

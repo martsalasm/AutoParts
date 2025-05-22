@@ -1,5 +1,9 @@
 import cart from "./cart.js";
 
+
+
+
+//función para mostrar los productos destacados
 document.addEventListener("DOMContentLoaded", () => {
     const mostSoldProductsContainer = document.getElementById("most-sold");
     fetch("http://localhost:3000/productos")
@@ -19,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 `;
                 mostSoldProductsContainer.appendChild(productCard);
             }
-            
         });
         document.querySelectorAll(".add-to-cart").forEach(button => {
                             button.addEventListener("click", (event) => {
@@ -29,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             });
                         });
     }).catch(error => {
-        console.error("Error al cargar los productos más vendidos:", error);
+        console.error("Error al cargar los productos destacados:", error);
     });
 
 
