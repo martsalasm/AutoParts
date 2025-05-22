@@ -44,4 +44,4 @@ document.getElementById("categorias-title").addEventListener("click", () => {
             categoriasList[i].classList.toggle('visible');
         }
     }
-});
+}); 
