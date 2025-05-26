@@ -102,7 +102,7 @@ function renderCart(cartContainer, cart) {
                 localStorage.setItem("cart", JSON.stringify(cart));
                 updateCartCount();
               } else {
-                alert(`La cantidad máxima es ${maxValue}`);
+                console.log(`La cantidad máxima es ${maxValue}`);
                 cantidadInput.value = item.quantity;
               }
               renderCart(cartContainer, cart);
@@ -119,7 +119,7 @@ function renderCart(cartContainer, cart) {
                 renderCart(cartContainer, cart);
                 updateCartCount();
               } else {
-                alert(`La cantidad máxima es ${maxValue}`);
+                console.log(`La cantidad máxima es ${maxValue}`);
               }
             });
             cantidadContainer.appendChild(botonResta);
