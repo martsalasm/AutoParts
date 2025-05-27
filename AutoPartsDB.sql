@@ -38,3 +38,20 @@ CREATE TABLE pagos(
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (rut_cliente) REFERENCES clientes(rut_cliente)
 )
+
+CREATE TABLE ordenes (
+  id_orden INT AUTO_INCREMENT PRIMARY KEY,
+  fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+  total INT NOT NULL,
+  estado ENUM('pendiente', 'completado','fallido', 'cancelado') NOT NULL,
+);
+
+CREATE TABLE detalle_orden (
+  id_detalle INT AUTO_INCREMENT PRIMARY KEY,
+  id_orden INT,
+  id_producto INT,
+  cantidad INT,
+  precio_unitario DECIMAL(10, 2),
+  FOREIGN KEY (id_orden) REFERENCES ordenes(id_orden),
+  FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
+);
