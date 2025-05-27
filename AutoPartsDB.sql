@@ -51,7 +51,7 @@ CREATE TABLE detalle_orden (
   id_orden INT,
   id_producto INT,
   cantidad INT,
-  precio_unitario DECIMAL(10, 2),
+  precio_unitario INT NOT NULL,
   FOREIGN KEY (id_orden) REFERENCES ordenes(id_orden),
   FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
 );
