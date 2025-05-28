@@ -4,39 +4,45 @@ function initializeCart() {
     localStorage.setItem("cart", JSON.stringify([]));
   }
 }
+// Función para obtener el carrito del localStorage
+// Esta función devuelve el carrito almacenado en el localStorage como un objeto JavaScript
+function getCart() {
+  return JSON.parse(localStorage.getItem("cart")) || [];
+}
+
+function saveCartToStorage(cart) {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
 // Función para agregar un producto al carrito
 function addToCart(productId) {
-  const cart = JSON.parse(localStorage.getItem("cart"));
+  getCart();
   const productIndex = cart.findIndex((item) => item.id === productId);
   if (productIndex > -1) {
     cart[productIndex].quantity += 1;
   } else {
     cart.push({ id: productId, quantity: 1 });
   }
-  localStorage.setItem("cart", JSON.stringify(cart));
+  saveCartToStorage(cart);
   updateCartCount();
 }
 // Función para actualizar el contador del carrito
 // Esta función cuenta la cantidad total de productos en el carrito y actualiza el contador en la interfaz
 function updateCartCount() {
-  const cart = JSON.parse(localStorage.getItem("cart"));
+  getCart();
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
   document.getElementById("cart-count").textContent = cartCount;
 }
-// Función para obtener el carrito del localStorage
-// Esta función devuelve el carrito almacenado en el localStorage como un objeto JavaScript
-function getCart() {
-  return JSON.parse(localStorage.getItem("cart"));
-}
+
 // Función para eliminar un producto del carrito
 // Esta función busca el producto en el carrito y lo elimina, o reduce su cantidad si hay más de uno
 function removeFromCart(productId) {
-  const cart = JSON.parse(localStorage.getItem("cart"));
+  getCart();
   const cartContainer = document.getElementById("cart-container");
   const productIndex = cart.findIndex((item) => item.id === productId);
   if (productIndex !== -1) {
     cart.splice(productIndex, 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
+    saveCartToStorage(cart);
     updateCartCount();
     renderCart(cartContainer, cart);
   }
@@ -60,6 +66,8 @@ function renderCart(cartContainer, cart) {
           acc[product.id_producto] = product;
           return acc;
         }, {});
+
+        let subtotal = 0;
         //Aquí se recorre el carrito y se crean los elementos HTML para cada producto
         // Se crea un contenedor para cada producto y se le añade la información del producto
         cart.forEach((item) => {
@@ -72,7 +80,7 @@ function renderCart(cartContainer, cart) {
                                             <h2 class=cart-product-title>${product.nombre_producto}</h2>
                                             <p>Precio Unitario: $${product.precio}</p>
                                         `;
-
+            subtotal += product.precio * item.quantity;
             const cantidadContainer = document.createElement("div");
             cantidadContainer.classList.add("cantidad-container");
 
@@ -82,7 +90,7 @@ function renderCart(cartContainer, cart) {
             botonResta.addEventListener("click", () => {
               if (item.quantity > 1) {
                 item.quantity -= 1;
-                localStorage.setItem("cart", JSON.stringify(cart));
+                saveCartToStorage(cart);
                 renderCart(cartContainer, cart);
                 updateCartCount();
               }
@@ -99,7 +107,7 @@ function renderCart(cartContainer, cart) {
               const newValue = parseInt(cantidadInput.value);
               if (newValue > 0 && newValue <= maxValue) {
                 item.quantity = newValue;
-                localStorage.setItem("cart", JSON.stringify(cart));
+                saveCartToStorage(cart);
                 updateCartCount();
               } else {
                 console.log(`La cantidad máxima es ${maxValue}`);
@@ -115,7 +123,7 @@ function renderCart(cartContainer, cart) {
             botonSuma.addEventListener("click", () => {
               if (item.quantity < maxValue) {
                 item.quantity += 1;
-                localStorage.setItem("cart", JSON.stringify(cart));
+                saveCartToStorage(cart);
                 renderCart(cartContainer, cart);
                 updateCartCount();
               } else {
@@ -141,6 +149,12 @@ function renderCart(cartContainer, cart) {
             cartContainer.appendChild(cartCard);
           }
         });
+        const subtotalElement = document.getElementById("cart-subtotal");
+        if (subtotalElement) {
+          subtotalElement.textContent = `$${new Intl.NumberFormat(
+            "es-CL"
+          ).format(subtotal)}`;
+        }
       })
       .catch((error) => {
         console.error("Error al cargar los productos del carrito:", error);
