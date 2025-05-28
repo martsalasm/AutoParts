@@ -16,7 +16,7 @@ function saveCartToStorage(cart) {
 
 // Función para agregar un producto al carrito
 function addToCart(productId) {
-  getCart();
+  const cart = getCart();
   const productIndex = cart.findIndex((item) => item.id === productId);
   if (productIndex > -1) {
     cart[productIndex].quantity += 1;
@@ -29,7 +29,7 @@ function addToCart(productId) {
 // Función para actualizar el contador del carrito
 // Esta función cuenta la cantidad total de productos en el carrito y actualiza el contador en la interfaz
 function updateCartCount() {
-  getCart();
+  const cart = getCart();
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
   document.getElementById("cart-count").textContent = cartCount;
 }
@@ -37,7 +37,7 @@ function updateCartCount() {
 // Función para eliminar un producto del carrito
 // Esta función busca el producto en el carrito y lo elimina, o reduce su cantidad si hay más de uno
 function removeFromCart(productId) {
-  getCart();
+  const cart = getCart();
   const cartContainer = document.getElementById("cart-container");
   const productIndex = cart.findIndex((item) => item.id === productId);
   if (productIndex !== -1) {
