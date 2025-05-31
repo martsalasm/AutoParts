@@ -23,8 +23,7 @@ function addToCart(productId) {
   } else {
     cart.push({ id: productId, quantity: 1 });
   }
-  saveCartToStorage(cart);
-  updateCartCount();
+  updateCartUI(cart);
 }
 // Función para actualizar el contador del carrito
 // Esta función cuenta la cantidad total de productos en el carrito y actualiza el contador en la interfaz
@@ -32,6 +31,13 @@ function updateCartCount() {
   const cart = getCart();
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
   document.getElementById("cart-count").textContent = cartCount;
+}
+// Función para actualizar la interfaz del carrito
+// Esta función guarda el carrito en el localStorage y renderiza el carrito en la interfaz
+function updateCartUI(cart) {
+  saveCartToStorage(cart);
+  const cartContainer = document.getElementById("cart-container");
+  renderCart(cartContainer, cart);
 }
 
 // Función para eliminar un producto del carrito
@@ -42,9 +48,7 @@ function removeFromCart(productId) {
   const productIndex = cart.findIndex((item) => item.id === productId);
   if (productIndex !== -1) {
     cart.splice(productIndex, 1);
-    saveCartToStorage(cart);
-    updateCartCount();
-    renderCart(cartContainer, cart);
+    updateCartUI(cart);
   }
 }
 
@@ -56,7 +60,12 @@ function renderCart(cartContainer, cart) {
   cartContainer.innerHTML = "";
   if (cart.length === 0) {
     cartContainer.innerHTML =
-      "<h2 style='display: flex; justify-content:center; align-items:center; margin: 12.5% 0';>El carrito está vacío :(</h2>";
+      "<h2 style='display: flex; justify-content:center; align-items:center; margin: 12.5% 0'>El carrito está vacío :(</h2>";
+      const subtotalElement = document.getElementById("cart-subtotal");
+    if (subtotalElement) {
+    subtotalElement.textContent = "$0";
+    }
+
   } else {
     // Aquí se hace una llamada a la API para obtener los productos
     fetch("http://localhost:3000/productos")
@@ -90,9 +99,7 @@ function renderCart(cartContainer, cart) {
             botonResta.addEventListener("click", () => {
               if (item.quantity > 1) {
                 item.quantity -= 1;
-                saveCartToStorage(cart);
-                renderCart(cartContainer, cart);
-                updateCartCount();
+                updateCartUI(cart);
               }
             });
 
@@ -107,14 +114,12 @@ function renderCart(cartContainer, cart) {
               const newValue = parseInt(cantidadInput.value);
               if (newValue > 0 && newValue <= maxValue) {
                 item.quantity = newValue;
-                saveCartToStorage(cart);
-                updateCartCount();
+                updateCartUI(cart);
               } else {
                 console.log(`La cantidad máxima es ${maxValue}`);
                 cantidadInput.value = item.quantity;
               }
-              renderCart(cartContainer, cart);
-              updateCartCount();
+              
             });
 
             const botonSuma = document.createElement("button");
@@ -123,9 +128,7 @@ function renderCart(cartContainer, cart) {
             botonSuma.addEventListener("click", () => {
               if (item.quantity < maxValue) {
                 item.quantity += 1;
-                saveCartToStorage(cart);
-                renderCart(cartContainer, cart);
-                updateCartCount();
+                updateCartUI(cart);
               } else {
                 console.log(`La cantidad máxima es ${maxValue}`);
               }
@@ -160,6 +163,7 @@ function renderCart(cartContainer, cart) {
         console.error("Error al cargar los productos del carrito:", error);
       });
   }
+  updateCartCount();
 }
 
 // Evento para cargar el carrito al cargar la página
