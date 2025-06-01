@@ -62,6 +62,7 @@ function renderCart(cartContainer, cart) {
     cartContainer.innerHTML =
       "<h2 style='display: flex; justify-content:center; align-items:center; margin: 12.5% 0'>El carrito está vacío :(</h2>";
       const subtotalElement = document.getElementById("cart-subtotal");
+        document.getElementById("subtotal-container").style.display = "none";
     if (subtotalElement) {
     subtotalElement.textContent = "$0";
     }
@@ -152,6 +153,9 @@ function renderCart(cartContainer, cart) {
             cartContainer.appendChild(cartCard);
           }
         });
+        if (cartContainer.children.length >0) {
+          document.getElementById("subtotal-container").style.display = "flex";
+        }
         const subtotalElement = document.getElementById("cart-subtotal");
         if (subtotalElement) {
           subtotalElement.textContent = `$${new Intl.NumberFormat(
