@@ -316,11 +316,11 @@ font-weight: 700;
   height: 30px;
   border-radius: 5px;
   border: none;
-background-color: rgb(33, 33, 33);
+  background-color: rgb(33, 33, 33);
   color: white;
 }
 
-#confirm-btn{
+#checkout-btn{
   background-color: #4CAF50;
   color:#fff;
   border: none;
