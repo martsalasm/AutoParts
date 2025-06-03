@@ -1,12 +1,17 @@
 CREATE TABLE productos(
     id_producto INT PRIMARY KEY AUTO_INCREMENT,
     nombre_producto VARCHAR(100) NOT NULL,
+    descripcion_producto TEXT NOT NULL,
     precio INT NOT NULL,
     preciob2b INT NOT NULL,
     marca VARCHAR(50) NOT NULL,
     categoria VARCHAR(50) NOT NULL,
     stock INT NOT NULL,
-    url_imagen VARCHAR(255)
+    url_imagen VARCHAR(255),
+    product_weight (4,2) NOT NULL,
+    product.height (4,2) NOT NULL,
+    product.width (4,2) NOT NULL,
+    product.length (5,2) NOT NULL,
 )
 
 CREATE TABLE clientes(
@@ -41,9 +46,19 @@ CREATE TABLE pagos(
 
 CREATE TABLE ordenes (
   id_orden INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_cliente VARCHAR(100) NOT NULL,
+  rut_cliente VARCHAR(10) NOT NULL,
+  correo_cliente VARCHAR(100) NOT NULL,
+  telefono_cliente VARCHAR(15) NOT NULL,
+  direccion_cliente VARCHAR(100) NOT NULL,
+  region_cliente VARCHAR(50) NOT NULL,
+  ciudad_cliente VARCHAR(50) NOT NULL,
+  comuna_cliente VARCHAR(50) NOT NULL,
+  valor_envio INT NOT NULL,
   fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+  metodo_pago ENUM('webpay', 'transferencia_bancaria', 'efectivo') NOT NULL,
   total INT NOT NULL,
-  estado ENUM('pendiente', 'completado','fallido', 'cancelado') NOT NULL,
+  estado ENUM('pendiente', 'completado','fallido', 'cancelado') NOT NULL
 );
 
 CREATE TABLE detalle_orden (
