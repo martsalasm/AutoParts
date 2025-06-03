@@ -79,9 +79,50 @@ document.addEventListener("DOMContentLoaded", () => {
         comunaSelect.appendChild(option);
       });
     } else {
-      console.warn(
-        `No se encontraron comunas para la región: ${selectedRegion}`
+      console.warn(`No se encontraron comunas para la región: ${selectedRegion}`);
+    }
+  });
+
+  // Verificar cobertura cuando cambia comuna
+  comunaSelect.addEventListener("change", () => {
+    const selectedRegion = regionSelect.value;
+    const selectedComuna = comunaSelect.value;
+
+    if (selectedRegion && selectedComuna) {
+      const selectedRegionData = regionesComunasData.find(
+        (region) => region.region === selectedRegion
       );
+      const regionCode = selectedRegionData ? selectedRegionData.regionId : "";
+
+      if (!regionCode) {
+        console.warn(`No se encontró el código para la región: ${selectedRegion}`);
+        return;
+      }
+
+      fetch("http://localhost:3000/chilexpress/validarCobertura", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          region: selectedRegion,
+          comuna: selectedComuna,
+          regionCode: regionCode,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.tieneCobertura) {
+            console.log(`Cobertura disponible para ${selectedRegion}, ${selectedComuna}`);
+            if (data.countyCode) {
+                // GUARDAR PARA USAR DPS
+              console.log("Código de comuna:", data.countyCode);
+            }
+          } else {
+            console.warn(`No hay cobertura disponible para ${selectedRegion}, ${selectedComuna}`);
+          }
+        })
+        .catch((error) => {
+          console.error("Error al verificar la cobertura:", error);
+        });
     }
   });
 });

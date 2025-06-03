@@ -28,6 +28,31 @@ const getProductoById = async (req, res) => {
   }
 };
 
+//Metodo para obtener varios productos por ids
+
+const getProductosByIds = async (req, res) => {
+  const { productos } = req.body;
+  if (!Array.isArray(productos) || productos.length === 0 || !productos) {
+    return res.status(400).json({ error: "Faltan ids de productos" });
+  }
+
+  const ids = productos.map(producto => producto.id);
+  if (ids.length === 0) {
+    return res.status(400).json({ error: "La lista de productos esta.. vacia?" });
+  }
+
+try {
+    const [rows] = await db.query(
+      `SELECT id_producto AS id, nombre_producto AS nombre, precio FROM productos WHERE id_producto IN (?)`,
+      [ids]
+    );
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener los productos por ID" });
+  }
+}
+
 
 // metodo post para agregar un producto
 const addProducto = async (req, res) => {
@@ -94,6 +119,7 @@ export default{
     getProductos,
     addProducto,
     getProductoById,
+    getProductosByIds,
     deleteProductoById,
     updateProductoById
 }
