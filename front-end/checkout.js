@@ -66,10 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
   
  regionSelect.addEventListener('change', () => {
     const selectedRegion = regionSelect.value;
-
     const regionData = regionesComunasData.find(
       (region) => region.region === selectedRegion
     );
+    comunaSelect.innerHTML = "";
+    
     if (regionData && regionData.comunas) {
       regionData.comunas.forEach((comuna) => {
         const option = document.createElement('option');
