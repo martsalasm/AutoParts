@@ -371,7 +371,7 @@ input[type=number] {
   margin-bottom: 5px;
 }
 
-#checkout-form input {
+#checkout-form input, select {
   background-color: #1e1e1e;
   border: 1px solid #555;
   padding: 10px;
@@ -379,7 +379,7 @@ input[type=number] {
   color: #fff;
   width: 100%;
 }
-#checkout-form input:focus {
+#checkout-form input:focus, select:focus{
   outline: 2px solid #fff;
 }
 
