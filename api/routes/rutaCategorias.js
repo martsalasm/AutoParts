@@ -8,6 +8,6 @@ router.post('/', categoriaController.addCategoria);
 router.put('/:id', categoriaController.updateCategoriaById);
 router.delete('/:id', categoriaController.deleteCategoriaById);
 router.get("/productos/:id", categoriaController.getProductosByCategoria);
-
+router.post("/productos", categoriaController.addProductoToCategoria);
 
 export default router;

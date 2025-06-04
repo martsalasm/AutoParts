@@ -90,11 +90,33 @@ const getProductosByCategoria = async (req, res) => {
     res.status(500).json({ error: "Error al obtener la categoría" });
   }
 };
+// metodo post para agregar un producto a una categoria
+// Este método asume que existe una tabla producto_categoria que relaciona productos con categorías
+const addProductoToCategoria = async (req, res) => {
+  const { id_categoria, id_producto } = req.body;
+  if (!id_categoria || !id_producto) {
+    return res.status(400).json({ error: "Faltan datos necesarios" });
+  }
+  try {
+    const [result] = await db.query(
+      "INSERT INTO producto_categoria (id_categoria, id_producto) VALUES (?, ?)",
+      [id_categoria, id_producto]
+    );
+    res.status(201).json({ id: result.insertId, id_categoria, id_producto });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al agregar el producto a la categoría" });
+  }
+}
+
+
+
 export default {
     getCategorias,
     getCategoriaById,
     addCategoria,
     updateCategoriaById,
     deleteCategoriaById,
-    getProductosByCategoria
+    getProductosByCategoria,
+    addProductoToCategoria
 }
