@@ -9,9 +9,9 @@ CREATE TABLE productos(
     stock INT NOT NULL,
     url_imagen VARCHAR(255),
     product_weight (4,2) NOT NULL,
-    product.height (4,2) NOT NULL,
-    product.width (4,2) NOT NULL,
-    product.length (5,2) NOT NULL,
+    product_height (4,2) NOT NULL,
+    product_width (4,2) NOT NULL,
+    product_length (5,2) NOT NULL,
 )
 
 CREATE TABLE clientes(
