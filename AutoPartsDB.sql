@@ -96,7 +96,7 @@ VALUES ("Bujía de Níquel NGK BPR5EY",
 3,
 3,
 9
-)
+);
 INSERT INTO productos (nombre_producto, descripcion_producto, precio, preciob2b, marca,stock, url_imagen, product_weight, product_height, product_width, product_length)
 VALUES("Batería de Auto BOSCH S4 39S470D-T 70AH 660CCA",
 "Batería de auto BOSCH S4 39S470D-T de 70AH y 660CCA es uno de los elementos imprescindibles en todo vehículo, cumpliendo la función de almacenar la energía eléctrica para luego ser transmitida al motor de partida cada vez que quieras arrancar.",
@@ -109,7 +109,7 @@ VALUES("Batería de Auto BOSCH S4 39S470D-T 70AH 660CCA",
 18,
 18,
 28
-)
+);
 
 INSERT INTO productos (nombre_producto, descripcion_producto, precio, preciob2b, marca,stock, url_imagen, product_weight, product_height, product_width, product_length)
 VALUES("Set de Ampolletas Pure Light W5w T10 de 12v y 5w",
@@ -123,4 +123,4 @@ VALUES("Set de Ampolletas Pure Light W5w T10 de 12v y 5w",
 7,
 14,
 2
-)
+);
