@@ -223,6 +223,16 @@ footer {
 .product-card:hover {
   transform: scale(1.01);
 }
+.add-to-cart:hover,
+.add-to-cart:active {
+  background-color: #45a049;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 1);
+  transform: scale(0.98);
+}
+.product-card:active {
+  transform: scale(0.99);
+  background-color: rgb(26, 26, 26);
+}
 .add-to-cart {
   background-color: #4caf50;
   color: white;
@@ -236,9 +246,7 @@ footer {
   cursor: pointer;
   border-radius: 5px;
 }
-.add-to-cart:active {
-  background-color: #45a049;
-}
+
 .card-title {
   font-size: 1.5em;
   text-align: center;
@@ -246,7 +254,28 @@ footer {
   max-height: 60px;
   overflow: hidden;
 }
+/* pagina producto */
+#product-detail{
+  max-width: 90%;
+  margin: 30px auto;
+  background-color: rgb(33, 33, 33);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: flex-start;
+}
 
+#product-detail img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
 /* carrito */
 #cart-container {
   display: flex;
@@ -307,6 +336,7 @@ footer {
   gap: 6px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  max-width: 50%;
 }
 .boton-cantidad {
   background-color: rgb(33, 33, 33);
@@ -326,12 +356,13 @@ footer {
   margin: 20px auto;
 }
 .cantidad-input {
-  width: 40px;
+  width: 50%;
   height: 30px;
   border-radius: 5px;
   border: none;
   background-color: rgb(33, 33, 33);
   color: white;
+  text-align: center;
 }
 
 #checkout-btn {

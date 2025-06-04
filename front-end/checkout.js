@@ -226,7 +226,7 @@ if (data.url && data.token) {
 
   form.submit();
 } else {
-  alert('Error al iniciar el pago');
+  console.log('Error al iniciar el pago');
 }
 
   } catch (error) {

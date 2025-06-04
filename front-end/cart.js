@@ -1,3 +1,7 @@
+const formatter = new Intl.NumberFormat("es-CL", {
+  style: "currency",
+  currency: "CLP",
+});
 // Funcion para iniciar el carrito en el localStorage si no existe
 function initializeCart() {
   if (!localStorage.getItem("cart")) {
@@ -15,16 +19,26 @@ function saveCartToStorage(cart) {
 }
 
 // Función para agregar un producto al carrito
-function addToCart(productId) {
+function addToCart(productId, cantidad = 1) {
+  const id = Number(productId);
   const cart = getCart();
-  const productIndex = cart.findIndex((item) => item.id === productId);
-  if (productIndex > -1) {
-    cart[productIndex].quantity += 1;
-  } else {
-    cart.push({ id: productId, quantity: 1 });
-  }
-  updateCartUI(cart);
+  const productIndex = cart.findIndex((item) => item.id === id);
+
+  fetch(`http://localhost:3000/productos/${productId}`)
+    .then(res => res.json())
+    .then(product => {
+      const stock = product.stock;
+      if (productIndex > -1) {
+        const nuevaCantidad = cart[productIndex].quantity + cantidad;
+        cart[productIndex].quantity = Math.min(nuevaCantidad, stock);
+      } else {
+        cart.push({ id, quantity: Math.min(cantidad, stock) });
+      }
+      updateCartUI(cart);
+    })
+    .catch(err => console.error("Error al verificar el stock:", err));
 }
+
 // Función para actualizar el contador del carrito
 // Esta función cuenta la cantidad total de productos en el carrito y actualiza el contador en la interfaz
 function updateCartCount() {
@@ -66,7 +80,6 @@ function renderCart(cartContainer, cart) {
     if (subtotalElement) {
     subtotalElement.textContent = "$0";
     }
-
   } else {
     // Aquí se hace una llamada a la API para obtener los productos
     fetch("http://localhost:3000/productos")
@@ -85,15 +98,35 @@ function renderCart(cartContainer, cart) {
           if (product) {
             const cartCard = document.createElement("div");
             cartCard.classList.add("cart-card");
-            cartCard.innerHTML = `
-                                            <img src="${product.url_imagen}" alt="${product.nombre_producto}">
-                                            <h2 class=cart-product-title>${product.nombre_producto}</h2>
-                                            <p>Precio Unitario: $${product.precio}</p>
-                                        `;
+
+            // Crear la imagen del producto
+            const productImage = document.createElement("img");
+            productImage.src = product.url_imagen;
+            productImage.alt = product.nombre_producto;
+            
+            // Añadir evento de clic en la imagen para redirigir
+            productImage.addEventListener("click", () => {
+              window.location.href = `producto.html?id=${product.id_producto}`;
+            });
+
+            // Agregar la imagen al cartCard
+            cartCard.appendChild(productImage);
+            
+            // Agregar el nombre del producto y precio al cartCard
+            const productInfo = document.createElement("div");
+            productInfo.innerHTML = `
+              <h2 class="cart-product-title">${product.nombre_producto}</h2>
+              <p>Precio Unitario: ${formatter.format(product.precio)}</p>
+            `;
+            cartCard.appendChild(productInfo);
+
             subtotal += product.precio * item.quantity;
+
+            // Crear el contenedor para la cantidad del producto
             const cantidadContainer = document.createElement("div");
             cantidadContainer.classList.add("cantidad-container");
 
+            // Crear el botón de resta
             const botonResta = document.createElement("button");
             botonResta.innerHTML = '<i class="fa-solid fa-minus"></i>';
             botonResta.classList.add("boton-cantidad");
@@ -104,6 +137,7 @@ function renderCart(cartContainer, cart) {
               }
             });
 
+            // Crear el input de cantidad
             const cantidadInput = document.createElement("input");
             cantidadInput.type = "number";
             cantidadInput.value = item.quantity;
@@ -120,9 +154,9 @@ function renderCart(cartContainer, cart) {
                 console.log(`La cantidad máxima es ${maxValue}`);
                 cantidadInput.value = item.quantity;
               }
-              
             });
 
+            // Crear el botón de suma
             const botonSuma = document.createElement("button");
             botonSuma.innerHTML = '<i class="fa-solid fa-plus"></i>';
             botonSuma.classList.add("boton-cantidad");
@@ -134,11 +168,13 @@ function renderCart(cartContainer, cart) {
                 console.log(`La cantidad máxima es ${maxValue}`);
               }
             });
+
             cantidadContainer.appendChild(botonResta);
             cantidadContainer.appendChild(cantidadInput);
             cantidadContainer.appendChild(botonSuma);
             cartCard.appendChild(cantidadContainer);
 
+            // Crear el contenedor para el botón de eliminar
             const trashContainer = document.createElement("div");
             trashContainer.classList.add("trash-container");
             const trashButton = document.createElement("button");
@@ -150,23 +186,28 @@ function renderCart(cartContainer, cart) {
             trashButton.addEventListener("click", () => {
               removeFromCart(item.id);
             });
+            trashContainer.appendChild(trashButton);
+            cartCard.appendChild(trashContainer);
+
+            // Agregar el cartCard al contenedor principal del carrito
             cartContainer.appendChild(cartCard);
           }
         });
         if (cartContainer.children.length >0) {
           document.getElementById("subtotal-container").style.display = "flex";
         }
+
+        // Mostrar el subtotal en formato de moneda
         const subtotalElement = document.getElementById("cart-subtotal");
         if (subtotalElement) {
-          subtotalElement.textContent = `$${new Intl.NumberFormat(
-            "es-CL"
-          ).format(subtotal)}`;
+          subtotalElement.textContent = `$${new Intl.NumberFormat("es-CL").format(subtotal)}`;
         }
       })
       .catch((error) => {
         console.error("Error al cargar los productos del carrito:", error);
       });
   }
+
   updateCartCount();
 }
 
