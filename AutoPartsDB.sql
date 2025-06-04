@@ -70,3 +70,20 @@ CREATE TABLE detalle_orden (
   FOREIGN KEY (id_orden) REFERENCES ordenes(id_orden),
   FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
 );
+
+
+
+INSERT INTO productos (nombre_producto, descripcion_producto, precio, preciob2b, marca, categoria, stock, url_imagen, product_weight, product_height, product_width, product_length)
+VALUES ("Bujía de Níquel NGK BPR5EY",
+ "Bujías de Encendido NGK cumplen una función vital en el motor de tu automóvil, ya que son las encargadas de encender la chispa que logra el arranque mediante la mezcla de combustible y oxígeno en cada cilindro.",
+ 2500,
+ 2000,
+"NGK",
+"motoresycomponentes",
+100,
+"https://api.autoplanet.cl/medias/sys_master/images/h41/hf6/9713013686302/123008_1-1702994561/123008-1-1702994561.webp",
+0.06,
+3,
+3,
+9
+)
