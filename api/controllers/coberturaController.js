@@ -1,12 +1,11 @@
-import fetch from "node-fetch";
+import axios from "axios";
 import dotenv from "dotenv";
 dotenv.config();
 
 const apiKeyCobertura = process.env.KEY_COBERTURA;
 const coberturaApiUrl = 'http://testservices.wschilexpress.com/georeference/api/v1.0/coverage-areas';
 
-const validarCobertura =  async (req, res) => {
-
+const validarCobertura = async (req, res) => {
   const { region, comuna, regionCode } = req.body;
 
   if (!regionCode || !comuna) {
@@ -16,20 +15,16 @@ const validarCobertura =  async (req, res) => {
   const url = `${coberturaApiUrl}?RegionCode=${regionCode}&type=1`;
 
   try {
-    const response = await fetch(url, {
+    const response = await axios.get(url, {
       headers: {
         'Cache-Control': 'no-cache',
         'Ocp-Apim-Subscription-Key': apiKeyCobertura,
       },
     });
 
-    if (!response.ok) {
-      console.error(`Error de la API de Chilexpress: ${response.status}`);
-      return res.status(500).json({ error: 'Error al consultar la API de Chilexpress.' });
-    }
-
-    const data = await response.json();
+    const data = response.data;
     console.log('Respuesta de la API de Cobertura:', data);
+
     if (data && data.coverageAreas) {
       const coberturaEncontrada = data.coverageAreas.find(
         (coverage) => coverage.countyName.toLowerCase() === comuna.toLowerCase()
@@ -45,7 +40,7 @@ const validarCobertura =  async (req, res) => {
       return res.status(500).json({ error: 'Respuesta de la API de Cobertura inválida.' });
     }
   } catch (error) {
-    console.error('Error al llamar a la API de Cobertura:', error);
+    console.error('Error al llamar a la API de Cobertura:', error.message);
     return res.status(500).json({ error: 'Error interno al validar la cobertura.' });
   }
 };
