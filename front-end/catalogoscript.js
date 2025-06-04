@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <h2 class=card-title>${product.nombre_producto}</h2>
                 <img src="${product.url_imagen}" alt="${product.nombre_producto}">
                 <p>Precio: $${product.precio}</p>
-                <p>Precio Mayorista: $${product.preciob2b}</p>
+                <p>Marca: ${product.marca}</p>
                 <p> Stock: ${product.stock} unidades</p>
                 <button class="add-to-cart" data-id="${product.id_producto}">Agregar al carrito<i class="fas fa-shopping-cart" style="display:inline; margin-left:10px"></i> </button>
             `;
