@@ -154,6 +154,31 @@ VALUES("Set de Ampolletas Pure Light W5w T10 de 12v y 5w",
 
 -- Poblar Categorias 
 
+INSERT INTO categorias (nombre_categoria) VALUES ('Destacados');  
 INSERT INTO categorias (nombre_categoria) VALUES ('Motores y componentes');
 INSERT INTO categorias (nombre_categoria) VALUES ('Filtros de aceite');
 INSERT INTO categorias (nombre_categoria) VALUES ('Filtros de aire');
+INSERT INTO categorias (nombre_categoria) VALUES ('Bujias');
+INSERT INTO categorias (nombre_categoria) VALUES ('Correas de distribucion');
+INSERT INTO categorias (nombre_categoria) VALUES ('Frenos y suspension');
+INSERT INTO categorias (nombre_categoria) VALUES ('Pastillas de freno');
+INSERT INTO categorias (nombre_categoria) VALUES ('Discos de freno');
+INSERT INTO categorias (nombre_categoria) VALUES ('Amortiguadores');
+INSERT INTO categorias (nombre_categoria) VALUES ('Rotulas');
+INSERT INTO categorias (nombre_categoria) VALUES ('Electricidad y baterias');
+INSERT INTO categorias (nombre_categoria) VALUES ('Alternadores');
+INSERT INTO categorias (nombre_categoria) VALUES ('Baterias');
+INSERT INTO categorias (nombre_categoria) VALUES ('Luces y faros');
+INSERT INTO categorias (nombre_categoria) VALUES ('Sensores y fusibles');
+INSERT INTO categorias (nombre_categoria) VALUES ('Accesorios de seguridad');
+INSERT INTO categorias (nombre_categoria) VALUES ('Alarmas');
+INSERT INTO categorias (nombre_categoria) VALUES ('Cinturones de seguridad');
+INSERT INTO categorias (nombre_categoria) VALUES ('Cubre asientos');
+INSERT INTO categorias (nombre_categoria) VALUES ('Kits de emergencia');
+
+-- Poblar producto_categoria
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (1, 1); -- Bujía de Níquel NGK BPR5EY / Destacados
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (1, 2); -- Bujía de Níquel NGK BPR5EY / Motores y componentes
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (1, 5); -- Bujía de Níquel NGK BPR5EY / Bujias
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (2, 12); -- Batería de Auto BOSCH S4 39S470D-T 70AH 660CCA / Electricidad y baterias
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (2, 14); -- Batería de Auto BOSCH S4 39S470D-T 70AH 660CCA / Baterias
