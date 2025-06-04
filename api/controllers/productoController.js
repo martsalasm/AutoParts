@@ -169,5 +169,5 @@ export default{
     getProductoById,
     getProductosByIds,
     deleteProductoById,
-    updateProductoById
+    updateProductoById,
 }
