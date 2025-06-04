@@ -11,7 +11,7 @@ CREATE TABLE productos(
     product_height DECIMAL(4,2) NOT NULL,
     product_width DECIMAL(4,2) NOT NULL,
     product_length DECIMAL(5,2) NOT NULL
-)
+);
 CREATE TABLE categorias (
     id_categoria INT PRIMARY KEY AUTO_INCREMENT,
     nombre_categoria VARCHAR(50) UNIQUE NOT NULL
@@ -33,7 +33,7 @@ CREATE TABLE clientes(
     telefono_cliente VARCHAR(15) NOT NULL,
     correo_cliente VARCHAR(100) NOT NULL,
     tipo_cliente ENUM('B2C', 'B2B') DEFAULT 'B2C' NOT NULL
-)
+);
 
 CREATE TABLE empleados(
     rut_empleado VARCHAR(10) PRIMARY KEY,
@@ -42,7 +42,7 @@ CREATE TABLE empleados(
     rol_empleado ENUM('admin','bodeguero','vendedor','contador') NOT NULL,
     telefono_empleado VARCHAR(15) NOT NULL,
     correo_empleado VARCHAR(100) NOT NULL
-)
+);
 
 CREATE TABLE pagos(
     id_pago INT PRIMARY KEY AUTO_INCREMENT,
@@ -53,7 +53,7 @@ CREATE TABLE pagos(
     estado_pago ENUM('pendiente', 'completado','fallido', 'cancelado') NOT NULL,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (rut_cliente) REFERENCES clientes(rut_cliente)
-)
+);
 
 CREATE TABLE ordenes (
   id_orden INT AUTO_INCREMENT PRIMARY KEY,
