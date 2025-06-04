@@ -1,3 +1,11 @@
+let valorTotal = 0;
+let subtotal = 0;
+const total = document.getElementById("checkout-total");
+const formatter = new Intl.NumberFormat("es-CL", {
+  style: "currency",
+  currency: "CLP",
+});
+
 // Mostramos el subtotal del carrito al cargar la página
 document.addEventListener("DOMContentLoaded", async () => {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -20,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const productos = await res.json();
 
-    let subtotal = 0;
+    
 
     productos.forEach((prod) => {
       const item = cart.find((c) => Number(c.id) === Number(prod.id));
@@ -29,9 +37,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
       }
       subtotal += prod.precio * item.quantity;
+      valorTotal = subtotal;
     });
 
-    document.getElementById("checkout-subtotal").textContent = `$${subtotal}`;
+    document.getElementById("checkout-subtotal").textContent = formatter.format(subtotal);
   } catch (err) {
     console.error("Error al obtener productos del backend:", err);
   }
@@ -134,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 destinationCountyCode: destinationCountyCode,
                 package: packageData,
                 productType:3,
-                declaredWorth: 10000,
+                declaredWorth: subtotal,
               }
               fetch("http://localhost:3000/chilexpress/calcularDespacho", {
                 method: "POST",
@@ -157,7 +166,10 @@ document.addEventListener("DOMContentLoaded", () => {
               else{
                 const option = courierOptions[1] ?? courierOptions[0];
                 const despachoValor = option && option.serviceValue !== undefined ? Number(option.serviceValue) : 0;
-                envioElement.textContent = `$${despachoValor}`;
+                envioElement.textContent = formatter.format(despachoValor);
+                console.log("Valor del despacho:", despachoValor);
+                valorTotal = subtotal + despachoValor;
+                total.textContent = formatter.format(valorTotal);
               }
             })
             .catch((error) => {
