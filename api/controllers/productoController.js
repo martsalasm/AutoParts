@@ -56,17 +56,65 @@ try {
 
 // metodo post para agregar un producto
 const addProducto = async (req, res) => {
-  const { nombre, precio, preciob2b, marca, stock, imagen } = req.body;
-  if (!nombre || !precio || !preciob2b || !marca || !imagen || stock === undefined) {
+  const {
+    nombre,
+    descripcion,
+    precio,
+    preciob2b,
+    marca,
+    categoria,
+    stock,
+    imagen,
+    peso,
+    alto,
+    ancho,
+    largo
+  } = req.body;
+
+  if (
+    !nombre || !descripcion || !precio || !preciob2b || !marca || !categoria || stock === undefined || !imagen || 
+    peso === undefined || alto === undefined || ancho === undefined || largo === undefined
+  ) {
     return res.status(400).json({ error: "Faltan datos necesarios" });
   }
 
   try {
     const [result] = await db.query(
-      "INSERT INTO productos (nombre_producto, precio, preciob2b, marca, stock, url_imagen) VALUES (?, ?, ?, ?, ?, ?)", 
-      [nombre, precio, preciob2b, marca, stock, imagen]
+      `INSERT INTO productos (
+        nombre_producto, descripcion_producto, precio, preciob2b, marca, categoria, stock,
+        url_imagen, product_weight, product_height, product_width, product_length
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        nombre,
+        descripcion,
+        precio,
+        preciob2b,
+        marca,
+        categoria,
+        stock,
+        imagen,
+        peso,
+        alto,
+        ancho,
+        largo,
+      ]
     );
-    res.status(201).json({ id: result.insertId, nombre, precio, preciob2b, marca, stock, imagen});
+
+    res.status(201).json({
+      id: result.insertId,
+      nombre,
+      descripcion,
+      precio,
+      preciob2b,
+      marca,
+      categoria,
+      stock,
+      imagen,
+      peso,
+      alto,
+      ancho,
+      largo,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error al agregar el producto" });

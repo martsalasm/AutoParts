@@ -32,15 +32,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     document.getElementById("checkout-subtotal").textContent = `$${subtotal}`;
-    /* window.checkoutData = {
-            subtotal,
-            productos,
-            cart
-        };*/
   } catch (err) {
     console.error("Error al obtener productos del backend:", err);
   }
 });
+
+function bloquearFinalizeBtn(){
+  const finalizeBtn = document.getElementById("finalize-btn");
+  if (finalizeBtn) finalizeBtn.disabled = true;
+}
+function desbloquearFinalizeBtn() {
+  const finalizeBtn = document.getElementById("finalize-btn");
+  if (finalizeBtn) finalizeBtn.disabled = false;
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const regionSelect = document.getElementById("region");
@@ -87,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
   comunaSelect.addEventListener("change", () => {
     const selectedRegion = regionSelect.value;
     const selectedComuna = comunaSelect.value;
-
+    desbloquearFinalizeBtn();
     if (selectedRegion && selectedComuna) {
       const selectedRegionData = regionesComunasData.find(
         (region) => region.region === selectedRegion
@@ -113,11 +118,57 @@ document.addEventListener("DOMContentLoaded", () => {
           if (data.tieneCobertura) {
             console.log(`Cobertura disponible para ${selectedRegion}, ${selectedComuna}`);
             if (data.countyCode) {
-                // GUARDAR PARA USAR DPS
               console.log("Código de comuna:", data.countyCode);
+              const destinationCountyCode = data.countyCode;
+              const originCountyCode = "STGO";
+
+              const packageData = {
+                weight: 1.5,
+                height: 10,
+                width: 10,
+                length: 10,
+              }
+
+              const bodyData={
+                originCountyCode: originCountyCode,
+                destinationCountyCode: destinationCountyCode,
+                package: packageData,
+                productType:3,
+                declaredWorth: 10000,
+              }
+              fetch("http://localhost:3000/chilexpress/calcularDespacho", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(bodyData),
+            }).then((response) => {
+                if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}`);
+                return response.json();
+            })
+            .then((despachoData) => {
+              console.log("Opciones de despacho:", despachoData);
+
+              const courierOptions = despachoData.data?.courierServiceOptions || [];
+              const envioElement = document.getElementById("checkout-shipping");
+
+              if  (courierOptions.length === 0) {
+                envioElement.textContent = "En este momento nuestro servicio de despacho no tiene opciones disponibles, porfavor comunicarse con servicio al cliente.";
+                bloquearFinalizeBtn();
+              }
+              else{
+                const option = courierOptions[1] ?? courierOptions[0];
+                const despachoValor = option && option.serviceValue !== undefined ? Number(option.serviceValue) : 0;
+                envioElement.textContent = `$${despachoValor}`;
+              }
+            })
+            .catch((error) => {
+              console.error("Error al calcular el despacho:", error);
+            });
             }
           } else {
             console.warn(`No hay cobertura disponible para ${selectedRegion}, ${selectedComuna}`);
+            const envioElement = document.getElementById("checkout-shipping");
+            envioElement.textContent = "Chilexpress no cuenta con cobertura a esta comuna, porfavor comunicarse con servicio al cliente.";
+            bloquearFinalizeBtn();
           }
         })
         .catch((error) => {
@@ -125,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
   });
-});
+}); 
 
 document
   .getElementById("checkout-form")

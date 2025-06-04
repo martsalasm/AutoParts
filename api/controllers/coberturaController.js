@@ -23,7 +23,7 @@ const validarCobertura = async (req, res) => {
     });
 
     const data = response.data;
-    console.log('Respuesta de la API de Cobertura:', data);
+    //console.log('Respuesta de la API de Cobertura:', data);
 
     if (data && data.coverageAreas) {
       const coberturaEncontrada = data.coverageAreas.find(
