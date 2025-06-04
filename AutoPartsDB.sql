@@ -83,7 +83,7 @@ CREATE TABLE detalle_orden (
 );
 
 
-
+-- Poblar productos
 INSERT INTO productos (nombre_producto, descripcion_producto, precio, preciob2b, marca,stock, url_imagen, product_weight, product_height, product_width, product_length)
 VALUES ("Bujía de Níquel NGK BPR5EY",
  "Bujías de Encendido NGK cumplen una función vital en el motor de tu automóvil, ya que son las encargadas de encender la chispa que logra el arranque mediante la mezcla de combustible y oxígeno en cada cilindro.",
@@ -124,3 +124,36 @@ VALUES("Set de Ampolletas Pure Light W5w T10 de 12v y 5w",
 14,
 2
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Poblar Categorias 
+
+INSERT INTO categorias (nombre_categoria) VALUES ('Motores y componentes');
+INSERT INTO categorias (nombre_categoria) VALUES ('Filtros de aceite');
+INSERT INTO categorias (nombre_categoria) VALUES ('Filtros de aire');
