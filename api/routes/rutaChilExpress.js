@@ -1,9 +1,8 @@
 import express from "express";
 const router = express.Router();
-import coberturaController from "../controllers/coberturaController.js";
-import calcularDespachoController from "../controllers/calcularDespachoController.js";
+import chilExpressController from "../controllers/chilExpressController.js";
 
 
-router.post("/validarCobertura", coberturaController.validarCobertura);
-router.post("/calcularDespacho", calcularDespachoController.calcularDespacho);
+router.post("/validarCobertura", chilExpressController.validarCobertura);
+router.post("/calcularDespacho", chilExpressController.calcularDespacho);
 export default router;
