@@ -190,22 +190,46 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 }); 
 
-document
-  .getElementById("checkout-form")
-  .addEventListener("submit", async (e) => {
-    e.preventDefault();
+document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-    const costumerData = {
-      rut: document.getElementById("rut").value,
-      name: document.getElementById("name").value,
-      lastname: document.getElementById("lastname").value,
-      email: document.getElementById("email").value,
-      phone: document.getElementById("phone").value,
-      region: document.getElementById("region").value,
-      comuna: document.getElementById("comuna").value,
-      address: document.getElementById("address").value,
-      apartment: document.getElementById("apartment").value,
-      paymentMethod: document.querySelector('input[name="payment"]:checked')
-        .value,
-    };
-  });
+  const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+  if (paymentMethod !== 'webpay') {
+    return;
+  }
+
+  const ordenId = `orden_${Date.now()}`;
+  const sessionId = `session_${Date.now()}`;
+  const monto = valorTotal;
+  const returnUrl = 'http://localhost:3000/webpay/confirmar';
+
+  try {
+    const res = await fetch('http://localhost:3000/webpay/iniciar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ monto, ordenId, sessionId, returnUrl }),
+    });
+    const data = await res.json();
+
+if (data.url && data.token) {
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = data.url;
+
+  const tokenInput = document.createElement('input');
+  tokenInput.type = 'hidden';
+  tokenInput.name = 'token_ws';
+  tokenInput.value = data.token;
+
+  form.appendChild(tokenInput);
+  document.body.appendChild(form);
+
+  form.submit();
+} else {
+  alert('Error al iniciar el pago');
+}
+
+  } catch (error) {
+    console.error('Error al iniciar pago:', error);
+  }
+});

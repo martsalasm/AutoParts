@@ -1,40 +1,67 @@
-import { WebpayPlus } from 'transbank-sdk'
-WebpayPlus.configureForIntegration('597055555532', 'test', 'https://webpay3gint.transbank.cl');
+import transbank from 'transbank-sdk';
 
-const crearTransaccion = async (req, res) => {
-  const { amount, buyOrder, sessionId, returnUrl } = req.body;
+const {
+  WebpayPlus,
+  Options,
+  Environment,
+  IntegrationCommerceCodes,
+  IntegrationApiKeys,
+} = transbank;
 
+// Crear instancia de Transaction con opciones para ambiente integración
+const tx = new WebpayPlus.Transaction(
+  new Options(
+    IntegrationCommerceCodes.WEBPAY_PLUS,  // CODIGO COMERCIO
+    IntegrationApiKeys.WEBPAY,             // APIKEY
+    Environment.Integration                 // Ambiente de prubeas/integracion
+  )
+);
+
+const iniciarPago = async (req, res) => {
   try {
-    const response = await WebpayPlus.Transaction.create(
-      buyOrder,
-      sessionId,
-      amount,
-    returnUrl
+    const { monto, ordenId, sessionId, returnUrl } = req.body;
+
+    // Crear transacción en Webpay
+    const response = await tx.create(
+      ordenId,      // Identificador único de la orden (buy_order)
+      sessionId,    // Identificador de sesión (session_id)
+      monto,        // Monto de la transacción
+      returnUrl     // URL de retorno después del pago
     );
 
-    res.status(200).json(response);
+    res.json({
+      url: response.url,
+      token: response.token,
+    });
   } catch (error) {
-    console.error('Error al crear la transacción:', error);
-    res.status(500).json({ error: 'Error al crear la transacción' });
+    console.error('Error iniciando pago Webpay:', error);
+    res.status(500).json({ error: 'Error al iniciar el pago' });
   }
 };
 
-const confirmarTransaccion = async (req, res) => {
-  const { token_ws } = req.body;
-
+const confirmarPago = async (req, res) => {
   try {
-    const result = await WebpayPlus.Transaction.commit(token_ws);
-    console.log("Pago confirmado:", result);
+    const { token_ws } = req.query;
 
-    // Aquí podrías guardar la compra en base de datos, etc.
-    res.status(200).json(result);
+    // Confirmar transacción
+    const result = await tx.commit(token_ws);
+
+    if (result.response_code === 0) {
+        return res.redirect(`http://localhost:5501/front-end/pago-exitoso.html?token=${token_ws}`);
+    } else {
+      return res.json({
+        success: false,
+        message: 'Pago rechazado o error',
+        data: result,
+      });
+    }
   } catch (error) {
-    console.error("Error al confirmar transacción:", error);
-    res.status(500).json({ error: "No se pudo confirmar la transacción" });
+    console.error('Error confirmando pago Webpay:', error);
+    res.status(500).json({ error: 'Error al confirmar el pago' });
   }
 };
 
-export default{
-    crearTransaccion,
-    confirmarTransaccion
-}
+export default {
+  iniciarPago,
+  confirmarPago,
+};
