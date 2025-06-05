@@ -97,7 +97,6 @@ a{
 
 
 /* Empleados */
-
 #empleados-section {
   width: 90%;
   max-width: 1000px;
@@ -117,7 +116,7 @@ a{
   margin-bottom: 20px;
 }
 
-#form-empleado, #form-cliente {
+#form-empleado, #form-cliente, #form-producto {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -217,29 +216,24 @@ a{
   background-color: darkred;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media (max-width: 600px) {
+  .admin-panel {
+    padding: 20px;
+  }
+
+  .admin-heading {
+    font-size: 2rem;
+  }
+
+  .admin-grid {
+    gap: 15px;
+  }
+
   .admin-card {
     flex-direction: column;
     align-items: flex-start;
-    gap: 20px;
+    gap: 15px;
+    padding: 20px;
   }
 
   .card-text {
@@ -247,93 +241,50 @@ a{
   }
 
   .card-btn {
-    align-self: stretch;
+    width: 100%;
+    padding: 12px;
     text-align: center;
   }
-}
 
-#toggle-form-btn {
-  margin: 20px auto;
-  display: block;
-  padding: 12px 30px;
-  font-size: 1rem;
-  border-radius: 8px;
-}
+  .logout-button {
+    width: 100%;
+    padding: 14px 0;
+    font-size: 1.1rem;
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@media (max-width: 600px) {
-  .admin-card {
+  .employee-card {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .card-btn {
-    align-self: stretch;
-    text-align: center;
-  }
-}
-  @media (max-width: 600px) {
-    .admin-card {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
-    }
-    .card-btn {
-      align-self: stretch;
-      text-align: center;
-    }
-  }
-  @media (max-width: 600px) {
-    .admin-card {
-      font-size: 1.4rem;
-      padding: 22px 18px;
-    }
-    .logout-button {
-      width: 100%;
-      padding: 14px 0;
-    }
+    gap: 10px;
   }
 
+  .employee-card button {
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  #form-empleado input {
+    padding: 8px;
+  }
+
+  .employee-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .boton-volver {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+
+  .card-text h3 {
+    font-size: 1.6rem;
+  }
+
+  .employee-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .employee-card p {
+    font-size: 0.9rem;
+  }
+}

@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     if (Object.values(nuevoCliente).some((val) => !val)) {
-      return alert("Todos los campos son obligatorios");
+      return console.log("Todos los campos son obligatorios");
     }
 
     try {
@@ -29,14 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!res.ok) {
         const error = await res.json();
-        return alert("Error: " + (error.error || "No se pudo agregar el cliente"));
+        return console.log("Error: " + (error.error || "No se pudo agregar el cliente"));
       }
 
       document.getElementById("form-cliente").reset();
       cargarClientes();
     } catch (err) {
       console.error(err);
-      alert("Error de red al intentar agregar cliente");
+      console.log("Error de red al intentar agregar cliente");
     }
   });
 });
@@ -85,6 +85,6 @@ async function eliminarCliente(rut) {
     cargarClientes();
   } catch (err) {
     console.error(err);
-    alert("No se pudo eliminar el cliente.");
+    console.log("No se pudo eliminar el cliente.");
   }
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vincular Producto a Categoría</title>
+  <link rel="stylesheet" href="adminStyle.css" />
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+
+<body>
+  <header>
+    <h1 id="title">Vinculación de Producto a Categoría</h1>
+  </header>
+
+  <main id="main-section">
+    <section id="vincular-producto">
+      <h2>Asignar Producto a Categoría</h2>
+      <form id="form-vincular">
+        <!-- Dropdown para Productos -->
+        <label for="producto">Selecciona un Producto:</label>
+        <select id="producto" required>
+          <option value="">Seleccione un producto</option>
+        </select>
+
+        <!-- Dropdown para Categorías -->
+        <label for="categoria">Selecciona una Categoría:</label>
+        <select id="categoria" required>
+          <option value="">Seleccione una categoría</option>
+        </select>
+
+        <!-- Botón para vincular -->
+        <button type="submit" class="boton-verde">Asignar Categoría</button>
+      </form>
+    </section>
+
+    <div class="volver-container">
+      <a href="admin-panel.html" class="boton-volver">← Volver al panel</a>
+    </div>
+  </main>
+
+  <script src="gestionCategorias.js"></script>
+</body>
+</html>

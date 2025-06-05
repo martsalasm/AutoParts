@@ -30,14 +30,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!res.ok) {
         const error = await res.json();
-        return alert("Error: " + (error.error || "No se pudo agregar el producto"));
+        return console.log("Error: " + (error.error || "No se pudo agregar el producto"));
       }
 
       document.getElementById("form-producto").reset();
       cargarProductos();
     } catch (err) {
       console.error(err);
-      alert("Error de red al intentar agregar producto");
+      console.log("Error de red al intentar agregar producto");
     }
   });
 });
@@ -87,6 +87,6 @@ async function eliminarProducto(id) {
     cargarProductos();
   } catch (err) {
     console.error(err);
-    alert("No se pudo eliminar el producto.");
+    console.log("No se pudo eliminar el producto.");
   }
 }

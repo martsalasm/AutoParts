@@ -13,7 +13,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
         const data = await response.json();
 
         if (!response.ok) {
-            alert(data.error || "Error en el login");
+            console.log(data.error || "Error en el login");
             return;
         }
 
@@ -33,7 +33,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
         }
 
     } catch (err) {
-        alert("Error de red al intentar iniciar sesión");
+        console.log("Error de red al intentar iniciar sesión");
         console.error(err);
     }
 });

@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       if (Object.values(nuevoEmpleado).some((val) => !val)) {
-        return alert("Todos los campos son obligatorios");
+        return console.log("Todos los campos son obligatorios");
       }
 
       try {
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!res.ok) {
           const error = await res.json();
-          return alert(
+          return console.log(
             "Error: " + (error.error || "No se pudo agregar el empleado")
           );
         }
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cargarEmpleados();
       } catch (err) {
         console.error(err);
-        alert("Error de red al intentar agregar empleado");
+        console.log("Error de red al intentar agregar empleado");
       }
     });
 });
@@ -88,6 +88,6 @@ async function eliminarEmpleado(rut) {
     cargarEmpleados();
   } catch (err) {
     console.error(err);
-    alert("No se pudo eliminar el empleado.");
+    console.log("No se pudo eliminar el empleado.");
   }
 }
