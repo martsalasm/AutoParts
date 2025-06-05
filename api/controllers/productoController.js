@@ -62,7 +62,6 @@ const addProducto = async (req, res) => {
     precio,
     preciob2b,
     marca,
-    categoria,
     stock,
     imagen,
     peso,
@@ -72,7 +71,7 @@ const addProducto = async (req, res) => {
   } = req.body;
 
   if (
-    !nombre || !descripcion || !precio || !preciob2b || !marca || !categoria || stock === undefined || !imagen || 
+    !nombre || !descripcion || !precio || !preciob2b || !marca || stock === undefined || !imagen || 
     peso === undefined || alto === undefined || ancho === undefined || largo === undefined
   ) {
     return res.status(400).json({ error: "Faltan datos necesarios" });
@@ -81,7 +80,7 @@ const addProducto = async (req, res) => {
   try {
     const [result] = await db.query(
       `INSERT INTO productos (
-        nombre_producto, descripcion_producto, precio, preciob2b, marca, categoria, stock,
+        nombre_producto, descripcion_producto, precio, preciob2b, marca, stock,
         url_imagen, product_weight, product_height, product_width, product_length
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
@@ -90,7 +89,6 @@ const addProducto = async (req, res) => {
         precio,
         preciob2b,
         marca,
-        categoria,
         stock,
         imagen,
         peso,
@@ -107,7 +105,6 @@ const addProducto = async (req, res) => {
       precio,
       preciob2b,
       marca,
-      categoria,
       stock,
       imagen,
       peso,
