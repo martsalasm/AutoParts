@@ -246,3 +246,31 @@ document.getElementById('checkout-form').addEventListener('submit', async (e) =>
     console.error('Error al iniciar pago:', error);
   }
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const deliveryRadios = document.querySelectorAll('input[name="delivery"]');
+  const shippingSection = document.getElementById('shipping-info');
+  const shippingCostEl = document.getElementById("checkout-shipping");
+
+  deliveryRadios.forEach((radio) => {
+    radio.addEventListener("change", (e) => {
+      const selected = e.target.value;
+
+      if (selected === "retiro") {
+        // Ocultar sección de envío
+        shippingSection.style.display = "none";
+        shippingCostEl.textContent = "$0";
+        valorTotal = subtotal;
+        document.getElementById("checkout-total").textContent = formatter.format(valorTotal);
+        desbloquearFinalizeBtn();
+      } else {
+        // Mostrar sección de envío
+        shippingSection.style.display = "block";
+        shippingCostEl.textContent = "Información faltante";
+        total.textContent = "Información faltante";
+        bloquearFinalizeBtn();
+      }
+    });
+  });
+});
