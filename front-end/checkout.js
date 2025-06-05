@@ -1,3 +1,5 @@
+import { getAdjustedPrice } from "./global.js";
+
 let valorTotal = 0;
 let subtotal = 0;
 const total = document.getElementById("checkout-total");
@@ -5,7 +7,6 @@ const formatter = new Intl.NumberFormat("es-CL", {
   style: "currency",
   currency: "CLP",
 });
-
 // Mostramos el subtotal del carrito al cargar la página
 document.addEventListener("DOMContentLoaded", async () => {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -27,8 +28,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const productos = await res.json();
-
     
+
 
     productos.forEach((prod) => {
       const item = cart.find((c) => Number(c.id) === Number(prod.id));
@@ -36,7 +37,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.warn(`Producto con ID ${prod.id} no encontrado en el carrito`);
         return;
       }
-      subtotal += prod.precio * item.quantity;
+      const adjustedPrice = getAdjustedPrice(prod);
+      subtotal +=  adjustedPrice * item.quantity;
       valorTotal = subtotal;
     });
 

@@ -15,6 +15,9 @@ export function getAdjustedPrice(product) {
   const tipo = localStorage.getItem('tipo');
   const tipo_cliente = localStorage.getItem('tipo_cliente');
 
+  console.log('Tipo:', tipo); // Debugging line
+  console.log('Tipo Cliente:', tipo_cliente); // Debugging line
+
   if (tipo === 'cliente' && tipo_cliente === 'B2B') {
     return product.preciob2b || product.precio;
   }

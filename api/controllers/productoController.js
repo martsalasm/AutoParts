@@ -43,7 +43,7 @@ const getProductosByIds = async (req, res) => {
 
 try {
     const [rows] = await db.query(
-      `SELECT id_producto AS id, nombre_producto AS nombre, precio FROM productos WHERE id_producto IN (?)`,
+      `SELECT id_producto AS id, nombre_producto AS nombre, precio, preciob2b FROM productos WHERE id_producto IN (?)`,
       [ids]
     );
     res.json(rows);
