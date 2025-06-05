@@ -5,7 +5,7 @@ import empleadoController from "./empleadoController.js";
 
 const getClientes = async (req, res) => {
   try {
-    const [rows] = await db.query("SELECT * FROM clientes ORDER BY id_cliente");
+    const [rows] = await db.query("SELECT * FROM clientes");
     res.json(rows);}
     catch (error) {
         console.error(error);
@@ -41,22 +41,22 @@ const addCliente = async (req, res) => {
     telefonoCliente,
     correoCliente,
     tipoCliente,
-    contraseña
+    contrasena
   } = req.body;
 
-  if (!rutCliente || !nombreCliente || !apellidoCliente || !telefonoCliente || !correoCliente || !contraseña) {
+  if (!rutCliente || !nombreCliente || !apellidoCliente || !telefonoCliente || !correoCliente || !contrasena) {
     return res.status(400).json({ error: "Faltan datos necesarios" });
   }
     if (!empleadoController.validarRut(rutCliente)) {
     return res.status(400).json({ error: "El formato del RUT no es válido" });
   }
-  const cleanedRut = limpiarRut(rutCliente);
+  const cleanedRut = empleadoController.limpiarRut(rutCliente);
   try {
-    const hashedPassword = await bcrypt.hash(contraseña, 10);
+    const hashedPassword = await bcrypt.hash(contrasena, 10);
 
     await db.query(
       `INSERT INTO clientes 
-       (rut_cliente, nombre_cliente, apellido_cliente, telefono_cliente, correo_cliente, tipo_cliente, contraseña_cliente)
+       (rut_cliente, nombre_cliente, apellido_cliente, telefono_cliente, correo_cliente, tipo_cliente, contrasena_cliente)
        VALUES (?, ?, ?, ?, ?, ?, ?)`,
       [cleanedRut, nombreCliente, apellidoCliente, telefonoCliente, correoCliente, tipoCliente || 'B2C', hashedPassword]
     );

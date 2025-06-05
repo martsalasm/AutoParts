@@ -114,5 +114,6 @@ getEmpleadoByRut,
 addEmpleado,
 updateEmpleadoByRut,
 deleteEmpleadoByRut,
-limpiarRut
+limpiarRut,
+validarRut
 };
