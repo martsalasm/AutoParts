@@ -123,7 +123,7 @@ a{
   gap: 12px;
 }
 
-#form-empleado input, #form-cliente input {
+#form-empleado input, #form-cliente input, #form-producto input {
   background-color: rgb(36, 36, 36);
   border: 1px solid #555;
   color: rgb(230, 230, 230);
