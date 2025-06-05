@@ -102,13 +102,37 @@ const addProductoToCategoria = async (req, res) => {
       "INSERT INTO producto_categoria (id_categoria, id_producto) VALUES (?, ?)",
       [id_categoria, id_producto]
     );
-    res.status(201).json({ id: result.insertId, id_categoria, id_producto });
+    if (result.affectedRows > 0) {
+      return res.status(201).json({ success: true, message: "Producto asignado correctamente" });
+    } else {
+      return res.status(500).json({ success: false, error: "No se pudo asignar el producto a la categoría" });
+    }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Error al agregar el producto a la categoría" });
+    return res.status(500).json({ success: false, error: "Error al agregar el producto a la categoría" });
   }
 }
 
+const deleteProductoFromCategoria = async (req, res) => {
+  const { id_categoria, id_producto } = req.body;
+  if (!id_categoria || !id_producto) {
+    return res.status(400).json({ error: "Faltan datos necesarios" });
+  }
+  try {
+    const [result] = await db.query(
+      "DELETE FROM producto_categoria WHERE id_categoria = ? AND id_producto = ?",
+      [id_categoria, id_producto]
+    );
+    if (result.affectedRows > 0) {
+      return res.status(200).json({ success: true, message: "Producto eliminado de la categoría correctamente" });
+    } else {
+      return res.status(404).json({ success: false, error: "No se encontró la relación entre el producto y la categoría" });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, error: "Error al eliminar el producto de la categoría" });
+  }
+}
 
 
 export default {
@@ -118,5 +142,6 @@ export default {
     updateCategoriaById,
     deleteCategoriaById,
     getProductosByCategoria,
-    addProductoToCategoria
+    addProductoToCategoria,
+    deleteProductoFromCategoria
 }

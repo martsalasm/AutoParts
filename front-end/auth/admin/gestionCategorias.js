@@ -73,3 +73,99 @@ async function asignarProductoACategoria(idProducto, idCategoria) {
   });
   return await response.json();
 }
+document.addEventListener('DOMContentLoaded', async function() {
+  const categorias = await obtenerCategorias();
+
+  // Llenar dropdown de categorías
+  const categoriaSelect = document.getElementById('categoria-desvincular');
+  categorias.forEach(categoria => {
+    const option = document.createElement('option');
+    option.value = categoria.id_categoria;
+    option.textContent = categoria.nombre_categoria;
+    categoriaSelect.appendChild(option);
+  });
+
+  // Event listener para cuando se selecciona una categoría
+  categoriaSelect.addEventListener('change', async function() {
+    const idCategoria = categoriaSelect.value;
+    const productoSelect = document.getElementById('producto-desvincular');
+    const botonDesvincular = document.getElementById('desvincular-btn');
+
+    // Si se seleccionó una categoría
+    if (idCategoria) {
+      // Habilitamos el dropdown de productos
+      productoSelect.disabled = false;
+      botonDesvincular.disabled = false;
+
+      // Obtenemos los productos de la categoría seleccionada
+      const productos = await obtenerProductosPorCategoria(idCategoria);
+      
+      // Limpiar las opciones previas
+      productoSelect.innerHTML = '<option value="">Seleccione un producto</option>';
+
+      // Llenar el dropdown de productos
+      productos.forEach(producto => {
+        const option = document.createElement('option');
+        option.value = producto.id_producto;
+        option.textContent = producto.nombre_producto;
+        productoSelect.appendChild(option);
+      });
+    } else {
+      // Si no hay categoría seleccionada, deshabilitar el dropdown de productos
+      productoSelect.disabled = true;
+      botonDesvincular.disabled = true;
+    }
+  });
+
+  // Formulario para desvincular producto
+  const formDesvincular = document.getElementById('form-desvincular');
+  formDesvincular.addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const idProducto = document.getElementById('producto-desvincular').value;
+    const idCategoria = document.getElementById('categoria-desvincular').value;
+
+    if (!idProducto || !idCategoria) {
+      console.log('Por favor, selecciona un producto y una categoría');
+      return;
+    }
+
+    const response = await desvincularProductoDeCategoria(idProducto, idCategoria);
+    if (response.success) {
+      console.log('Producto desvinculado correctamente');
+    } else {
+      console.log(response.error || 'Hubo un error al desvincular el producto');
+    }
+  });
+});
+
+// Función para obtener los productos de una categoría
+async function obtenerProductosPorCategoria(idCategoria) {
+  const response = await fetch(`http://localhost:3000/categorias/productos/${idCategoria}`);
+  const productos = await response.json();
+  
+  // Verifica si productos es un arreglo antes de usar forEach
+  if (Array.isArray(productos)) {
+    return productos;
+  } else {
+    console.error('Se esperaba un arreglo de productos, pero se recibió:', productos);
+    return [];
+  }
+
+
+}
+
+// Función para desvincular un producto de categoría
+async function desvincularProductoDeCategoria(idProducto, idCategoria) {
+  const response = await fetch('http://localhost:3000/categorias/productos/desvincular', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      id_producto: idProducto,
+      id_categoria: idCategoria,
+    }),
+  });
+  return await response.json();
+}

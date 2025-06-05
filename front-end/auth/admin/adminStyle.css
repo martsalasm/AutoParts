@@ -103,7 +103,9 @@ a{
   margin: 30px auto;
 }
 
-#formulario-empleado {
+#formulario-empleado,
+#vincular-producto,
+#desvincular-producto{
   background-color: rgb(33, 33, 33);
   padding: 20px;
   border-radius: 10px;
@@ -116,13 +118,13 @@ a{
   margin-bottom: 20px;
 }
 
-#form-empleado, #form-cliente, #form-producto {
+#form-empleado, #form-cliente, #form-producto, #form-vincular, #form-desvincular {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-#form-empleado input, #form-cliente input, #form-producto input {
+#form-empleado input, #form-cliente input, #form-producto input, #form-vincular input, #form-desvincular input {
   background-color: rgb(36, 36, 36);
   border: 1px solid #555;
   color: rgb(230, 230, 230);
@@ -132,6 +134,15 @@ a{
 
 .boton-verde {
   background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+}
+.boton-rojo {
+  background-color: #f44336;
   color: white;
   border: none;
   padding: 12px;
