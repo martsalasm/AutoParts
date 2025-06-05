@@ -28,7 +28,7 @@ const login = async (req, res) => {
         const isPasswordValid = await bcrypt.compare(password, cliente.contrasena_cliente);
         if (isPasswordValid) {
             const token = jwt.sign({ rut: cliente.rut_cliente, tipo:"cliente", tipo_cliente:cliente.tipo_cliente}, secretKey, { expiresIn: '1h' });
-            return res.json({ token, tipo: "cliente", nombre: cliente.nombre_cliente, apellido: cliente.apellido_cliente });
+            return res.json({ token, tipo: "cliente", nombre: cliente.nombre_cliente, apellido: cliente.apellido_cliente, tipo_cliente: cliente.tipo_cliente});
         }
     }
 

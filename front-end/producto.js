@@ -1,3 +1,4 @@
+import { getAdjustedPrice } from "./global.js";
 // Obtener ID desde la URL
 const params = new URLSearchParams(window.location.search);
 const productId = params.get("id");
@@ -15,6 +16,7 @@ if (productId) {
     })
     .then((product) => {
       const container = document.getElementById("product-detail");
+      const adjustedPrice = getAdjustedPrice(product);
       container.innerHTML = `
         <h1>${product.nombre_producto}</h1>
         <img src="${product.url_imagen}" alt="${product.nombre_producto}" />

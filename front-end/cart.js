@@ -1,3 +1,5 @@
+import { getAdjustedPrice } from "./global.js";
+
 const formatter = new Intl.NumberFormat("es-CL", {
   style: "currency",
   currency: "CLP",
@@ -98,6 +100,8 @@ function renderCart(cartContainer, cart) {
           if (product) {
             const cartCard = document.createElement("div");
             cartCard.classList.add("cart-card");
+            
+            const adjustedPrice = getAdjustedPrice(product);
 
             // Crear la imagen del producto
             const productImage = document.createElement("img");
@@ -116,11 +120,11 @@ function renderCart(cartContainer, cart) {
             const productInfo = document.createElement("div");
             productInfo.innerHTML = `
               <h2 class="cart-product-title">${product.nombre_producto}</h2>
-              <p>Precio Unitario: ${formatter.format(product.precio)}</p>
+              <p>Precio Unitario: ${formatter.format(adjustedPrice)}</p>
             `;
             cartCard.appendChild(productInfo);
 
-            subtotal += product.precio * item.quantity;
+            subtotal += adjustedPrice * item.quantity;
 
             // Crear el contenedor para la cantidad del producto
             const cantidadContainer = document.createElement("div");

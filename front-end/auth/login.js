@@ -21,7 +21,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
         localStorage.setItem("token", data.token);
         localStorage.setItem("tipo", data.tipo);
         localStorage.setItem("rol", data.rol || "");
-        localStorage.setItem("tipoCliente", data.rol || "");
+        localStorage.setItem("tipo_cliente", data.tipo_cliente || "");
         localStorage.setItem("nombre", data.nombre);
         localStorage.setItem("apellido", data.apellido);
 
@@ -29,7 +29,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
         if (data.tipo === "empleado" && data.rol === "admin") {
             window.location.href = window.location.href = "admin/admin-panel.html"; //
         }
-        if (data.tipo === "cliente" && data.rol === "b2b") {
+        if (data.tipo === "cliente" && data.rol === "B2B") {
             window.location.href = "user-panel.html"; // Panel de usuario
         }
 
