@@ -82,7 +82,7 @@ const addProducto = async (req, res) => {
       `INSERT INTO productos (
         nombre_producto, descripcion_producto, precio, preciob2b, marca, stock,
         url_imagen, product_weight, product_height, product_width, product_length
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         nombre,
         descripcion,
