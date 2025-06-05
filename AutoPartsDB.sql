@@ -56,7 +56,6 @@ CREATE TABLE pagos(
     token VARCHAR(100) NOT NULL,
     estado_pago ENUM('pendiente', 'completado','fallido', 'cancelado') NOT NULL,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (rut_cliente) REFERENCES clientes(rut_cliente)
 );
 
 CREATE TABLE ordenes (

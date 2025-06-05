@@ -2,6 +2,12 @@ import { getAdjustedPrice } from "./global.js";
 
 let valorTotal = 0;
 let subtotal = 0;
+let totalWeight = 0;
+let maxHeight = 0;
+let maxWidth = 0;
+let maxLength = 0;
+
+
 const total = document.getElementById("checkout-total");
 const formatter = new Intl.NumberFormat("es-CL", {
   style: "currency",
@@ -28,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const productos = await res.json();
-    
+
 
 
     productos.forEach((prod) => {
@@ -38,8 +44,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
       }
       const adjustedPrice = getAdjustedPrice(prod);
-      subtotal +=  adjustedPrice * item.quantity;
+      subtotal += adjustedPrice * item.quantity;
       valorTotal = subtotal;
+      const quantity = item.quantity;
+      if (prod.weight) totalWeight += prod.weight * quantity;
+      if (prod.height && prod.height > maxHeight) maxHeight = prod.height;
+      if (prod.width && prod.width > maxWidth) maxWidth = prod.width;
+      if (prod.length && prod.length > maxLength) maxLength = prod.length;
     });
 
     document.getElementById("checkout-subtotal").textContent = formatter.format(subtotal);
@@ -48,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-function bloquearFinalizeBtn(){
+function bloquearFinalizeBtn() {
   const finalizeBtn = document.getElementById("finalize-btn");
   if (finalizeBtn) finalizeBtn.disabled = true;
 }
@@ -66,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("comunas-regiones.json")
     .then((response) => response.json())
     .then((data) => {
-      regionesComunasData= data.regiones;
+      regionesComunasData = data.regiones;
       regionesComunasData.forEach((regionData) => {
         const option = document.createElement("option");
         option.value = regionData.region;
@@ -79,14 +90,14 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch((error) => {
       console.error("Error al cargar las regiones:", error);
     });
-  
- regionSelect.addEventListener('change', () => {
+
+  regionSelect.addEventListener('change', () => {
     const selectedRegion = regionSelect.value;
     const regionData = regionesComunasData.find(
       (region) => region.region === selectedRegion
     );
     comunaSelect.innerHTML = "";
-    
+
     if (regionData && regionData.comunas) {
       regionData.comunas.forEach((comuna) => {
         const option = document.createElement('option');
@@ -134,49 +145,49 @@ document.addEventListener("DOMContentLoaded", () => {
               const originCountyCode = "STGO";
 
               const packageData = {
-                weight: 1.5,
-                height: 10,
-                width: 10,
-                length: 10,
+                weight: totalWeight,
+                height: maxHeight,
+                width: maxWidth,
+                length: maxLength,
               }
 
-              const bodyData={
+              const bodyData = {
                 originCountyCode: originCountyCode,
                 destinationCountyCode: destinationCountyCode,
                 package: packageData,
-                productType:3,
+                productType: 3,
                 declaredWorth: subtotal,
               }
               fetch("http://localhost:3000/chilexpress/calcularDespacho", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(bodyData),
-            }).then((response) => {
+              }).then((response) => {
                 if (!response.ok) throw new Error(`Error ${response.status}: ${response.statusText}`);
                 return response.json();
-            })
-            .then((despachoData) => {
-              console.log("Opciones de despacho:", despachoData);
+              })
+                .then((despachoData) => {
+                  console.log("Opciones de despacho:", despachoData);
 
-              const courierOptions = despachoData.data?.courierServiceOptions || [];
-              const envioElement = document.getElementById("checkout-shipping");
+                  const courierOptions = despachoData.data?.courierServiceOptions || [];
+                  const envioElement = document.getElementById("checkout-shipping");
 
-              if  (courierOptions.length === 0) {
-                envioElement.textContent = "En este momento nuestro servicio de despacho no tiene opciones disponibles, porfavor comunicarse con servicio al cliente.";
-                bloquearFinalizeBtn();
-              }
-              else{
-                const option = courierOptions[1] ?? courierOptions[0];
-                const despachoValor = option && option.serviceValue !== undefined ? Number(option.serviceValue) : 0;
-                envioElement.textContent = formatter.format(despachoValor);
-                console.log("Valor del despacho:", despachoValor);
-                valorTotal = subtotal + despachoValor;
-                total.textContent = formatter.format(valorTotal);
-              }
-            })
-            .catch((error) => {
-              console.error("Error al calcular el despacho:", error);
-            });
+                  if (courierOptions.length === 0) {
+                    envioElement.textContent = "En este momento nuestro servicio de despacho no tiene opciones disponibles, porfavor comunicarse con servicio al cliente.";
+                    bloquearFinalizeBtn();
+                  }
+                  else {
+                    const option = courierOptions[1] ?? courierOptions[0];
+                    const despachoValor = option && option.serviceValue !== undefined ? Number(option.serviceValue) : 0;
+                    envioElement.textContent = formatter.format(despachoValor);
+                    console.log("Valor del despacho:", despachoValor);
+                    valorTotal = subtotal + despachoValor;
+                    total.textContent = formatter.format(valorTotal);
+                  }
+                })
+                .catch((error) => {
+                  console.error("Error al calcular el despacho:", error);
+                });
             }
           } else {
             console.warn(`No hay cobertura disponible para ${selectedRegion}, ${selectedComuna}`);
@@ -190,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
   });
-}); 
+});
 
 document.getElementById('checkout-form').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -213,23 +224,23 @@ document.getElementById('checkout-form').addEventListener('submit', async (e) =>
     });
     const data = await res.json();
 
-if (data.url && data.token) {
-  const form = document.createElement('form');
-  form.method = 'POST';
-  form.action = data.url;
+    if (data.url && data.token) {
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = data.url;
 
-  const tokenInput = document.createElement('input');
-  tokenInput.type = 'hidden';
-  tokenInput.name = 'token_ws';
-  tokenInput.value = data.token;
+      const tokenInput = document.createElement('input');
+      tokenInput.type = 'hidden';
+      tokenInput.name = 'token_ws';
+      tokenInput.value = data.token;
 
-  form.appendChild(tokenInput);
-  document.body.appendChild(form);
+      form.appendChild(tokenInput);
+      document.body.appendChild(form);
 
-  form.submit();
-} else {
-  console.log('Error al iniciar el pago');
-}
+      form.submit();
+    } else {
+      console.log('Error al iniciar el pago');
+    }
 
   } catch (error) {
     console.error('Error al iniciar pago:', error);
