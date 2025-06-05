@@ -10,7 +10,8 @@ CREATE TABLE productos(
     product_weight DECIMAL(4,2) NOT NULL,
     product_height DECIMAL(4,2) NOT NULL,
     product_width DECIMAL(4,2) NOT NULL,
-    product_length DECIMAL(5,2) NOT NULL
+    product_length DECIMAL(5,2) NOT NULL,
+    updated_by VARCHAR(10) DEFAULT NULL,
 )
 CREATE TABLE categorias (
     id_categoria INT PRIMARY KEY AUTO_INCREMENT,
@@ -27,16 +28,19 @@ CREATE TABLE producto_categoria (
 
 CREATE TABLE clientes(
     rut_cliente VARCHAR(10) PRIMARY KEY,
+    contrasena_cliente VARCHAR(255) NOT NULL,
     nombre_cliente VARCHAR(100) NOT NULL,
     apellido_cliente VARCHAR(100) NOT NULL,
-    direccion_cliente VARCHAR(100) NOT NULL,
     telefono_cliente VARCHAR(15) NOT NULL,
     correo_cliente VARCHAR(100) NOT NULL,
-    tipo_cliente ENUM('B2C', 'B2B') DEFAULT 'B2C' NOT NULL
+    tipo_cliente ENUM('B2C', 'B2B') DEFAULT 'B2C' NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by VARCHAR(10) DEFAULT NULL,
 )
 
 CREATE TABLE empleados(
     rut_empleado VARCHAR(10) PRIMARY KEY,
+    contrasena_empleado VARCHAR(255) NOT NULL,
     nombre_empleado VARCHAR(100) NOT NULL,
     apellido_empleado VARCHAR(100) NOT NULL,
     rol_empleado ENUM('admin','bodeguero','vendedor','contador') NOT NULL,

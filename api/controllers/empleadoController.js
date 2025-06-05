@@ -1,4 +1,5 @@
 import db from "../database.js";
+import bcrypt from "bcrypt";
 
 //Controlador de empleados para operaciones CRUD
 
@@ -32,18 +33,20 @@ const getEmpleadoByRut = async (req, res) => {
 
 //metodo post para agregar un empleado
 const addEmpleado = async (req, res) => {
-const { rutEmpleado, nombreEmpleado, apellidoEmpleado, rolEmpleado, telefonoEmpleado, correoEmpleado} = req.body;
-if (!rutEmpleado || !nombreEmpleado || !apellidoEmpleado || !rolEmpleado || !telefonoEmpleado || !correoEmpleado) {
+const { rutEmpleado, nombreEmpleado, apellidoEmpleado, rolEmpleado, telefonoEmpleado, correoEmpleado, contrasenaEmpleado} = req.body;
+if (!rutEmpleado || !nombreEmpleado || !apellidoEmpleado || !rolEmpleado || !telefonoEmpleado || !correoEmpleado || !contrasenaEmpleado) {
   return res.status(400).json({ error: "Faltan datos necesarios" });
 }
   // ** Validación del RUT utilizando la regex **
   if (!validarRut(rutEmpleado)) {
     return res.status(400).json({ error: "El formato del RUT no es válido" });
   }
+  const cleanedRut = limpiarRut(rutEmpleado);
   try {
+    const hashedPassword = await bcrypt.hash(contrasenaEmpleado, 10);
     const [result] = await db.query(
-      "INSERT INTO empleados (rut_empleado, nombre_empleado, apellido_empleado, rol_empleado, telefono_empleado, correo_empleado) VALUES (?, ?, ?, ?, ?, ?)", 
-      [rutEmpleado, nombreEmpleado, apellidoEmpleado, rolEmpleado, telefonoEmpleado, correoEmpleado]
+      "INSERT INTO empleados (rut_empleado, nombre_empleado, apellido_empleado, rol_empleado, telefono_empleado, correo_empleado, contrasena_empleado) VALUES (?, ?, ?, ?, ?, ?, ?)", 
+      [cleanedRut, nombreEmpleado, apellidoEmpleado, rolEmpleado, telefonoEmpleado, correoEmpleado, hashedPassword]
     );
     res.status(201).json({ rutEmpleado, nombreEmpleado, apellidoEmpleado, rolEmpleado, telefonoEmpleado, correoEmpleado });
   }
@@ -51,7 +54,7 @@ if (!rutEmpleado || !nombreEmpleado || !apellidoEmpleado || !rolEmpleado || !tel
     console.error(error);
     res.status(500).json({ error: "Error al agregar el empleado" });
   }
-  };
+};
 
 
 // metodo put para actualizar un empleado por rut
@@ -101,7 +104,9 @@ const deleteEmpleadoByRut = async (req, res) => {
     const regex = /^([1-9]|[1-9]\d|[1-9]\d{2})(\d{3})*-(\d|k|K)$/;
     return regex.test(rutLimpio);
   }
-
+  function limpiarRut(rut) {
+    return rut.replace(/\./g, '').replace(/-/g, '');
+  }
 
 export default {
 getEmpleados,
@@ -109,4 +114,5 @@ getEmpleadoByRut,
 addEmpleado,
 updateEmpleadoByRut,
 deleteEmpleadoByRut,
+limpiarRut
 };

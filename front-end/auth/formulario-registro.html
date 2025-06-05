@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro Mayoristas - AutoParts</title>
+    <link rel="icon" href="../media/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="auth.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <h1 id="title">
+            <img src="/media/logoautoparts.png" alt="Logo AutoParts" />
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="../catalogo.html">Productos</a></li>
+                <li><a href="../aboutus.html">Sobre Nosotros</a></li>
+                <li><a href="login.html">Iniciar Sesión</a></li>
+                <li><a href="../cart.html" class="fas fa-shopping-cart" style="display: inline;"><span
+                            id="cart-count"></span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="registro-wrapper">
+            <h2>Formulario de Registro</h2>
+            <p>Envianos tus datos y nos pondremos en contacto contigo!</p>
+            <p> <strong>Sólo para mayoristas.</strong> </p>
+            <form method="POST" action="#">
+                <input type="text" name="nombre_empresa" placeholder="Nombre de la empresa" required />
+                <input type="text" name="rut" placeholder="RUT de empresa o representante" required />
+                <input type="text" name="nombre_contacto" placeholder="Nombre del contacto" required />
+                <input type="email" name="email" placeholder="Correo electrónico" required />
+                <input type="tel" name="telefono" placeholder="Teléfono de contacto" required />
+                <textarea name="comentario" placeholder="Comentarios"></textarea>
+                <button type="submit">Enviar solicitud</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <h2>Información de Contacto</h2>
+            <p>Sucursal 1: +569123456</p>
+            <p>Sucursal 2: +569123456</p>
+            <p>contacto@autoparts.cl</p>
+            <p>Santiago 101, Santiago</p>
+        </div>
+        <div class="footer-container">
+            <h2>Nuestras Políticas</h2>
+            <ul>
+                <li>Políticas de entrega y despacho</li>
+                <li>Políticas de cambio y devolución</li>
+            </ul>
+        </div>
+        <div class="footer-container" id="pagos">
+            <h2>Paga a través de</h2>
+            <img src="/media/1.Webpay_FB_300px.png" alt="Imagen de Webpay" />
+            <img src="/media/transferencia.png" alt="Imagen de transferencia" />
+        </div>
+    </footer>
+</body>
+
+</html>

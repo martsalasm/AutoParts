@@ -6,11 +6,13 @@ app.use(cors());
 
 
 import empleadoRouter from "./routes/rutaEmpleados.js";
+import loginRouter from "./routes/rutaLogin.js";
 import productRouter from "./routes/rutaProductos.js";
 import categoriaRouter from "./routes/rutaCategorias.js";
 import chilExpressRouter from "./routes/rutaChilExpress.js";
 import webpayRouter from "./routes/rutaWebpay.js";
 app.use("/productos", productRouter);
+app.use("/login", loginRouter);
 app.use("/categorias", categoriaRouter);
 app.use("/empleados", empleadoRouter);
 app.use("/chilexpress", chilExpressRouter);

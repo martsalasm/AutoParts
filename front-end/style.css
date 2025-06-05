@@ -184,6 +184,11 @@ footer {
   padding: 5px;
   cursor: pointer;
 }
+
+#categorias li:hover {
+  background-color: rgb(50, 50, 50);
+  border-radius: 5px;
+}
 #categorias ul > ul > li {
   margin-left: 8px;
   max-width: fit-content;
@@ -256,7 +261,7 @@ footer {
 }
 /* pagina producto */
 #product-detail{
-  max-width: 90%;
+  max-width: 60%;
   margin: 30px auto;
   background-color: rgb(33, 33, 33);
   padding: 30px;
@@ -533,6 +538,9 @@ fieldset {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  #product-detail {
+    max-width: 90%;
   }
 }
 .visible {
