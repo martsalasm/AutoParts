@@ -86,7 +86,19 @@ CREATE TABLE detalle_orden (
   FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
 );
 
+-- admin
+/* 
+{
+  "rutEmpleado": "12.345.678-9",
+  "nombreEmpleado": "Juan",
+  "apellidoEmpleado": "Perez",
+  "rolEmpleado": "admin",
+  "telefonoEmpleado": "+56912345678",
+  "correoEmpleado": "juan.perez@example.com",
+  "contrasenaEmpleado": "1234"
+}
 
+*/
 -- Poblar productos
 INSERT INTO productos (nombre_producto, descripcion_producto, precio, preciob2b, marca,stock, url_imagen, product_weight, product_height, product_width, product_length)
 VALUES ("Bujía de Níquel NGK BPR5EY",
