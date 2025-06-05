@@ -5,7 +5,7 @@ import db from "../database.js";
 // metodo get para obtener todos los productos
 const getProductos = async (req, res) => {  
   try {
-    const [rows] = await db.query("SELECT * FROM productos");
+    const [rows] = await db.query("SELECT * FROM productos order by nombre_producto");
     res.json(rows);
   } catch (error) {
     console.error(error);
