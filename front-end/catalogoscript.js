@@ -63,6 +63,7 @@ function renderProducts(data) {
 
   data.forEach((product) => {
     const productCard = document.createElement("div");
+    const adjustedPrice = getAdjustedPrice(product);
     productCard.classList.add("product-card");
     productCard.innerHTML = `
       <h2 class="card-title">${product.nombre_producto}</h2>
