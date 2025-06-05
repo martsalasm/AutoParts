@@ -11,8 +11,8 @@ CREATE TABLE productos(
     product_height DECIMAL(4,2) NOT NULL,
     product_width DECIMAL(4,2) NOT NULL,
     product_length DECIMAL(5,2) NOT NULL,
-    updated_by VARCHAR(10) DEFAULT NULL,
-)
+    updated_by VARCHAR(10) DEFAULT NULL
+);
 CREATE TABLE categorias (
     id_categoria INT PRIMARY KEY AUTO_INCREMENT,
     nombre_categoria VARCHAR(50) UNIQUE NOT NULL
@@ -35,7 +35,7 @@ CREATE TABLE clientes(
     correo_cliente VARCHAR(100) NOT NULL,
     tipo_cliente ENUM('B2C', 'B2B') DEFAULT 'B2C' NOT NULL,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_by VARCHAR(10) DEFAULT NULL,
+    updated_by VARCHAR(10) DEFAULT NULL
 )
 
 CREATE TABLE empleados(
@@ -128,9 +128,19 @@ VALUES("Set de Ampolletas Pure Light W5w T10 de 12v y 5w",
 14,
 2
 );
-
-
-
+INSERT INTO productos (nombre_producto, descripcion_producto, precio, preciob2b, marca,stock, url_imagen, product_weight, product_height, product_width, product_length)
+VALUES("Alternador Chevrolet Luv 2300 CC 8V Motor 4ZD1",
+"Alternador Chevrolet Luv 2300 CC 8V Motor 4ZD1, con una potencia de 55A y un voltaje de 12V, es un componente esencial para el sistema eléctrico de tu vehículo, asegurando un suministro constante de energía.",
+114000,
+100000,
+"Kuboshi",
+10,
+"https://media.falabella.com/falabellaCL/135611019_01/w=1500,h=1500,fit=pad",
+4.1,
+18,
+22,
+22
+);
 
 
 
