@@ -112,9 +112,8 @@ VALUES ("Bujía de Níquel NGK BPR5EY",
 3,
 3,
 9
-);
-INSERT INTO productos (nombre_producto, descripcion_producto, precio, preciob2b, marca,stock, url_imagen, product_weight, product_height, product_width, product_length)
-VALUES("Batería de Auto BOSCH S4 39S470D-T 70AH 660CCA",
+),
+("Batería de Auto BOSCH S4 39S470D-T 70AH 660CCA",
 "Batería de auto BOSCH S4 39S470D-T de 70AH y 660CCA es uno de los elementos imprescindibles en todo vehículo, cumpliendo la función de almacenar la energía eléctrica para luego ser transmitida al motor de partida cada vez que quieras arrancar.",
 135000,
 120000,
@@ -125,10 +124,8 @@ VALUES("Batería de Auto BOSCH S4 39S470D-T 70AH 660CCA",
 18,
 18,
 28
-);
-
-INSERT INTO productos (nombre_producto, descripcion_producto, precio, preciob2b, marca,stock, url_imagen, product_weight, product_height, product_width, product_length)
-VALUES("Set de Ampolletas Pure Light W5w T10 de 12v y 5w",
+),
+("Set de Ampolletas Pure Light W5w T10 de 12v y 5w",
 "Ampolleta T10 12V 5W pertenece a la línea Pure Light de Bosch, cuyo diseño especial de filamento y la estructura del relleno de la bombilla le brindan parámetros idénticos a las bombillas de equipo de fábrica de los vehículos.",
 6000,
 5500,
@@ -139,9 +136,8 @@ VALUES("Set de Ampolletas Pure Light W5w T10 de 12v y 5w",
 7,
 14,
 2
-);
-INSERT INTO productos (nombre_producto, descripcion_producto, precio, preciob2b, marca,stock, url_imagen, product_weight, product_height, product_width, product_length)
-VALUES("Alternador Chevrolet Luv 2300 CC 8V Motor 4ZD1",
+),
+("Alternador Chevrolet Luv 2300 CC 8V Motor 4ZD1",
 "Alternador Chevrolet Luv 2300 CC 8V Motor 4ZD1, con una potencia de 55A y un voltaje de 12V, es un componente esencial para el sistema eléctrico de tu vehículo, asegurando un suministro constante de energía.",
 114000,
 100000,
@@ -152,15 +148,162 @@ VALUES("Alternador Chevrolet Luv 2300 CC 8V Motor 4ZD1",
 18,
 22,
 22
+),
+("Filtro de Aceite Hu7019z",
+"Dale a tu motor la protección que se merece con el filtro de aceite Hu7019z de Bosch.
+Fabricado con materiales de primera calidad, este filtro asegura una larga vida útil y un rendimiento óptimo.
+ Su instalación es sencilla y viene con todo lo necesario para que puedas realizarla sin problemas.",
+ 9590,
+ 8990,
+"Bosch",
+  50,
+  "https://dojiw2m9tvv09.cloudfront.net/40652/product/X_hu7019zhk3723.jpg?321&time=1749133689",
+  0.3,
+  10,
+  10,
+  10
+  ),
+("Filtro de aire de cabina HEPA",
+"Los filtros de aire de cabina de alta eficiencia de Bosch están diseñados para proporcionar a tu vehículo lo último en aire limpio, fresco y sin olor para ti y tu familia.",
+18900,
+16900,
+"Bosch",
+35,
+"https://m.media-amazon.com/images/I/71rzO4rpweL._AC_SL1500_.jpg",
+0.5,
+10,
+10,
+10),
+(
+  "Correa de Distribución Bosch B111SP170",
+  "Correa de distribución original Bosch para vehículos Chevrolet.",
+  14543,
+  13990,
+  "Bosch",
+  30,
+  "https://http2.mlstatic.com/D_NQ_NP_913289-MLA83528696566_042025-F.webp",
+  0.5,
+  10,
+  10,
+  10
+),
+(
+  "Pastillas de Freno Delanteras Bosch VW Amarok 2.0 2010-2023",
+  "Juego de pastillas de freno delanteras Bosch para Volkswagen Amarok 2.0, modelos 2010 a 2023.",
+  67990,
+  64990,
+  "Bosch",
+  10,
+  "https://cdnx.jumpseller.com/solol200/image/45401026/resize/540/540?1707507084",
+  1.5,
+  10,
+  10,
+  10
+),
+(
+  "Disco de Freno Bosch Delantero",
+  "Disco de freno delantero Bosch, compatible con diversos modelos de vehículos.",
+  37840,
+  34990,
+  "Bosch",
+  15,
+  "https://http2.mlstatic.com/D_NQ_NP_898347-MLU32026318976_082019-O.webp",
+  4.0,
+  10,
+  10,
+  10
+),
+(
+  "Amortiguador Delantero Bosch",
+  "Amortiguador delantero Bosch, diseñado para ofrecer un rendimiento óptimo y seguridad en la conducción.",
+  27991,
+  25990,
+  "Bosch",
+  20,
+  "https://www.repuestosboston.cl/media/catalog/product/5/4/54661d3000a_1.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=566&width=756&canvas=756:566",
+  3.5,
+  10,
+  10,
+  10
+),
+(
+  "Rótula de Suspensión Bosch",
+  "Rótula de suspensión Bosch, fabricada con materiales de alta calidad para garantizar durabilidad y seguridad.",
+  12000,
+  11000,
+  "Bosch",
+  25,
+  "https://cdn.autodoc.de/thumb?id=22285186&m=1&n=0&lng=es&rev=94077893",
+  0.8,
+  10,
+  10,
+  10
+),
+(
+  "Kit de 300 Fusibles Automotrices",
+  "Kit que incluye 300 fusibles automotrices de diferentes amperajes, ideal para reemplazo y mantenimiento.",
+  5990,
+  4990,
+  "Bosch",
+  50,
+  "https://media.falabella.com/falabellaCL/119092953_01/w=800,h=800,fit=pad",
+  0.3,
+  10,
+  10,
+  10
+),
+(
+  "Alarma Para Automóviles NEMESIS MP1",
+  "Sistema de alarma NEMESIS MP1, diseñado para proteger tu vehículo con tecnología avanzada y fácil instalación.",
+  20000,
+  13700,
+  "Bosch",
+  5,
+  "https://api.autoplanet.cl/medias/sys_master/images/h2f/he5/9875281969182/1050861_1-1739980652/1050861-1-1739980652.webp",
+  0.64,
+  15,
+  12,
+  19
+),
+(
+  "Cinturón de Seguridad 3 Puntas",
+  "Cinturón de seguridad de 3 puntos, compatible con diversos modelos de vehículos.",
+  11000,
+  10000,
+  "Bosch",
+  30,
+  "https://api.autoplanet.cl/medias/sys_master/images/h1e/h14/9871490154526/120732_1-1739980652/120732-1-1739980652.webp",
+  0.5,
+  10,
+  10,
+  10
+),
+(
+  "Fundas Cubreasiento Sparco Universal",
+  "Fundas cubreasiento Sparco universales, color negro, fabricadas en poliéster, ideales para proteger los asientos.",
+  33990,
+  29990,
+  "Sparco",
+  40,
+  "https://www.dimarsa.cl/media/catalog/product/m/a/marcassparcosps424bkr-negro1jpeg_0_1.jpg",
+  1.0,
+  10,
+  10,
+  10
+),
+(
+  "Kit de Emergencia para Auto 11 Piezas",
+  "¡Disfruta de la seguridad y la tranquilidad de contar con un kit de emergencia profesional! Es un producto especialmente diseñado para ser tu mejor compañero de viaje en cada recorrido, es imprescindible junto a tu caja de herramientas, las múltiples funciones de sus piezas te permitirán resolver de manera efectiva las anomalías mecánicas y eléctricas que presente tu vehículo.",
+  56900,
+  49900,
+  "Power Grid",
+  15,
+  "https://api.autoplanet.cl/medias/sys_master/images/h89/h29/9875441877022/1073400_1-1739980652/1073400-1-1739980652.webp",
+  2.5,
+  10,
+  10,
+  10
 );
-
-
-
-
-
-
-
-
 
 
 
@@ -208,3 +351,51 @@ INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (1, 2); -- Buj
 INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (1, 5); -- Bujía de Níquel NGK BPR5EY / Bujias
 INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (2, 12); -- Batería de Auto BOSCH S4 39S470D-T 70AH 660CCA / Electricidad y baterias
 INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (2, 14); -- Batería de Auto BOSCH S4 39S470D-T 70AH 660CCA / Baterias
+-- Filtro de Aceite Hu7019z
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (5, 1); -- Destacados
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (5, 3); -- Filtros de aceite
+
+-- Filtro de aire de cabina HEPA
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (6, 1); -- Destacados
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (6, 4); -- Filtros de aire
+
+-- Correa de Distribución Bosch B111SP170
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (7, 2); -- Motores y componentes
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (7, 6); -- Correas de distribucion
+
+-- Pastillas de Freno Delanteras Bosch VW Amarok 2.0 2010-2023
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (8, 1); -- Destacados
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (8, 7); -- Frenos y suspension
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (8, 8); -- Pastillas de freno
+
+-- Disco de Freno Bosch Delantero
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (9, 7); -- Frenos y suspension
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (9, 9); -- Discos de freno
+
+-- Amortiguador Delantero Bosch
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (10, 7); -- Frenos y suspension
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (10, 10); -- Amortiguadores
+
+-- Rótula de Suspensión Bosch
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (11, 7); -- Frenos y suspension
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (11, 11); -- Rotulas
+
+-- Kit de 300 Fusibles Automotrices
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (12, 12); -- Electricidad y baterias
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (12, 16); -- Sensores y fusibles
+
+-- Sistema de Alarma Bosch Integral
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (13, 12); -- Electricidad y baterias
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (13, 18); -- Alarmas
+
+-- Cinturón de Seguridad 3 Puntas
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (14, 17); -- Accesorios de seguridad
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (14, 19); -- Cinturones de seguridad
+
+-- Fundas Cubreasiento Sparco Universal
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (15, 17); -- Accesorios de seguridad
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (15, 20); -- Cubre asientos
+
+-- Kit de Emergencia Starter 1
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (16, 17); -- Accesorios de seguridad
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (16, 21); -- Kits de emergencia
