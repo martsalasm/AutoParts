@@ -21,6 +21,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
         localStorage.setItem("token", data.token);
         localStorage.setItem("tipo", data.tipo);
         localStorage.setItem("rol", data.rol || "");
+        localStorage.setItem("tipoCliente", data.rol || "");
         localStorage.setItem("nombre", data.nombre);
         localStorage.setItem("apellido", data.apellido);
 
