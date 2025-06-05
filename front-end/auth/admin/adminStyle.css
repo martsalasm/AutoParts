@@ -1,0 +1,339 @@
+/*panel de admin*/
+.admin-panel {
+  background-color: rgb(33, 33, 33);
+  border-radius: 20px;
+  padding: 40px 30px 50px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 40px auto 80px;
+  width: 95%;
+}
+
+.admin-heading {
+  font-size: 2.8rem;
+  font-weight: 900;
+  text-align: center;
+  color: rgb(230, 230, 230);
+}
+
+.admin-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+}
+
+.admin-card {
+  background-color: rgb(26, 26, 26);
+  border-radius: 16px;
+  padding: 25px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  width: 100%;
+}
+
+.admin-card:hover,
+.admin-card:focus-within {
+  transform: translateY(-6px);
+}
+
+.card-text {
+  width: 70%;
+}
+
+.card-text h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  color: rgb(230, 230, 230);
+}
+
+.card-text p {
+  font-size: 1.2rem;
+  color: rgb(200, 200, 200);
+  margin: 0;
+}
+
+.card-btn {
+  background-color: rgb(26,26,26);
+  color: #fff;
+  border: none;
+  border-radius: 22px;
+  padding: 10px 26px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: fit-content;
+}
+
+
+.logout-button {
+  align-self: center;
+  padding: 14px 40px;
+  font-size: 1.2rem;
+  border-radius: 22px;
+  border: none;
+  background-color: #640210;;
+  color: rgb(20, 20, 20);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 30px;
+  width: fit-content;
+}
+
+.logout-button:hover {
+  background-color:#750012;
+}
+a{
+  text-decoration: none;
+}
+
+
+/* Empleados */
+
+#empleados-section {
+  width: 90%;
+  max-width: 1000px;
+  margin: 30px auto;
+}
+
+#formulario-empleado {
+  background-color: rgb(33, 33, 33);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+#formulario-empleado h2,
+#lista-empleados h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#form-empleado, #form-cliente {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#form-empleado input, #form-cliente input, #form-producto input {
+  background-color: rgb(36, 36, 36);
+  border: 1px solid #555;
+  color: rgb(230, 230, 230);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.boton-verde {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.boton-verde:hover {
+  background-color: #45a049;
+}
+
+.employee-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.employee-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.boton-volver {
+  padding: 12px 30px;
+  background-color: rgb(33, 33, 33);
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.boton-volver:hover {
+  background-color: rgb(36, 36, 36);
+}
+
+
+.employee-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgb(33, 33, 33);
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  gap: 1em;
+  align-items: center;
+}
+
+.employee-card .info {
+  flex-grow: 1;
+}
+
+.employee-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 6px;
+}
+
+.employee-card p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+}
+
+.employee-card button {
+  background-color: crimson;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.employee-card button:hover {
+  background-color: darkred;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 600px) {
+  .admin-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .card-text {
+    width: 100%;
+  }
+
+  .card-btn {
+    align-self: stretch;
+    text-align: center;
+  }
+}
+
+#toggle-form-btn {
+  margin: 20px auto;
+  display: block;
+  padding: 12px 30px;
+  font-size: 1rem;
+  border-radius: 8px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 600px) {
+  .admin-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .card-btn {
+    align-self: stretch;
+    text-align: center;
+  }
+}
+  @media (max-width: 600px) {
+    .admin-card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .card-btn {
+      align-self: stretch;
+      text-align: center;
+    }
+  }
+  @media (max-width: 600px) {
+    .admin-card {
+      font-size: 1.4rem;
+      padding: 22px 18px;
+    }
+    .logout-button {
+      width: 100%;
+      padding: 14px 0;
+    }
+  }
+

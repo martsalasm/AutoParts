@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestión de Clientes</title>
+  <link rel="stylesheet" href="adminStyle.css" />
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+
+<body>
+  <header>
+    <h1 id="title">Gestión de Clientes</h1>
+  </header>
+
+  <section id="lista-clientes">
+    <h2 id="title">Clientes Registrados</h2>
+    <div class="employee-cards" id="cards-container"></div>
+  </section>
+
+  <main id="empleados-section">
+  <section id="formulario-empleado">
+    <h2>Agregar Cliente</h2>
+    <form id="form-cliente">
+      <input type="text" id="rut" placeholder="RUT" required />
+      <input type="text" id="nombre" placeholder="Nombre" required />
+      <input type="text" id="apellido" placeholder="Apellido" required />
+      <select id="tipo" required>
+        <option value="">Seleccione tipo de cliente</option>
+        <option value="B2C">B2C</option>
+        <option value="B2B">B2B</option>
+      </select>
+      <input type="tel" id="telefono" placeholder="Teléfono" required />
+      <input type="email" id="correo" placeholder="Correo electrónico" required />
+      <input type="password" id="contrasena" placeholder="Contraseña" required />
+      <button type="submit" class="boton-verde">Agregar Cliente</button>
+    </form>
+  </section>
+
+    <div class="volver-container">
+      <a href="admin-panel.html" class="boton-volver">← Volver al panel</a>
+    </div>
+  </main>
+
+  <script src="gestionClientes.js"></script>
+</body>
+
+</html>

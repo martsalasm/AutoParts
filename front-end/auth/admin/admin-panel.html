@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Panel de Administración</title>
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="adminStyle.css" />
+  <link rel="icon" href="/media/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+  <header>
+    <h1 id="title">
+      <img src="/media/logoautoparts.png" alt="Logo AutoParts" />
+    </h1>
+
+    <nav>
+      <ul>
+        <li><a href="../../index.html">Inicio</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="admin-panel">
+      <h2 class="admin-heading">Panel de Administración</h2>
+      <div class="admin-grid">
+
+        <div class="admin-card">
+          <div class="card-text">
+            <h3>Gestión de Empleados</h3>
+            <p>Administra los empleados del sistema</p>
+          </div>
+          <button class="card-btn"><a href="gestionEmpleados.html">Ver Empleados</a></button>
+        </div>
+
+        <div class="admin-card">
+          <div class="card-text">
+            <h3>Gestión de Clientes</h3>
+            <p>Verifica la información de clientes</p>
+          </div>
+          <button class="card-btn"><a href="gestionClientes.html">Ver Clientes</button></a>
+        </div>
+
+        <div class="admin-card">
+          <div class="card-text">
+            <h3>Gestión de Productos</h3>
+            <p>Visualiza los productos del sistema</p>
+          </div>
+          <button class="card-btn"><a href="gestionProductos.html">Ver Productos</a></button>
+        </div>
+
+        <div class="admin-card">
+          <div class="card-text">
+            <h3>Gestión de Órdenes</h3>
+            <p>Ver las órdenes del sistema</p>
+          </div>
+          <button class="card-btn"><a href="gestionOrdenes.html">Ver Órdenes</a></button>
+        </div>
+
+      </div>
+      <button class="logout-button"><a href="login.html">Cerrar Sesión</a></button>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <h2>Información de Contacto</h2>
+      <p>Sucursal 1: +569123456</p>
+      <p>Sucursal 2: +569123456</p>
+      <p>contacto@autoparts.cl</p>
+      <p>Santiago 101, Santiago</p>
+    </div>
+    <div class="footer-container">
+      <h2>Nuestras Políticas</h2>
+      <ul>
+        <li>Políticas de entrega y despacho</li>
+        <li>Políticas de cambio y devolución</li>
+      </ul>
+    </div>
+    <div class="footer-container" id="pagos">
+      <h2>Paga a través de</h2>
+      <img src="/media/1.Webpay_FB_300px.png" alt="Imagen de Webpay" />
+      <img src="/media/transferencia.png" alt="Imagen de transferencia" />
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Empleados</title>
+    <link rel="stylesheet" href="adminStyle.css" />
+    <link rel="stylesheet" href="../../style.css" />
+</head>
+
+<body>
+    <header>
+        <h1 id="title">Gestión de Empleados</h1>
+    </header>
+
+
+    <section id="lista-empleados">
+        <h2>Empleados Registrados</h2>
+        <div class="employee-cards" id="cards-container"></div>
+    </section>
+
+    <main id="empleados-section">
+        <section id="formulario-empleado">
+            <h2>Agregar Empleado</h2>
+            <form id="form-empleado">
+                <input type="text" id="rut" placeholder="RUT" required />
+                <input type="text" id="nombre" placeholder="Nombre" required />
+                <input type="text" id="apellido" placeholder="Apellido" required />
+                <select id="rol" required>
+                    <option value="">Seleccione un rol</option>
+                    <option value="admin">admin</option>
+                    <option value="bodeguero">bodeguero</option>
+                    <option value="vendedor">vendedor</option>
+                    <option value="contador">contador</option>
+                </select>
+                <input type="tel" id="telefono" placeholder="Teléfono" required />
+                <input type="email" id="correo" placeholder="Correo electrónico" required />
+                <input type="password" id="contrasena" placeholder="Contraseña" required />
+                <button type="submit" class="boton-verde">Agregar Empleado</button>
+            </form>
+        </section>
+        <div class="volver-container">
+            <a href="admin-panel.html" class="boton-volver">← Volver al panel</a>
+        </div>
+    </main>
+
+    <script src="gestionEmpleados.js"></script>
+</body>
+
+</html>

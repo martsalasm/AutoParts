@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - AutoParts</title>
+    <link rel="icon" href="../media/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="auth.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1 id="title">
+            <img src="/media/logoautoparts.png" alt="Logo AutoParts" />
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="../catalogo.html">Productos</a></li>
+                <li><a href="../aboutus.html">Sobre Nosotros</a></li>
+                <li><a href="login.html">Iniciar Sesión</a></li>
+                <li><a href="../cart.html" class="fas fa-shopping-cart" style="display: inline;"><span id="cart-count"></span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="login-wrapper">
+            <h2>Iniciar Sesión</h2>
+            <form id="login-form">
+                <input type="text" name="rut" placeholder="Rut" required />
+                <input type="password" name="password" placeholder="Contraseña" required />
+                <button type="submit">Ingresar</button>
+            </form>
+            <div class="no-account">
+            <p>El registro de clientes está reservado para clientes mayoristas.</p>
+            <p>¿Aún no tienes cuenta?</p>
+            <p><a href="formulario-registro.html" class="register-link">Contáctate con nosotros</a></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <h2>Información de Contacto</h2>
+            <p>Sucursal 1: +569123456</p>
+            <p>Sucursal 2: +569123456</p>
+            <p>contacto@autoparts.cl</p>
+            <p>Santiago 101, Santiago</p>
+        </div>
+        <div class="footer-container">
+            <h2>Nuestras Políticas</h2>
+            <ul>
+                <li>Políticas de entrega y despacho</li>
+                <li>Políticas de cambio y devolución</li>
+            </ul>
+        </div>
+        <div class="footer-container" id="pagos">
+            <h2>Paga a través de</h2>
+            <img src="/media/1.Webpay_FB_300px.png" alt="Imagen de Webpay" />
+            <img src="/media/transferencia.png" alt="Imagen de transferencia" />
+        </div>
+    </footer>
+    <script src="login.js"></script>
+</body>
+
+</html>

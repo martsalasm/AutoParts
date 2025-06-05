@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestión de Productos</title>
+  <link rel="stylesheet" href="adminStyle.css" />
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+
+<body>
+  <header>
+    <h1 id="title">Gestión de Productos</h1>
+  </header>
+
+  <section id="lista-productos">
+    <h2 id="title">Productos Registrados</h2>
+    <div class="employee-cards" id="cards-container"></div>
+  </section>
+
+  <main id="empleados-section">
+    <section id="formulario-empleado">
+      <h2>Agregar Producto</h2>
+      <form id="form-producto">
+        <input type="text" id="nombre" placeholder="Nombre del producto" required />
+        <input type="text" id="descripcion" placeholder="Descripción" required />
+        <input type="number" id="precio" placeholder="Precio (B2C)" step="0.01" required />
+        <input type="number" id="preciob2b" placeholder="Precio B2B" step="0.01" required />
+        <input type="text" id="marca" placeholder="Marca" required />
+        <input type="number" id="stock" placeholder="Stock" required />
+        <input type="text" id="imagen" placeholder="URL de imagen" required />
+        <input type="number" id="peso" placeholder="Peso (kg)" step="0.01" required />
+        <input type="number" id="alto" placeholder="Alto (cm)" step="0.1" required />
+        <input type="number" id="ancho" placeholder="Ancho (cm)" step="0.1" required />
+        <input type="number" id="largo" placeholder="Largo (cm)" step="0.1" required />
+        <button type="submit" class="boton-verde">Agregar Producto</button>
+      </form>
+    </section>
+
+    <div class="volver-container">
+      <a href="admin-panel.html" class="boton-volver">← Volver al panel</a>
+    </div>
+  </main>
+
+  <script src="gestionProductos.js"></script>
+</body>
+</html>
