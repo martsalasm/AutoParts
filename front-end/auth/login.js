@@ -29,8 +29,8 @@ document.querySelector("form").addEventListener("submit", async (e) => {
         if (data.tipo === "empleado" && data.rol === "admin") {
             window.location.href = window.location.href = "admin/admin-panel.html"; //
         }
-        if (data.tipo === "cliente" && data.rol === "B2B") {
-            window.location.href = "user-panel.html"; // Panel de usuario
+        if (data.tipo === "cliente" && data.tipo_cliente === "B2B") {
+            window.location.href = "cliente/cliente-panel.html"; // Panel de usuario
         }
 
     } catch (err) {
