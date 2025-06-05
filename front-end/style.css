@@ -1,5 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap");
+/*
 
+| Elemento             | Color                               | Función                |
+| -------------------- | ----------------------------------- | ---------------------- |
+| Fondo principal      | `rgb(26,26,26)`                     | Fondo del sitio        |
+| Contenedores oscuros | `rgb(33,33,33)`                     | Cards, headers, footer |
+| Fondo de categorías  | `rgb(36,36,36)`                     | Lateral de catálogo    |
+| Texto                | `rgb(230,230,230)` / `#fff`         | Texto principal        |
+| Botones verdes       | `#4caf50` / `#45a049`               | Acción positiva (CTA)  |
+
+*/
 * {
   font-family: "Lato", sans-serif, monospace;
   margin: 0px;
