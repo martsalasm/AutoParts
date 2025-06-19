@@ -385,7 +385,7 @@ INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (12, 12); -- E
 INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (12, 16); -- Sensores y fusibles
 
 -- Sistema de Alarma Bosch Integral
-INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (13, 12); -- Electricidad y baterias
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (13, 17); -- Accesorios de seguridad
 INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (13, 18); -- Alarmas
 
 -- Cinturón de Seguridad 3 Puntas
