@@ -6,7 +6,7 @@
   
   
   
-  if (token && tipo ==="empleado" && rol === "admin") {
+if (token && tipo ==="empleado" && rol === "admin") {
     loginLink.textContent = 'Mi Perfil';
     loginLink.href = 'http://localhost:5501/front-end/auth/admin/admin-panel.html';
   };
