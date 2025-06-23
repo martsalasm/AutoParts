@@ -61,17 +61,18 @@ CREATE TABLE pagos(
 CREATE TABLE ordenes (
   id_orden INT AUTO_INCREMENT PRIMARY KEY,
   nombre_cliente VARCHAR(100) NOT NULL,
+  apellido_cliente VARCHAR(100) NOT NULL,
   rut_cliente VARCHAR(10) NOT NULL,
   correo_cliente VARCHAR(100) NOT NULL,
   telefono_cliente VARCHAR(15) NOT NULL,
   tipo_envio ENUM('retiro', 'envio') NOT NULL,
-  direccion_cliente VARCHAR(100) NULL,
-  region_cliente VARCHAR(50) NULL,
-  ciudad_cliente VARCHAR(50) NULL,
-  comuna_cliente VARCHAR(50) NULL,
+  direccion_cliente VARCHAR(100) NOT NULL,
+  apartamento_cliente VARCHAR(50) NULL,
+  region_cliente VARCHAR(50) NOT NULL,
+  comuna_cliente VARCHAR(50) NOT NULL,
   valor_envio INT NULL,
   fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
-  metodo_pago ENUM('webpay', 'transferencia_bancaria', 'efectivo') NOT NULL,
+  metodo_pago ENUM('webpay', 'transferencia', 'efectivo') NOT NULL,
   total INT NOT NULL,
   estado ENUM('pendiente', 'completado','fallido', 'cancelado') NOT NULL
 );
