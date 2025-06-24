@@ -101,7 +101,7 @@ const addOrden = async(req,res) => {
     for (const producto of productos){
       const { id_producto, cantidad, precio} = producto;
       await db.query(
-        `INSERT INTO detalle_orden (id_orden, id_productom cantidad, precio_unitario),
+        `INSERT INTO detalle_orden (id_orden, id_producto, cantidad, precio_unitario),
         VALUES(?, ?, ?, ?)`,
         [ordenId, id_producto, cantidad, precio]
       );
