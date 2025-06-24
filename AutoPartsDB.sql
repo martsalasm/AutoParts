@@ -379,12 +379,12 @@ INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (10, 7); -- Fr
 INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (10, 10); -- Amortiguadores
 
 -- Rótula de Suspensión Bosch
-INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (11, 7); -- Frenos y suspension
-INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (11, 11); -- Rotulas
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (15, 7); -- Frenos y suspension
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (15, 11); -- Rotulas
 
 -- Kit de 300 Fusibles Automotrices
-INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (12, 12); -- Electricidad y baterias
-INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (12, 16); -- Sensores y fusibles
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (16, 12); -- Electricidad y baterias
+INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (16, 16); -- Sensores y fusibles
 
 -- Sistema de Alarma Bosch Integral
 INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (13, 17); -- Accesorios de seguridad
