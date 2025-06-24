@@ -1,15 +1,18 @@
-import db from database.js;
+import db from "../database.js";
 
 const getOrdenes =  async (req , res) => {
     try {
         const [rows] = await db.query("SELECT * FROM ordenes");
+        if (rows.length === 0) {
+            return res.status(404).json({ error: "No se encontraron ordenes" });
+        }
         res.json(rows);
     }
     catch (error){
         console.error(error);
         res.status(500).json({ error: "Error al obtener los productos" });
     }
-}
+};
 
 const getOrdenById = async (req, res) => {
     const id =  req.params.id;
@@ -24,7 +27,7 @@ const getOrdenById = async (req, res) => {
     res.status(500).json({ error: "Error al obtener la orden" });
   }
 
-}
+};
 
 const getOrdenesByCliente = async (req, res) =>{
     const rut = req.params.rut;
@@ -40,7 +43,7 @@ const getOrdenesByCliente = async (req, res) =>{
     console.error(error);
     res.status(500).json({error: "Error al obtener las ordenes x rut"})
   }
-}
+};
 
 const addOrden = async(req,res) => {
   const {
@@ -67,7 +70,7 @@ const addOrden = async(req,res) => {
      ||!comuna_cliente || !valor_envio || !metodo_pago || !total 
      || !estado ||  !productos ) {
     return res.status(400).json({ message: 'Faltan campos por completar' });
-  }
+  };
 
   try{
     const [result] = await db.query(
@@ -109,7 +112,7 @@ const addOrden = async(req,res) => {
     console.error(error);
     res.status(500).json({ error: "Error al agregar la orden" });
   }
-}
+};
 
 export default {
   getOrdenes,
