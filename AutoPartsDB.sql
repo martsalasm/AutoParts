@@ -63,6 +63,7 @@ CREATE TABLE ordenes (
   nombre_cliente VARCHAR(100) NOT NULL,
   apellido_cliente VARCHAR(100) NOT NULL,
   rut_cliente VARCHAR(10) NOT NULL,
+  tipo_cliente ENUM('B2C', 'B2B') DEFAULT 'B2C' NOT NULL,
   correo_cliente VARCHAR(100) NOT NULL,
   telefono_cliente VARCHAR(15) NOT NULL,
   tipo_envio ENUM('retiro', 'envio') NOT NULL,
