@@ -26,7 +26,7 @@ const getOrdenById = async (req, res) => {
 
 }
 
-const getOrdenByRutCliente = async (req, res) =>{
+const getOrdenesByCliente = async (req, res) =>{
     const rut = req.params.rut;
 
   try {
@@ -114,6 +114,6 @@ const addOrden = async(req,res) => {
 export default {
   getOrdenes,
   getOrdenById,
-  getOrdenByRutCliente,
+  getOrdenesByCliente,
   addOrden
 };

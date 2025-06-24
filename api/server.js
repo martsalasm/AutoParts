@@ -12,7 +12,10 @@ import categoriaRouter from "./routes/rutaCategorias.js";
 import chilExpressRouter from "./routes/rutaChilExpress.js";
 import webpayRouter from "./routes/rutaWebpay.js";
 import clienteRouter from "./routes/rutaClientes.js";
+import ordenRouter from "./routes/rutaOrden.js";
 
+
+app.use("/ordenes", ordenRouter);
 app.use("/productos", productRouter);
 app.use("/login", loginRouter);
 app.use("/categorias", categoriaRouter);
