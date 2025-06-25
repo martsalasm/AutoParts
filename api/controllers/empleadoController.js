@@ -100,7 +100,7 @@ const deleteEmpleadoByRut = async (req, res) => {
     if (typeof rut !== 'string') {
       return false;
     }
-    const rutLimpio = limpiarRut(rut); // Eliminar puntos
+    const rutLimpio = rut.replace(/\./g, ''); // Eliminar puntos
     const regex = /^([1-9]|[1-9]\d|[1-9]\d{2})(\d{3})*-(\d|k|K)$/;
     return regex.test(rutLimpio);
   }

@@ -68,14 +68,16 @@ const addOrden = async(req,res) => {
 
   if (!nombre_cliente || !apellido_cliente || !rut_cliente || !tipo_cliente || !correo_cliente
      || !telefono_cliente || !tipo_envio || !direccion_cliente || !region_cliente
-     ||!comuna_cliente || !valor_envio || !metodo_pago || !total 
+     ||!comuna_cliente|| !metodo_pago || !total 
      || !estado ||  !productos ) {
     return res.status(400).json({ message: 'Faltan campos por completar' });
   };
-
-  if (!empleadoController.validarRut(rut_cliente)){
+  const rut_limpio = empleadoController.limpiarRut(rut_cliente);
+  const validacion = empleadoController.validarRut(rut_cliente);
+  if (!validacion) {
     return res.status(400).json({ error: "El formato del RUT no es válido" });
   }
+
 
   try{
     const [result] = await db.query(
@@ -86,7 +88,7 @@ const addOrden = async(req,res) => {
       [
         nombre_cliente,
         apellido_cliente,
-        rut_cliente,
+        rut_limpio,
         tipo_cliente,
         correo_cliente,
         telefono_cliente,
