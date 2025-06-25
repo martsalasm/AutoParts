@@ -7,6 +7,7 @@ let maxHeight = 0;
 let maxWidth = 0;
 let maxLength = 0;
 let productosOrden = [];
+const envioElement = document.getElementById("checkout-shipping");
 
 const total = document.getElementById("checkout-total");
 const formatter = new Intl.NumberFormat("es-CL", {
@@ -68,10 +69,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 function bloquearFinalizeBtn() {
   const finalizeBtn = document.getElementById("finalize-btn");
   if (finalizeBtn) finalizeBtn.disabled = true;
+  finalizeBtn.textContent = "Faltan datos clave";
 }
 function desbloquearFinalizeBtn() {
   const finalizeBtn = document.getElementById("finalize-btn");
   if (finalizeBtn) finalizeBtn.disabled = false;
+  finalizeBtn.textContent = "Confirmar pedido";
 }
 
 
@@ -102,7 +105,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const regionData = regionesComunasData.find(
       (region) => region.region === selectedRegion
     );
-    comunaSelect.innerHTML = '<option value="" selected>Seleccione una comuna</option>'; // Limpiar opciones anteriores
+    envioElement.textContent = "Información faltante";
+    comunaSelect.innerHTML = '<option value="" selected disabled>Seleccione una comuna</option>';
+    total.textContent = "Información faltante";
     if (regionData && regionData.comunas) {
       regionData.comunas.forEach((comuna) => {
         const option = document.createElement('option');
@@ -175,10 +180,12 @@ document.addEventListener("DOMContentLoaded", () => {
                   console.log("Opciones de despacho:", despachoData);
 
                   const courierOptions = despachoData.data?.courierServiceOptions || [];
-                  const envioElement = document.getElementById("checkout-shipping");
+                  
 
                   if (courierOptions.length === 0) {
                     envioElement.textContent = "En este momento nuestro servicio de despacho no tiene opciones disponibles, porfavor comunicarse con servicio al cliente.";
+                    valorTotal = subtotal;
+                    total.textContent = formatter.format(valorTotal);
                     bloquearFinalizeBtn();
                   }
                   else {
