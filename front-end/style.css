@@ -483,6 +483,10 @@ fieldset,
   float: right;
   text-align: right;
 }
+#finalize-btn:disabled {
+  background-color: red;
+  cursor: not-allowed;
+}
 /* Responsive Design */
 @media (max-width: 650px) {
   nav li {

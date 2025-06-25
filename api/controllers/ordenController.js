@@ -77,7 +77,7 @@ const addOrden = async(req,res) => {
       `INSERT INTO ordenes (nombre_cliente, apellido_cliente, rut_cliente, tipo_cliente, correo_cliente
       , telefono_cliente, tipo_envio, direccion_cliente, apartamento_cliente, region_cliente
       , comuna_cliente, valor_envio, metodo_pago, total, estado)
-      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
       [
         nombre_cliente,
         apellido_cliente,
@@ -101,7 +101,7 @@ const addOrden = async(req,res) => {
     for (const producto of productos){
       const { id_producto, cantidad, precio} = producto;
       await db.query(
-        `INSERT INTO detalle_orden (id_orden, id_producto, cantidad, precio_unitario),
+        `INSERT INTO detalle_orden (id_orden, id_producto, cantidad, precio_unitario)
         VALUES(?, ?, ?, ?)`,
         [ordenId, id_producto, cantidad, precio]
       );

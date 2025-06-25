@@ -6,7 +6,7 @@ let totalWeight = 0;
 let maxHeight = 0;
 let maxWidth = 0;
 let maxLength = 0;
-
+let productosOrden = [];
 
 const total = document.getElementById("checkout-total");
 const formatter = new Intl.NumberFormat("es-CL", {
@@ -45,6 +45,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
       const adjustedPrice = getAdjustedPrice(prod);
       subtotal += adjustedPrice * item.quantity;
+
+      productosOrden.push({
+        id_producto: prod.id,
+        cantidad: item.quantity,
+        precio: adjustedPrice
+      })
       valorTotal = subtotal;
       const quantity = item.quantity;
       if (prod.weight) totalWeight += prod.weight * quantity;
@@ -96,8 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const regionData = regionesComunasData.find(
       (region) => region.region === selectedRegion
     );
-    comunaSelect.innerHTML = "";
-
+    comunaSelect.innerHTML = '<option value="" selected>Seleccione una comuna</option>'; // Limpiar opciones anteriores
     if (regionData && regionData.comunas) {
       regionData.comunas.forEach((comuna) => {
         const option = document.createElement('option');
@@ -210,7 +215,38 @@ document.getElementById('checkout-form').addEventListener('submit', async (e) =>
   if (paymentMethod !== 'webpay') {
     return;
   }
+  
+  const tipo_envio = document.querySelector('input[name="delivery"]:checked').value;
+  const valor_envio = tipo_envio === 'retiro' ? 0 : valorTotal - subtotal;
 
+  const orderPayload = {
+    nombre_cliente: document.getElementById('name').value,
+    apellido_cliente: document.getElementById('lastname').value,
+    rut_cliente: document.getElementById('rut').value,
+    tipo_cliente: localStorage.getItem('tipo_cliente') || 'B2C',
+    correo_cliente: document.getElementById('email').value,
+    telefono_cliente: document.getElementById('phone').value,
+    tipo_envio,
+    direccion_cliente: document.getElementById('address').value,
+    apartamento_cliente: document.getElementById('apartment').value || '',
+    region_cliente: document.getElementById('region').value,
+    comuna_cliente: document.getElementById('comuna').value,
+    valor_envio,
+    metodo_pago: paymentMethod,
+    total: valorTotal,
+    estado: 'pendiente',
+    productos: productosOrden
+  };
+  try{
+    const ordenResponse = await fetch("http://localhost:3000/ordenes" ,{
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(orderPayload),
+    });
+   }
+    catch (error) {
+    console.error("Error al registrar la orden:", error);
+};
   const ordenId = `orden_${Date.now()}`;
   const sessionId = `session_${Date.now()}`;
   const monto = valorTotal;
