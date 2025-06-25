@@ -1,4 +1,5 @@
 import db from "../database.js";
+import empleadoController from "./empleadoController.js";
 
 const getOrdenes =  async (req , res) => {
     try {
@@ -71,6 +72,10 @@ const addOrden = async(req,res) => {
      || !estado ||  !productos ) {
     return res.status(400).json({ message: 'Faltan campos por completar' });
   };
+
+  if (!empleadoController.validarRut(rut_cliente)){
+    return res.status(400).json({ error: "El formato del RUT no es válido" });
+  }
 
   try{
     const [result] = await db.query(
