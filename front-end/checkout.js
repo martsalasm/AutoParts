@@ -256,6 +256,7 @@ document.getElementById('checkout-form').addEventListener('submit', async (e) =>
 
     const ordenData = await ordenResponse.json();
     ordenId = String(ordenData.id_orden);
+    localStorage.setItem('ordenId', ordenId);
     const sessionId = `session_${Date.now()}`;
     const monto = valorTotal;
     const returnUrl = 'http://localhost:3000/webpay/confirmar';
