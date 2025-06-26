@@ -113,6 +113,7 @@ const addOrden = async(req,res) => {
         [ordenId, id_producto, cantidad, precio]
       );
     }
+      res.status(201).json({ message: "Orden agregada exitosamente", id_orden: ordenId });
   }
 
   catch(error){

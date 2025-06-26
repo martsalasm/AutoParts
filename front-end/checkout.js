@@ -240,22 +240,26 @@ document.getElementById('checkout-form').addEventListener('submit', async (e) =>
     estado: 'pendiente',
     productos: productosOrden
   };
+
+  let ordenId;
+
   try{
     const ordenResponse = await fetch("http://localhost:3000/ordenes" ,{
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(orderPayload),
     });
-   }
-    catch (error) {
-    console.error("Error al registrar la orden:", error);
-};
-  const ordenId = `orden_${Date.now()}`;
-  const sessionId = `session_${Date.now()}`;
-  const monto = valorTotal;
-  const returnUrl = 'http://localhost:3000/webpay/confirmar';
 
-  try {
+    if (!ordenResponse.ok){
+      throw new Error(`Error al registrar la orden: ${ordenResponse.status} ${ordenResponse.statusText}`);
+    }
+
+    const ordenData = await ordenResponse.json();
+    ordenId = String(ordenData.id_orden);
+    const sessionId = `session_${Date.now()}`;
+    const monto = valorTotal;
+    const returnUrl = 'http://localhost:3000/webpay/confirmar';
+
     const res = await fetch('http://localhost:3000/webpay/iniciar', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
