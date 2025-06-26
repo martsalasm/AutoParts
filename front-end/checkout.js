@@ -219,10 +219,6 @@ document.getElementById('checkout-form').addEventListener('submit', async (e) =>
   e.preventDefault();
 
   const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
-  if (paymentMethod !== 'webpay') {
-    return;
-  }
-  
   const tipo_envio = document.querySelector('input[name="delivery"]:checked').value;
   const valor_envio = tipo_envio === 'retiro' ? 0 : valorTotal - subtotal;
 
@@ -234,10 +230,10 @@ document.getElementById('checkout-form').addEventListener('submit', async (e) =>
     correo_cliente: document.getElementById('email').value,
     telefono_cliente: document.getElementById('phone').value,
     tipo_envio,
-    direccion_cliente: document.getElementById('address').value,
+    direccion_cliente: document.getElementById('address').value || "Antonio Varas 366",
     apartamento_cliente: document.getElementById('apartment').value || '',
-    region_cliente: document.getElementById('region').value,
-    comuna_cliente: document.getElementById('comuna').value,
+    region_cliente: document.getElementById('region').value || "Metropolitana de Santiago",
+    comuna_cliente: document.getElementById('comuna').value || "Providencia",
     valor_envio,
     metodo_pago: paymentMethod,
     total: valorTotal,
@@ -284,7 +280,6 @@ document.getElementById('checkout-form').addEventListener('submit', async (e) =>
     } else {
       console.log('Error al iniciar el pago');
     }
-
   } catch (error) {
     console.error('Error al iniciar pago:', error);
   }
@@ -295,6 +290,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const deliveryRadios = document.querySelectorAll('input[name="delivery"]');
   const shippingSection = document.getElementById('shipping-info');
   const shippingCostEl = document.getElementById("checkout-shipping");
+  const regionSelect = document.getElementById("region");
+  const comunaSelect = document.getElementById("comuna");
+  const addressSelect = document.getElementById("address");
+  const apartamento_cliente = document.getElementById("apartment");
 
   deliveryRadios.forEach((radio) => {
     radio.addEventListener("change", (e) => {
@@ -302,6 +301,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (selected === "retiro") {
         // Ocultar sección de envío
+        addressSelect.value = "";
+        regionSelect.value = "";
+        comunaSelect.value = "";
+        apartamento_cliente.value = "";
+        addressSelect.removeAttribute("required");
+        regionSelect.removeAttribute("required");
+        comunaSelect.removeAttribute("required");
         shippingSection.style.display = "none";
         shippingCostEl.textContent = "$0";
         valorTotal = subtotal;
@@ -310,6 +316,9 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         // Mostrar sección de envío
         shippingSection.style.display = "block";
+        addressSelect.setAttribute("required", true);
+        regionSelect.setAttribute("required",true);
+        comunaSelect.setAttribute("required",true);
         shippingCostEl.textContent = "Información faltante";
         total.textContent = "Información faltante";
         bloquearFinalizeBtn();
