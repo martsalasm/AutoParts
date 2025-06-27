@@ -18,11 +18,30 @@ const getOrdenes =  async (req , res) => {
 const getOrdenById = async (req, res) => {
     const id =  req.params.id;
  try {
-    const [rows] = await db.query("SELECT * FROM ordenes WHERE id_orden = ?", [id]);
-    if (rows.length === 0) {
+    const [ordenRows] = await db.query("SELECT * FROM ordenes WHERE id_orden = ?", [id]);
+    if (ordenRows.length === 0) {
       return res.status(404).json({ error: "Orden no encontrada" });
     }
-    res.json(rows[0]);
+    const orden = ordenRows[0];
+
+    const [productosRows] = await db.query(
+      `
+      SELECT
+      do.cantidad,
+      do.precio_unitario,
+      p.id_producto,
+      p.nombre_producto,
+      p.descripcion_producto,
+      p.stock,
+      p.url_imagen
+      FROM detalle_orden do
+      JOIN productos p ON do.id_producto = p.id_producto
+      WHERE do.id_orden = ?
+      `,[id]
+    );
+    orden.productos = productosRows;
+    res.json(orden);
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error al obtener la orden" });
