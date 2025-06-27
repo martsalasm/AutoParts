@@ -583,9 +583,12 @@ gap: 16px;
     justify-content: center;
     align-items: center;
   }
-  #product-detail {
+  #product-detail,
+  #orden-details,
+  #products-orden {
     max-width: 90%;
   }
+  
 }
 .visible {
   display: block;
