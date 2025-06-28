@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="adminStyle.css" />
+  <link rel="stylesheet" href="../../style.css" />
+  <title>Listado de Órdenes</title>
+</head>
+<body>
+<header>
+  <h1 id="title">Listado de Órdenes</h1>
+</header>
+<input type="text" id="search-bar" placeholder="Buscar por RUT" />
+
+<div id="ordenes-container">
+  <div id="error-message" class="error-message"></div>
+  <table id="ordenes-table">
+    <thead>
+      <tr>
+        <th>ID Orden</th>
+        <th>Rut Cliente</th>
+        <th>Cliente</th>
+        <th>Correo</th>
+        <th>Fecha</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- ORDENES -->
+    </tbody>
+  </table>
+</div>
+<script src="gestionOrdenes.js" type="module">
+  
+</script>
+
+</body>
+</html>
