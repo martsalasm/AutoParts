@@ -1,5 +1,5 @@
 import { saveCartToStorage,getCart,getAdjustedPrice, updateCartCount } from "./global.js";
-
+import { showModal } from "./modal.js";
 const formatter = new Intl.NumberFormat("es-CL", {
   style: "currency",
   currency: "CLP",
@@ -54,6 +54,7 @@ function removeFromCart(productId) {
   if (productIndex !== -1) {
     cart.splice(productIndex, 1);
     updateCartUI(cart);
+    showModal("Exito", "Producto eliminado del carrito", "success")
   }
 }
 
