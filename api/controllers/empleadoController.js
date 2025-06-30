@@ -81,13 +81,14 @@ const deleteEmpleadoByRut = async (req, res) => {
   const { rut } = req.params;
   try {
     const [result] = await db.query("DELETE FROM empleados WHERE rut_empleado = ?", [rut]);
-    res.status(200).json({ message: "Empleado eliminado" });
+    
     if (result.affectedRows > 0) {
-      res.send({ message: 'Empleado eliminado correctamente' });
+      // Si se eliminó, responde con 204 No Content. Es el estándar y no necesita cuerpo.
+      res.status(204).send();
     } else {
+      // Si no se encontró, responde con 404 Not Found.
       res.status(404).json({ error: 'No se encontró ningún empleado con ese RUT' });
     }
-    res.status(204).send();
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error al eliminar el empleado" });
