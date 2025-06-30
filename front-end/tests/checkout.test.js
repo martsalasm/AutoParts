@@ -154,11 +154,30 @@ describe('Lógica del Checkout', () => {
     expect(fetchBody.package.width).toBe(25);
     expect(fetchBody.package.length).toBe(35);
   });
+// En tu archivo checkout.test.js, reemplaza solo esta prueba:
+
+// Requisito: Bloquear y desbloquear el botón de finalizar pedido
+test('Bloquea y desbloquea el botón de finalizar pedido correctamente', async () => {
+    document.dispatchEvent(new Event('DOMContentLoaded'));
+    await flushPromises();
+
+    const finalizeBtn = document.getElementById('finalize-btn');
+    const retiroRadio = document.querySelector('input[value="retiro"]');
+    const despachoRadio = document.querySelector('input[value="despacho"]');
+    // Empezamos en despacho y cambiamos a retiro boton habilitado.
+    retiroRadio.checked = true;
+    retiroRadio.dispatchEvent(new Event('change'));
+    expect(finalizeBtn.disabled).toBe(false);
+
+    // cambio a despacho ->boton deshabilitado.
+    despachoRadio.checked = true;
+    despachoRadio.dispatchEvent(new Event('change'));
+    expect(finalizeBtn.disabled).toBe(true);
+});
 });
 
 describe('Validación y Envío de Formulario', () => {
     let mockApiData;
-    // La configuración de beforeEach debe estar disponible también en este bloque
     beforeEach(() => {
         mockApiData = {
           '/productos/detalles': [],
@@ -167,7 +186,6 @@ describe('Validación y Envío de Formulario', () => {
           '/webpay/iniciar': { url: 'http://webpay.cl', token: 'token123' },
         };
         fetch.mockImplementation(url => {
-          // ... (la misma implementación de fetch de arriba)
           let responseData;
           if (url.includes('/productos/detalles')) { responseData = mockApiData['/productos/detalles']; }
           else if (url.includes('comunas-regiones.json')) { responseData = mockApiData['comunas-regiones.json']; }
@@ -193,6 +211,7 @@ describe('Validación y Envío de Formulario', () => {
             <select id="comuna"><option value=""></option></select>
           </form>
         `;
+        jest.spyOn(window.HTMLFormElement.prototype, 'submit').mockImplementation(() => {});
         require('../checkout.js');
     });
 
@@ -214,7 +233,6 @@ describe('Validación y Envío de Formulario', () => {
         expect(ordenesFetchCall).toBeDefined(); // Verificamos que se intentó crear la orden
 
         const payload = JSON.parse(ordenesFetchCall[1].body);
-        // La aserción clave: el valor en el payload es el string exacto que enviamos.
         expect(payload.nombre_cliente).toBe(sqlInjectionString);
     });
 

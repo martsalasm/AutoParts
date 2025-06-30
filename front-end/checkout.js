@@ -146,9 +146,9 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((response) => response.json())
         .then((data) => {
           if (data.tieneCobertura) {
-            console.log(`Cobertura disponible para ${selectedRegion}, ${selectedComuna}`);
+            //console.log(`Cobertura disponible para ${selectedRegion}, ${selectedComuna}`);
             if (data.countyCode) {
-              console.log("Código de comuna:", data.countyCode);
+              //console.log("Código de comuna:", data.countyCode);
               const destinationCountyCode = data.countyCode;
               const originCountyCode = "STGO";
 
@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return response.json();
               })
                 .then((despachoData) => {
-                  console.log("Opciones de despacho:", despachoData);
+                  //console.log("Opciones de despacho:", despachoData);
 
                   const courierOptions = despachoData.data?.courierServiceOptions || [];
                   
@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const option = courierOptions[1] ?? courierOptions[0];
                     const despachoValor = option && option.serviceValue !== undefined ? Number(option.serviceValue) : 0;
                     envioElement.textContent = formatter.format(despachoValor);
-                    console.log("Valor del despacho:", despachoValor);
+                    //console.log("Valor del despacho:", despachoValor);
                     valorTotal = subtotal + despachoValor;
                     total.textContent = formatter.format(valorTotal);
                   }
@@ -281,7 +281,7 @@ document.getElementById('checkout-form').addEventListener('submit', async (e) =>
 
       form.submit();
     } else {
-      console.log('Error al iniciar el pago');
+      //console.log('Error al iniciar el pago');
     }
   } catch (error) {
     console.error('Error al iniciar pago:', error);

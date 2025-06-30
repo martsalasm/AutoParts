@@ -1,5 +1,6 @@
 import { showModal } from "../../modal.js";
 
+
 document.addEventListener('DOMContentLoaded', async function() {
   // Obtener los productos y categorías
   const productos = await obtenerProductos();
