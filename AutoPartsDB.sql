@@ -401,3 +401,13 @@ INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (15, 20); -- C
 -- Kit de Emergencia Starter 1
 INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (16, 17); -- Accesorios de seguridad
 INSERT INTO producto_categoria (id_producto, id_categoria) VALUES (16, 21); -- Kits de emergencia
+
+
+
+ALTER TABLE detalle_orden
+DROP FOREIGN KEY detalle_orden_ibfk_2;
+
+ALTER TABLE detalle_orden
+ADD CONSTRAINT detalle_orden_ibfk_2
+  FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
+  ON DELETE CASCADE;
