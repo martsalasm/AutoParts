@@ -411,3 +411,12 @@ ALTER TABLE detalle_orden
 ADD CONSTRAINT detalle_orden_ibfk_2
   FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
   ON DELETE CASCADE;
+
+
+ALTER TABLE producto_categoria
+DROP FOREIGN KEY producto_categoria_ibfk_1;
+
+ALTER TABLE producto_categoria
+ADD CONSTRAINT producto_categoria_ibfk_1
+  FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
+  ON DELETE CASCADE;
