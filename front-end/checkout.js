@@ -93,8 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
         option.textContent = regionData.region;
         regionSelect.appendChild(option);
       });
-
-      console.log("Regiones cargadas correctamente");
     })
     .catch((error) => {
       console.error("Error al cargar las regiones:", error);
