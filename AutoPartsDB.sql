@@ -11,7 +11,7 @@ CREATE TABLE productos(
     product_height DECIMAL(4,2) NOT NULL,
     product_width DECIMAL(4,2) NOT NULL,
     product_length DECIMAL(5,2) NOT NULL,
-    updated_by VARCHAR(10) DEFAULT NULL
+    updated_by VARCHAR(200) DEFAULT NULL
 );
 CREATE TABLE categorias (
     id_categoria INT PRIMARY KEY AUTO_INCREMENT,
