@@ -1,5 +1,4 @@
-import cart from "./cart.js";
-import { getAdjustedPrice } from "./global.js";
+import { addToCart, getAdjustedPrice, updateCartCount} from "./global.js";
 const formatter = new Intl.NumberFormat("es-CL", {
   style: "currency",
   currency: "CLP",
@@ -7,6 +6,7 @@ const formatter = new Intl.NumberFormat("es-CL", {
 
 // Función para mostrar los productos en la página de catálogo
 document.addEventListener("DOMContentLoaded", () => {
+  updateCartCount();
   const productsContainer = document.getElementById("products-container");
   fetch("http://localhost:3000/productos")
     .then((response) => response.json())
@@ -35,8 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.querySelectorAll(".add-to-cart").forEach((button) => {
         button.addEventListener("click", (event) => {
           const productId = event.target.getAttribute("data-id");
-          cart.addToCart(productId);
-          console.log("Producto agregado al carrito!");
+          addToCart(productId);
         });
       });
     })
@@ -81,8 +80,7 @@ function renderProducts(data) {
   document.querySelectorAll(".add-to-cart").forEach((button) => {
     button.addEventListener("click", (event) => {
       const productId = event.target.getAttribute("data-id");
-      cart.addToCart(productId);
-      console.log("Producto agregado al carrito!");
+      addToCart(productId);
     });
   });
 }

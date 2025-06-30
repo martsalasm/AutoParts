@@ -1,5 +1,4 @@
-import cart from "./cart.js";
-import { getAdjustedPrice } from "./global.js";
+import { getAdjustedPrice, addToCart, updateCartCount } from "./global.js";
 
 const formatter = new Intl.NumberFormat("es-CL", {
   style: "currency",
@@ -8,6 +7,7 @@ const formatter = new Intl.NumberFormat("es-CL", {
 
 //función para mostrar los productos destacados
 document.addEventListener("DOMContentLoaded", () => {
+  updateCartCount();
   const mostSoldProductsContainer = document.getElementById("most-sold");
   fetch("http://localhost:3000/categorias/productos/1")
     .then((response) => response.json())
@@ -35,8 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.querySelectorAll(".add-to-cart").forEach((button) => {
         button.addEventListener("click", (event) => {
           const productId = event.target.getAttribute("data-id");
-          cart.addToCart(productId);
-          console.log("Producto agregado al carrito!");
+          addToCart(productId);
         });
       });
     })

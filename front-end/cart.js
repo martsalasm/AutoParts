@@ -1,15 +1,11 @@
-import { getAdjustedPrice } from "./global.js";
+import { saveCartToStorage,getCart,getAdjustedPrice, updateCartCount } from "./global.js";
 
 const formatter = new Intl.NumberFormat("es-CL", {
   style: "currency",
   currency: "CLP",
 });
-// Funcion para iniciar el carrito en el localStorage si no existe
-function initializeCart() {
-  if (!localStorage.getItem("cart")) {
-    localStorage.setItem("cart", JSON.stringify([]));
-  }
-}
+
+/*
 // Función para obtener el carrito del localStorage
 // Esta función devuelve el carrito almacenado en el localStorage como un objeto JavaScript
 function getCart() {
@@ -19,7 +15,6 @@ function getCart() {
 function saveCartToStorage(cart) {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
-
 // Función para agregar un producto al carrito
 function addToCart(productId, cantidad = 1) {
   const id = Number(productId);
@@ -40,14 +35,8 @@ function addToCart(productId, cantidad = 1) {
     })
     .catch(err => console.error("Error al verificar el stock:", err));
 }
+*/
 
-// Función para actualizar el contador del carrito
-// Esta función cuenta la cantidad total de productos en el carrito y actualiza el contador en la interfaz
-function updateCartCount() {
-  const cart = getCart();
-  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
-  document.getElementById("cart-count").textContent = cartCount;
-}
 // Función para actualizar la interfaz del carrito
 // Esta función guarda el carrito en el localStorage y renderiza el carrito en la interfaz
 function updateCartUI(cart) {
@@ -223,4 +212,3 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCart(cartContainer, cart);
 });
 
-export default { initializeCart, addToCart, updateCartCount };
