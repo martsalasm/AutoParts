@@ -9,9 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const res = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Error al eliminar producto");
+      showModal('Éxito', 'Producto eliminado exitosamente', 'success');
       cargarProductos();
     } catch (err) {
       console.error(err);
+      showModal('Error', 'No se pudo elimnar el producto', 'error');
       console.log("No se pudo eliminar el producto.");
     }
   };
