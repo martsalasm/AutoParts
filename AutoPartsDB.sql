@@ -36,7 +36,7 @@ CREATE TABLE clientes(
     tipo_cliente ENUM('B2C', 'B2B') DEFAULT 'B2C' NOT NULL,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_by VARCHAR(10) DEFAULT NULL
-)
+);
 
 CREATE TABLE empleados(
     rut_empleado VARCHAR(10) PRIMARY KEY,
@@ -55,7 +55,7 @@ CREATE TABLE pagos(
     monto_pago INT NOT NULL,
     token VARCHAR(100) NOT NULL,
     estado_pago ENUM('pendiente', 'completado','fallido', 'cancelado') NOT NULL,
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE ordenes (
