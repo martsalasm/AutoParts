@@ -1,4 +1,4 @@
-import { getAdjustedPrice } from "./global.js";
+import { addToCart,getAdjustedPrice, updateCartCount } from "./global.js";
 // Obtener ID desde la URL
 const params = new URLSearchParams(window.location.search);
 const productId = params.get("id");
@@ -9,6 +9,7 @@ const formatter = new Intl.NumberFormat("es-CL", {
 
 
 if (productId) {
+  updateCartCount();
   fetch(`http://localhost:3000/productos/${productId}`)
     .then((response) => {
       if (!response.ok) throw new Error("Producto no encontrado");
@@ -63,10 +64,8 @@ inputCantidad.addEventListener("change", () => {
       // Agrega funcionalidad al botón
         document.querySelector(".add-to-cart").addEventListener("click", () => {
             const cantidad = parseInt(document.getElementById("cantidad").value) || 1;
-                import("./cart.js").then((module) => {
-                    module.default.addToCart(product.id_producto, cantidad);
-                console.log("Producto agregado al carrito");
-        });
+                addToCart(product.id_producto, cantidad);
+        ;
       });
     })
     .catch((error) => {
