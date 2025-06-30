@@ -67,7 +67,8 @@ const addProducto = async (req, res) => {
     peso,
     alto,
     ancho,
-    largo
+    largo,
+    updated_by
   } = req.body;
 
   if (
@@ -81,8 +82,8 @@ const addProducto = async (req, res) => {
     const [result] = await db.query(
       `INSERT INTO productos (
         nombre_producto, descripcion_producto, precio, preciob2b, marca, stock,
-        url_imagen, product_weight, product_height, product_width, product_length
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        url_imagen, product_weight, product_height, product_width, product_length,updated_by
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)`,
       [
         nombre,
         descripcion,
@@ -95,6 +96,7 @@ const addProducto = async (req, res) => {
         alto,
         ancho,
         largo,
+        updated_by
       ]
     );
 
@@ -129,13 +131,13 @@ const updateProductoById = async (req, res) => {
 
   try {
     const [result] = await db.query(
-      "UPDATE productos SET nombre_producto = ?, precio = ?, preciob2b = ?, marca = ?,stock = ?, url_imagen=?  WHERE id_producto = ?",
-      [nombre, precio, preciob2b, marca, stock,imagen, id]
+      "UPDATE productos SET nombre_producto = ?, precio = ?, preciob2b = ?, marca = ?,stock = ?, url_imagen=?, updated_by=?  WHERE id_producto = ?",
+      [nombre, precio, preciob2b, marca, stock,imagen,updated_by, id]
     );
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: "Producto no encontrado" });
     }
-    res.json({ id, nombre, precio, preciob2b, marca, stock, imagen });
+    res.json({ id, nombre, precio, preciob2b, marca, stock, imagen, updated_by});
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error al actualizar el producto" });
