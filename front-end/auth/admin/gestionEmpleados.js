@@ -1,7 +1,21 @@
+import { showModal } from "../../modal.js";
 const API_URL = "http://localhost:3000/empleados";
 
 document.addEventListener("DOMContentLoaded", () => {
   cargarEmpleados();
+  window.eliminarEmpleado = async (rut) => {
+    if (!confirm("¿Deseas eliminar este empleado?")) return;
+    try {
+      const res = await fetch(`${API_URL}/${rut}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Error al eliminar empleado");
+      showModal('Éxito', 'Empleado eliminado exitosamente', 'success');
+      cargarEmpleados();
+    } catch (err) {
+      console.error(err);
+      console.log("No se pudo eliminar el empleado.");
+      showModal('Error', 'No se pudo eliminar el empleado', 'error');
+    }
+  };
 
   document
     .getElementById("form-empleado")
@@ -31,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!res.ok) {
           const error = await res.json();
+          showModal('Error', 'No se pudo agregar el empleado', 'error');
           return console.log(
             "Error: " + (error.error || "No se pudo agregar el empleado")
           );
@@ -38,8 +53,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.getElementById("form-empleado").reset();
         cargarEmpleados();
+        showModal('Éxito', 'Empleado agregado exitosamente', 'success');
       } catch (err) {
         console.error(err);
+        showModal('Error', 'No se pudo agregar el empleado', 'error');
         console.log("Error de red al intentar agregar empleado");
       }
     });
@@ -70,24 +87,11 @@ async function cargarEmpleados() {
                     <p><strong>Tel:</strong> ${emp.telefono_empleado}</p>
                     <p><strong>Correo:</strong> ${emp.correo_empleado}</p>
                     <button onclick="eliminarEmpleado('${emp.rut_empleado}')">Eliminar</button>
-
       `;
       container.appendChild(card);
     });
   } catch (err) {
     console.error(err);
     container.innerHTML = "<p>Error al cargar empleados.</p>";
-  }
-}
-
-async function eliminarEmpleado(rut) {
-  if (!confirm("¿Deseas eliminar este empleado?")) return;
-  try {
-    const res = await fetch(`${API_URL}/${rut}`, { method: "DELETE" });
-    if (!res.ok) throw new Error("Error al eliminar empleado");
-    cargarEmpleados();
-  } catch (err) {
-    console.error(err);
-    console.log("No se pudo eliminar el empleado.");
   }
 }
