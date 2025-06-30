@@ -1,7 +1,20 @@
+import { showModal } from "../../modal.js";
 const API_URL = "http://localhost:3000/productos";
 
 document.addEventListener("DOMContentLoaded", () => {
   cargarProductos();
+
+  window.eliminarProducto = async (id) => {
+    if (!confirm("¿Deseas eliminar este producto?")) return;
+    try {
+      const res = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Error al eliminar producto");
+      cargarProductos();
+    } catch (err) {
+      console.error(err);
+      console.log("No se pudo eliminar el producto.");
+    }
+  };
 
   document.getElementById("form-producto").addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -20,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
       largo: parseFloat(document.getElementById("largo").value),
     };
 
-
     try {
       const res = await fetch(API_URL, {
         method: "POST",
@@ -35,8 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       document.getElementById("form-producto").reset();
       cargarProductos();
+      showModal('Éxito', 'Producto agregado exitosamente', 'success');
     } catch (err) {
       console.error(err);
+      showModal('Error', 'No se pudo agregar el producto', 'error');
       console.log("Error de red al intentar agregar producto");
     }
   });
@@ -76,17 +90,5 @@ async function cargarProductos() {
   } catch (err) {
     console.error(err);
     container.innerHTML = "<p>Error al cargar productos.</p>";
-  }
-}
-
-async function eliminarProducto(id) {
-  if (!confirm("¿Deseas eliminar este producto?")) return;
-  try {
-    const res = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
-    if (!res.ok) throw new Error("Error al eliminar producto");
-    cargarProductos();
-  } catch (err) {
-    console.error(err);
-    console.log("No se pudo eliminar el producto.");
   }
 }
