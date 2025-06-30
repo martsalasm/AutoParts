@@ -21,13 +21,13 @@
             <form id="form-vincular">
                 <!-- Dropdown para Productos -->
                 <label for="producto">Selecciona un Producto:</label>
-                <select id="producto" required>
+                <select id="producto" class="block w-full px-4 py-2 mt-2" required>
                     <option value="">Seleccione un producto</option>
                 </select>
 
                 <!-- Dropdown para Categorías -->
                 <label for="categoria">Selecciona una Categoría:</label>
-                <select id="categoria" required>
+                <select id="categoria" class="block w-full px-4 py-2 mt-2" required>
                     <option value="">Seleccione una categoría</option>
                 </select>
 
@@ -40,18 +40,18 @@
             <form id="form-desvincular">
                 <!-- Dropdown para Categorías -->
                 <label for="categoria-desvincular">Selecciona una Categoría:</label>
-                <select id="categoria-desvincular" required>
+                <select id="categoria-desvincular" class="block w-full px-4 py-2 mt-2" required>
                     <option value="">Seleccione una categoría</option>
                 </select>
 
                 <!-- Dropdown para Productos (vacío inicialmente) -->
                 <label for="producto-desvincular">Selecciona un Producto:</label>
-                <select id="producto-desvincular" required disabled>
+                <select id="producto-desvincular" class="block w-full px-4 py-2 mt-2" required disabled>
                     <option value="">Seleccione un producto</option>
                 </select>
 
                 <!-- Botón para desvincular -->
-                <button type="submit" class="boton-rojo"  id="desvincular-btn">Desvincular Producto</button>
+                <button type="submit" class="boton-rojo" id="desvincular-btn">Desvincular Producto</button>
             </form>
         </section>
 
@@ -59,8 +59,24 @@
             <a href="admin-panel.html" class="boton-volver">← Volver al panel</a>
         </div>
     </main>
+    <div id="warningModal"
+        class="hidden fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300 z-50">
+        <div id="modalContent"
+            class="bg-[rgb(33,33,33)] text-[rgb(230,230,230)] rounded-xl shadow-2xl p-6 sm:p-8 w-full max-w-md mx-auto transform transition-all duration-300 scale-95 opacity-0">
+            <div class="flex flex-col items-center text-center">
+                <div id="modalIcon" class="mb-4">
+                </div>
+                <h2 id="modalTitle" class="text-2xl font-bold mb-2"></h2>
+            </div>
+            <p id="modalMessage" class="text-center text-gray-300 mb-6"></p>
+            <button id="closeModalBtn"
+                class="w-full bg-[#4caf50] hover:bg-[#45a049] text-white font-bold py-3 px-6 rounded-lg transition duration-300">
+                Entendido
+            </button>
+        </div>
 
-    <script src="gestionCategorias.js"></script>
+        <script src="gestionCategorias.js" type="module"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
 </body>
 
 </html>

@@ -1,3 +1,5 @@
+import { showModal } from "../../modal.js";
+
 document.addEventListener('DOMContentLoaded', async function() {
   // Obtener los productos y categorías
   const productos = await obtenerProductos();
@@ -38,10 +40,14 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Enviar la solicitud para vincular el producto a la categoría
     const response = await asignarProductoACategoria(idProducto, idCategoria);
     if (response.success) {
-      console.log('Producto asignado correctamente a la categoría');
+      showModal('Éxito', 'Producto vinculado correctamente', 'success');
     } else {
-      console.log('Hubo un error al asignar el producto a la categoría');
+      showModal('Error', 'No se pudo vincular', 'error');
     }
+
+    // Resetear los selects
+    productoSelect.value = '';
+    categoriaSelect.value = '';
   });
 });
 
@@ -73,6 +79,7 @@ async function asignarProductoACategoria(idProducto, idCategoria) {
   });
   return await response.json();
 }
+
 document.addEventListener('DOMContentLoaded', async function() {
   const categorias = await obtenerCategorias();
 
@@ -99,7 +106,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
       // Obtenemos los productos de la categoría seleccionada
       const productos = await obtenerProductosPorCategoria(idCategoria);
-      
+
       // Limpiar las opciones previas
       productoSelect.innerHTML = '<option value="">Seleccione un producto</option>';
 
@@ -132,10 +139,14 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     const response = await desvincularProductoDeCategoria(idProducto, idCategoria);
     if (response.success) {
-      console.log('Producto desvinculado correctamente');
+      showModal('Éxito', 'Producto desvinculado correctamente', 'success');
     } else {
-      console.log(response.error || 'Hubo un error al desvincular el producto');
+      showModal('Error', 'No se pudo desvincular correctamente', 'error');
     }
+
+    // Resetear los selects
+    document.getElementById('producto-desvincular').value = '';
+    document.getElementById('categoria-desvincular').value = '';
   });
 });
 
@@ -151,8 +162,6 @@ async function obtenerProductosPorCategoria(idCategoria) {
     console.error('Se esperaba un arreglo de productos, pero se recibió:', productos);
     return [];
   }
-
-
 }
 
 // Función para desvincular un producto de categoría
