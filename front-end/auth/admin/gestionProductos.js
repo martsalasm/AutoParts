@@ -1,6 +1,6 @@
 import { showModal } from "../../modal.js";
 const API_URL = "http://localhost:3000/productos";
-
+const token = localStorage.getItem('token')
 document.addEventListener("DOMContentLoaded", () => {
   cargarProductos();
 
@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alto: parseFloat(document.getElementById("alto").value),
       ancho: parseFloat(document.getElementById("ancho").value),
       largo: parseFloat(document.getElementById("largo").value),
+      updated_by: token
     };
 
     try {
