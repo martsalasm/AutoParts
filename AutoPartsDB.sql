@@ -66,7 +66,7 @@ CREATE TABLE ordenes (
   tipo_cliente ENUM('B2C', 'B2B') DEFAULT 'B2C' NOT NULL,
   correo_cliente VARCHAR(100) NOT NULL,
   telefono_cliente VARCHAR(15) NOT NULL,
-  tipo_envio ENUM('retiro', 'envio') NOT NULL,
+  tipo_envio ENUM('retiro', 'despacho') NOT NULL,
   direccion_cliente VARCHAR(100) NOT NULL,
   apartamento_cliente VARCHAR(50) NULL,
   region_cliente VARCHAR(50) NOT NULL,

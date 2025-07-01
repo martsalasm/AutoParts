@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fetchOrderDetails();
 });
 
-export function handleImageError(image) {
+function handleImageError(image) {
   image.onerror = null; // Evita bucles si la imagen de respaldo también falla.
   image.src = '../../../media/logoautoparts2.png'; // Ruta a tu imagen de respaldo.
 }
