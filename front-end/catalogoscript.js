@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         productCard.classList.add("product-card");
         productCard.innerHTML = `
                 <h2 class=card-title>${product.nombre_producto}</h2>
-                <img src="${product.url_imagen}" alt="${product.nombre_producto}">
+                <img src="${product.url_imagen}" onerror="handleImageError(this)" alt="${product.nombre_producto}">
                 <p>Precio: ${formatter.format(adjustedPrice)}</p>
                 <p>Marca: ${product.marca}</p>
                 <p> Stock: ${product.stock} unidades</p>
@@ -66,7 +66,7 @@ function renderProducts(data) {
     productCard.classList.add("product-card");
     productCard.innerHTML = `
       <h2 class="card-title">${product.nombre_producto}</h2>
-      <img src="${product.url_imagen}" alt="${product.nombre_producto}">
+      <img src="${product.url_imagen}" onerror="handleImageError(this)" alt="${product.nombre_producto}">
       <p>Precio: $${adjustedPrice}</p>
       <p>Marca: ${product.marca}</p>
       <p>Stock: ${product.stock} unidades</p>

@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ? data.productos.map(p => `
                     <tr>
                         <td class="product-info">
-                            <img src="${p.url_imagen || '/media/placeholder.png'}" alt="${p.nombre_producto}">
+                            <img src="${p.url_imagen || '../media/logoautoparts2.png'}" onerror="handleImageError(this)" alt="${p.nombre_producto}">
                             <span>${p.nombre_producto}</span>
                         </td>
                         <td style="text-align:center;">${p.cantidad}</td>

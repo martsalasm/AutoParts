@@ -97,6 +97,7 @@ function renderCart(cartContainer, cart) {
             const productImage = document.createElement("img");
             productImage.src = product.url_imagen;
             productImage.alt = product.nombre_producto;
+            productImage.onerror = () => handleImageError(productImage);
             
             // Añadir evento de clic en la imagen para redirigir
             productImage.addEventListener("click", () => {

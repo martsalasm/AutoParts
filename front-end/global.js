@@ -70,3 +70,9 @@ export function updateCartCount() {
     .catch(err => console.error("Error al verificar el stock:", err));
     showModal('Error', 'No se pudo agregar el producto.', 'error');
 }
+
+export function handleImageError(image) {
+  image.onerror = null; // Evita bucles si la imagen de respaldo también falla.
+  image.src = '../media/logoautoparts2.png'; // Ruta a tu imagen de respaldo.
+}
+window.handleImageError = handleImageError;
