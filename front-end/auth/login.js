@@ -1,3 +1,4 @@
+import { showModal } from "../modal.js";
 document.querySelector("form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const rut = e.target.rut.value;
@@ -14,6 +15,7 @@ document.querySelector("form").addEventListener("submit", async (e) => {
 
         if (!response.ok) {
             console.log(data.error || "Error en el login");
+            showModal("Error", data.error, "error");
             return;
         }
 

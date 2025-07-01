@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Obtener el ID de la orden desde el localStorage
     const ordenId = localStorage.getItem("ordenId");
+    localStorage.removeItem("cart");
 
     if (!ordenId) {
         ordenDetailsContainer.innerHTML = "<p>No se encontró una orden para mostrar. Gracias por tu visita.</p>";
@@ -82,4 +83,5 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Error al cargar los detalles de la orden:", error);
             ordenDetailsContainer.innerHTML = "<p>Error al cargar los detalles de la orden.</p>";
         });
+
 });
