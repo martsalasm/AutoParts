@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ${order.productos.map(p => `
               <tr>
                 <td class="product-info">
-                  <img src="${p.url_imagen || '/media/placeholder.png'}" alt="${p.nombre_producto}">
+                  <img src="${p.url_imagen}" onerror="handleImageError(this)  alt="${p.nombre_producto}">
                   <span>${p.nombre_producto}</span>
                 </td>
                 <td style="text-align:center;">${p.cantidad}</td>
@@ -115,3 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fetchOrderDetails();
 });
+
+export function handleImageError(image) {
+  image.onerror = null; // Evita bucles si la imagen de respaldo también falla.
+  image.src = '../../../media/logoautoparts2.png'; // Ruta a tu imagen de respaldo.
+}
+window.handleImageError = handleImageError;
