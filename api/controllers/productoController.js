@@ -124,7 +124,7 @@ const addProducto = async (req, res) => {
 // metodo put para actualizar un producto por id
 const updateProductoById = async (req, res) => {
   const { id } = req.params;
-  const { nombre, precio, preciob2b, marca, stock, imagen } = req.body;
+  const { nombre, precio, preciob2b, marca, stock, imagen, updated_by } = req.body;
   if (!nombre || !precio || !preciob2b || !marca || !imagen || stock === undefined) {
     return res.status(400).json({ error: "Faltan datos necesarios" });
   }
