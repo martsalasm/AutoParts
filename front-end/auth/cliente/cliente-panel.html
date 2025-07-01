@@ -3,61 +3,72 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Descuento Aplicado</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Panel de Cliente</title>
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="stylesheet" href="clienteStyle.css" />
   <link rel="icon" href="/media/favicon.ico" type="image/x-icon" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #f4f4f4;
-    }
-
-    .message-container {
-      text-align: center;
-      background-color: #fff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-      color: #4CAF50;
-    }
-
-    p {
-      font-size: 1.2em;
-      color: #333;
-    }
-
-    .button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 5px;
-      margin-top: 20px;
-      display: inline-block;
-    }
-
-    .button:hover {
-      background-color: #45a049;
-    }
-  </style>
 </head>
 
 <body>
-  <div class="message-container">
-    <h1>¡Felicitaciones!</h1>
-    <p>Ya tienes tus descuentos aplicados en tus productos.</p>
-    <p>¡Disfruta de tus compras!</p>
-    <a href="../../index.html" class="button">Regresar al inicio</a>
-  </div>
+  <header>
+    <h1 id="title">
+      <img src="/media/logoautoparts.png" alt="Logo AutoParts" />
+    </h1>
+    <nav>
+      <ul>
+        <li><a href="../../index.html">Inicio</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="client-panel">
+      <h2 class="client-heading" id="welcome-heading">Bienvenido a tu Panel</h2>
+      <p>Desde aquí puedes ver tus ordenes. <br><br> Además, tu descuento de mayorista se encuentra activo.</p>
+      
+      <div class="client-actions">
+        <a href="gestionOrdenes.html" class="action-btn view-orders-btn">
+          Ver mis Órdenes
+        </a>
+        <a href="../login.html" id="logout-button" class="action-btn logout-btn">
+          Cerrar Sesión
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    </footer>
+
+  <script>
+    document.getElementById("logout-button").addEventListener("click", function () {
+      localStorage.removeItem("token");
+      localStorage.removeItem("tipo");
+      localStorage.removeItem("tipo_cliente");
+      localStorage.removeItem("rol");
+      // Es buena práctica limpiar también el nombre y apellido al cerrar sesión
+      localStorage.removeItem("nombre");
+      localStorage.removeItem("apellido");
+    });
+  </script>
+
+  <script>
+    // Se ejecuta cuando el contenido de la página ha cargado
+    document.addEventListener("DOMContentLoaded", function() {
+      // Obtenemos el nombre y apellido desde el localStorage
+      const nombre = localStorage.getItem("nombre");
+      const apellido = localStorage.getItem("apellido");
+
+      // Buscamos el elemento del encabezado por su ID
+      const welcomeHeading = document.getElementById("welcome-heading");
+
+      // Si encontramos nombre, apellido y el elemento, actualizamos el texto
+      if (nombre && apellido && welcomeHeading) {
+        welcomeHeading.textContent = `Bienvenido, ${nombre} ${apellido}`;
+      }
+    });
+  </script>
+
 </body>
 
 </html>

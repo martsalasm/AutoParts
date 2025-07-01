@@ -1,75 +1,90 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const ordenDetails = document.getElementById("orden-details");
-  const productsOrden = document.getElementById("products-orden");
-  let subtotal = 0;
+    const ordenDetailsContainer = document.getElementById("orden-details");
+    const productsOrdenContainer = document.getElementById("products-orden");
 
-  // Obtener el ID de la orden desde la URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const ordenId = urlParams.get('id'); // Se asume que el parámetro en la URL es 'id'
+    // Función para formatear números a moneda CLP
+    const formatCurrency = (value) => {
+        return new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(value);
+    };
 
-  if (!ordenId) {
-    ordenDetails.innerHTML = "<p>Error: No se ha encontrado el ID de la orden.</p>";
-    return;
-  }
+    // Obtener el ID de la orden desde la URL (sin cambios aquí)
+    const urlParams = new URLSearchParams(window.location.search);
+    const ordenId = urlParams.get('id');
 
-  fetch(`http://localhost:3000/ordenes/${ordenId}`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Error al obtener la orden");
-      }
-      return response.json();
-    })
-    .then(data => {
-      subtotal = data.total;
-      ordenDetails.innerHTML = `
-        <h2>Fecha: ${new Date(data.fecha).toLocaleString()} <br> Código de orden: #${data.id_orden}</h2>
-        <h2>Datos Cliente</h2>
-        <p><strong>Nombre Cliente:</strong> ${data.nombre_cliente} ${data.apellido_cliente}</p>
-        <p><strong>Rut: </strong>${data.rut_cliente}</p>
-        <p><strong>Correo:</strong> ${data.correo_cliente}</p>
-        <p><strong>Teléfono:</strong> ${data.telefono_cliente}</p>
-        <p><strong>Tipo de Envío:</strong> ${data.tipo_envio}</p>
-        <p><strong>Dirección:</strong> ${data.direccion_cliente}, ${data.comuna_cliente}, ${data.region_cliente}</p>
-        ${data.apartamento_cliente ? `<p><strong>Apartamento:</strong> ${data.apartamento_cliente}</p>` : ''}
-        <p><strong>Método de Pago:</strong> ${data.metodo_pago}</p>
-      `;
+    if (!ordenId) {
+        ordenDetailsContainer.innerHTML = "<p>Error: No se ha encontrado el ID de la orden.</p>";
+        return;
+    }
 
-      productsOrden.innerHTML = `
-        <h2>Productos:</h2>
-        <div style="overflow-x:auto; width:100%; margin-top:20px;">
-          <table border="0" cellpadding="10" cellspacing="0" style="width:100%; border-collapse:collapse; background-color:rgb(36,36,36); border-radius:5px;">
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th style="text-align:center; padding:10px;">Cantidad</th>
-                <th style="text-align:center; padding:10px;">Precio Unitario</th>
-                <th style="text-align:center; padding:10px;">Subtotal</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${data.productos && data.productos.length > 0 ? 
-                data.productos.map(producto => `
-                  <tr>
-                    <td style="display: flex; align-items: center; gap: 10px;">
-                      <img src="${producto.url_imagen}" alt="${producto.nombre_producto}" style="width:50px; height:50px; object-fit:cover;">
-                      <span>${producto.nombre_producto}</span>
-                    </td>
-                    <td style="text-align:center;">${producto.cantidad}</td>
-                    <td style="text-align:center;">$${producto.precio_unitario.toLocaleString('es-CL')}</td>
-                    <td style="text-align:center;">$${(producto.cantidad * producto.precio_unitario).toLocaleString('es-CL')}</td>
-                  </tr>
+    fetch(`http://localhost:3000/ordenes/${ordenId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error al obtener la orden");
+            }
+            return response.json();
+        })
+        .then(data => {
+            // --- Renderizar Resumen de la Orden y Datos del Cliente ---
+            const fechaFormateada = new Date(data.fecha).toLocaleString('es-CL');
+            ordenDetailsContainer.innerHTML = `
+                <h2>Resumen de la Orden</h2>
+                <p><strong>Código de orden:</strong> #${data.id_orden}</p>
+                <p><strong>Fecha:</strong> ${fechaFormateada}</p>
+                <p><strong>Método de Pago:</strong> ${data.metodo_pago}</p>
+                
+                <h2 style="margin-top: 2rem;">Datos del Cliente</h2>
+                <p><strong>Nombre:</strong> ${data.nombre_cliente} ${data.apellido_cliente}</p>
+                <p><strong>RUT:</strong> ${data.rut_cliente}</p>
+                <p><strong>Correo:</strong> ${data.correo_cliente}</p>
+                <p><strong>Teléfono:</strong> ${data.telefono_cliente}</p>
+                
+                <h2 style="margin-top: 2rem;">Datos de Entrega</h2>
+                <p><strong>Tipo de Envío:</strong> ${data.tipo_envio}</p>
+                <p><strong>Dirección:</strong> ${data.direccion_cliente}, ${data.comuna_cliente}, ${data.region_cliente}</p>
+                ${data.apartamento_cliente ? `<p><strong>Departamento:</strong> ${data.apartamento_cliente}</p>` : ''}
+            `;
+
+            // --- Renderizar Tabla de Productos y Totales ---
+            const productosHTML = data.productos && data.productos.length > 0
+                ? data.productos.map(p => `
+                    <tr>
+                        <td class="product-info">
+                            <img src="${p.url_imagen || '/media/placeholder.png'}" alt="${p.nombre_producto}">
+                            <span>${p.nombre_producto}</span>
+                        </td>
+                        <td style="text-align:center;">${p.cantidad}</td>
+                        <td style="text-align:right;">${formatCurrency(p.precio_unitario)}</td>
+                        <td style="text-align:right;">${formatCurrency(p.cantidad * p.precio_unitario)}</td>
+                    </tr>
                 `).join('')
-                : '<tr><td colspan="4">No hay productos asociados a esta orden.</td></tr>'
-              }
-            </tbody>
-          </table>
-        </div>
-        <p style="text-align:right"><strong>Valor Envío:</strong> $${data.valor_envio ? data.valor_envio.toLocaleString('es-CL') : '0'}</p>
-        <h2 style="text-align:right">Total: $${subtotal.toLocaleString('es-CL')}</h2>
-      `;
-    })
-    .catch(error => {
-      console.error("Error al cargar los detalles de la orden:", error);
-      ordenDetails.innerHTML = "<p>Error al cargar los detalles de la orden.</p>";
-    });
+                : '<tr><td colspan="4">No hay productos asociados a esta orden.</td></tr>';
+
+            productsOrdenContainer.innerHTML = `
+                <h2>Productos en la Orden</h2>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th style="text-align:center;">Cantidad</th>
+                                <th style="text-align:right;">Precio Unit.</th>
+                                <th style="text-align:right;">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${productosHTML}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="totals-section">
+                    <p><strong>Subtotal productos:</strong> ${formatCurrency(data.total - (data.valor_envio || 0))}</p>
+                    <p><strong>Valor Envío:</strong> ${formatCurrency(data.valor_envio || 0)}</p>
+                    <h3>Total Pagado: ${formatCurrency(data.total)}</h3>
+                </div>
+            `;
+        })
+        .catch(error => {
+            console.error("Error al cargar los detalles de la orden:", error);
+            ordenDetailsContainer.innerHTML = `<p>Error al cargar los detalles de la orden: ${error.message}</p>`;
+        });
 });

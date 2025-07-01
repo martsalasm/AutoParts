@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="../media/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="adminStyle.css" />
-  <link rel="stylesheet" href="../../style.css" />
-  <title>Detalles de la Orden</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../media/favicon.ico" type="image/x-icon">
+    
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="adminStyle.css" />
+    
+    <title>Detalles de la Orden</title>
 </head>
 <body>
-<header>
-  <h1 id="title">Detalles de la Orden</h1>
-</header>
+    <header>
+        <h1 id="title">Detalles de la Orden</h1>
+    </header>
 
-<div id="orden-details">
-</div>
+    <main>
+        <div class="order-confirmation-layout">
+            <div id="orden-details">
+                </div>
+            
+            <div id="products-orden">
+                </div>
+        </div>
+        
+        <div class="volver-container" style="text-align: center; margin: 2rem 0;">
+            <a href="gestionOrdenes.html" class="boton-volver">← Volver al listado de órdenes</a>
+        </div>
+    </main>
 
-<div id="products-orden">
-</div>
-
-<div class="volver-container" style="margin:20px;">
-  <a href="gestionOrdenes.html" class="boton-volver">← Volver al listado de órdenes</a>
-</div>
-
-<script src="ordenesAdmin.js" type="module"></script>
-
+    <script src="ordenesAdmin.js" type="module"></script>
 </body>
 </html>

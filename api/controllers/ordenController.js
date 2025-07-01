@@ -57,8 +57,9 @@ const getOrdenesByCliente = async (req, res) =>{
     if ( rows.length === 0){
       return res.status(404).json({error: "No se encontraron ordenes asociadas con el rut proporcionado"})
     }
-    
+    res.status(200).json(rows);
   }
+  
   catch(error){
     console.error(error);
     res.status(500).json({error: "Error al obtener las ordenes x rut"})

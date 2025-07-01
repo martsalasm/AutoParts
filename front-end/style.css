@@ -500,31 +500,118 @@ fieldset,
   cursor: not-allowed;
 }
 /* Pago Exitoso */
-#orden-details, #products-orden{
-  background-color: rgb(33, 33, 33);
-  padding: 40px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0.1);
-  max-width: 600px;
-  margin: 30px auto;
-  display: flex;
-  flex-direction: column;
-
+.page-main-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem !important;
 }
+
+/* Layout principal que crea las dos columnas en escritorio.
+  Hereda el color de fondo de tu body.
+*/
+.order-confirmation-layout {
+  display: grid;
+  grid-template-columns: 1fr; /* 1 columna por defecto para móviles */
+  gap: 2rem;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* En pantallas de más de 992px, activamos el layout de 2 columnas */
+@media (min-width: 992px) {
+  .order-confirmation-layout {
+    grid-template-columns: 350px 1fr; /* Columna fija para el resumen */
+  }
+}
+
+/* Estilos para el contenedor de resumen (#orden-details).
+  Reutiliza tu clase #product-detail como base y la ajusta.
+*/
 #orden-details {
-gap: 16px;
-}
-#orden-details h2, #products-orden h2 {
-  text-align: center;
+  background-color: rgb(33, 33, 33);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+  height: fit-content;
+  margin-top: 20px;
 }
 
-#products-orden li{
- margin: 10px 0 10px 0;
-  padding: 10px;
-  background-color: rgb(36, 36, 36);
-  border-radius: 5px;
+#orden-details h2 {
+  font-size: 1.4rem;
+  color: #fff;
+  border-bottom: 1px solid rgb(60, 60, 60);
+  padding-bottom: 0.5rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+#orden-details p {
+  font-size: 0.95rem;
+  color: #ccc;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+#orden-details strong {
+  color: #eee;
+}
+#products-orden {
+  background-color: rgb(33, 33, 33);
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+#products-orden h2 {
+    font-size: 1.6rem;
+    margin-top: 0;
+}
+
+/* Estilos para la tabla generada por JS */
+#products-orden table {
+  width:100%; 
+  border-collapse:collapse; 
+  background-color:rgb(36,36,36); 
+  border-radius:5px;
+  margin-top: 1rem;
+}
+
+#products-orden th, #products-orden td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgb(50, 50, 50);
+}
+
+#products-orden .product-info {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+#products-orden .product-info img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+#products-orden .product-info span {
+  font-weight: bold;
+  color: #eee;
+}
+
+/* Estilos para la sección de totales generada por JS */
+#products-orden .totals-section {
+  text-align: right;
+  margin-top: 1.5rem;
+  padding-right: 1rem;
+}
+#products-orden .totals-section p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+#products-orden .totals-section h3 {
+  margin-top: 1rem;
+  font-size: 1.6rem;
+  color: #4caf50; /* Total destacado en verde */
 }
 /* Responsive Design */
 @media (max-width: 650px) {

@@ -4,6 +4,6 @@ import ordenController from "../controllers/ordenController.js";
 
 router.get("/", ordenController.getOrdenes);
 router.get("/:id", ordenController.getOrdenById);
-router.get("/:rut", ordenController.getOrdenesByCliente);
+router.get("/cliente/:rut", ordenController.getOrdenesByCliente);
 router.post("/", ordenController.addOrden);
 export default router;

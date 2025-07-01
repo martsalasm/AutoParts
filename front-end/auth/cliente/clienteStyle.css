@@ -1,0 +1,316 @@
+/* Estilo del panel principal del cliente */
+.client-panel {
+  background-color: rgb(33, 33, 33); /* Contenedor oscuro */
+  color: rgb(230, 230, 230); /* Texto */
+  max-width: 90%;
+  width: 700px;
+  margin: 4rem auto;
+  padding: 2.5rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+body {
+  background-color: rgb(26, 26, 26);
+  color: rgb(230, 230, 230);
+  font-family: sans-serif;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+.client-heading {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  color: #fff; /* Texto más destacado */
+}
+
+.client-panel p {
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Contenedor para los botones de acción */
+.client-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Estilo base para los botones de acción */
+.action-btn {
+  display: block;
+  width: 100%;
+  max-width: 300px; /* Ancho máximo para los botones */
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Botón principal (Verde) */
+.view-orders-btn {
+  background-color: rgb(26, 26, 26);
+  border: 1px solid #555;
+  color: #fff;
+}
+
+.view-orders-btn:hover {
+  background-color: rgb(36, 36, 36);
+}
+
+/* Botón de logout */
+.logout-btn {
+  background-color: rgb(145, 4, 32);
+  color: rgb(230, 230, 230);
+  border: 1px solid rgb(80, 80, 80);
+}
+
+.logout-btn:hover {
+  background-color: crimson;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+header {
+  width: 100%;
+  background-color: rgb(33, 33, 33);
+  padding: 1rem 0;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+#title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0;
+}
+#ordenes-container {
+  width: 90%;
+  max-width: 900px;
+  background-color: rgb(33, 33, 33);
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  margin-bottom: 2rem;
+  overflow-x: auto;
+}
+
+#ordenes-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+#ordenes-table th,
+#ordenes-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid rgb(50, 50, 50);
+}
+
+#ordenes-table th {
+  background-color: rgb(26, 26, 26);
+  color: #fff;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#ordenes-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+#ordenes-table tbody tr:hover {
+  background-color: rgb(40, 40, 40);
+}
+
+#ordenes-table td {
+  color: #bbb;
+  font-size: 0.95rem;
+}
+#message-container {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #aaa;
+}
+.detalle-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 0.9em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.detalle-btn:hover {
+  background-color: #45a049;
+}
+
+.boton-volver {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: rgb(44, 44, 44);
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.boton-volver:hover {
+  background-color: rgb(55, 55, 55);
+}
+
+/* Estilos para la página de detalle de orden del cliente */
+.page-detalle-orden header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.order-detail-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr; /* Una columna por defecto para móviles */
+  gap: 2rem;
+}
+
+/* En pantallas más grandes, usamos dos columnas */
+@media (min-width: 992px) {
+  .order-detail-container {
+    grid-template-columns: 350px 1fr; /* Columna fija para el resumen, el resto para productos */
+  }
+}
+
+/* Contenedor del resumen */
+#order-summary-container {
+  background-color: rgb(33, 33, 33);
+  padding: 1.5rem;
+  border-radius: 10px;
+  height: fit-content; /* Para que no se estire innecesariamente */
+}
+
+#order-summary-container h2 {
+  font-size: 1.4rem;
+  color: #fff;
+  border-bottom: 1px solid rgb(60, 60, 60);
+  padding-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+#order-summary-container p {
+  font-size: 0.95rem;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+#order-summary-container strong {
+  color: #eee;
+}
+
+/* Contenedor de la tabla de productos */
+#order-products-container {
+  background-color: rgb(33, 33, 33);
+  padding: 1.5rem;
+  border-radius: 10px;
+}
+
+#order-products-container h2 {
+  font-size: 1.6rem;
+  margin-top: 0;
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.products-table th,
+.products-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgb(50, 50, 50);
+}
+
+.products-table th {
+  color: #fff;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.products-table td {
+  color: #bbb;
+}
+
+.products-table .product-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.products-table .product-info img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.products-table .product-info span {
+  font-weight: bold;
+  color: #eee;
+}
+
+.totals-section {
+  text-align: right;
+  margin-top: 1.5rem;
+  padding-right: 1rem;
+}
+
+.totals-section p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.totals-section h3 {
+  margin-top: 1rem;
+  font-size: 1.6rem;
+  color: #4caf50; 
+}
+
+/* Botón volver */
+.volver-container {
+  grid-column: 1 / -1;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.boton-volver {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: rgb(44, 44, 44);
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.boton-volver:hover {
+  background-color: rgb(55, 55, 55);
+}
