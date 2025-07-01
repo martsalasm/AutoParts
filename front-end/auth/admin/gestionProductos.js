@@ -85,7 +85,7 @@ async function cargarProductos() {
         <p><strong>Stock:</strong> ${prod.stock}</p>
         <p><strong>Dimensiones (cm):</strong> ${prod.product_height} x ${prod.product_width} x ${prod.product_length}</p>
         <p><strong>Peso:</strong> ${prod.product_weight} kg</p>
-        <img src="${prod.url_imagen}" alt="Imagen del producto" style="width: 100px; height: auto;">
+        <img src="${prod.url_imagen}" alt="Imagen del producto" onerror="handleImageError(this)" style="width: 100px; height: auto;">
         <button onclick="eliminarProducto(${prod.id_producto})">Eliminar</button>
       `;
       container.appendChild(card);
@@ -95,3 +95,8 @@ async function cargarProductos() {
     container.innerHTML = "<p>Error al cargar productos.</p>";
   }
 }
+export function handleImageError(image) {
+  image.onerror = null; // Evita bucles si la imagen de respaldo también falla.
+  image.src = '../../../media/logoautoparts2.png'; // Ruta a tu imagen de respaldo.
+}
+window.handleImageError = handleImageError;
