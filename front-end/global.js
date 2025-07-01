@@ -10,6 +10,10 @@ if (token && tipo ==="empleado" && rol === "admin") {
     loginLink.textContent = 'Mi Perfil';
     loginLink.href = 'http://localhost:5501/front-end/auth/admin/admin-panel.html';
   };
+if (token && tipo ==="cliente"){
+    loginLink.textContent = 'Mi Perfil';
+    loginLink.href = 'http://localhost:5501/front-end/auth/cliente/cliente-panel.html';
+}
 
 export function getAdjustedPrice(product) {
   const tipo = localStorage.getItem('tipo');
